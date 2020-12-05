@@ -1,5 +1,5 @@
 import "./App.css";
-import SvgMap from "./components/SvgMap";
+import SvgMap from "./components/SvgMap/SvgMap";
 function App() {
   return (
     <div>
