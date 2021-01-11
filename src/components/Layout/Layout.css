@@ -1,5 +1,15 @@
-Main {
+main {
+    margin-top: 56px;
     display: flex;
     flex-flow: row;
-    width: auto;    ;
+    width: auto;
+}
+
+.SvgDiv{
+width: 50%;
+}
+
+.TableDiv{
+    width: 50%;
+
 }

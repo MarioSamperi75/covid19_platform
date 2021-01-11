@@ -4,15 +4,9 @@ import "./Table.css"
 
 const table = (props) => {
 
-const dummyData =
-    [
-        { id: 1, name: 'Mario', age: 25, email: 'Mario@email.com' },
-        { id: 2, name: 'Marcus', age: 22, email: 'Marcus@email.com' },
-        { id: 3, name: 'Mahmoud', age: 30, email: 'Mahmoud@email.com' },
-        { id: 4, name: 'Sigrun', age: 29, email: 'Sigrun@email.com' }
-    ]
 
 
+    const dummyData = props.dummyData
     const tableData =dummyData.map((dataItem) =>{
     return(
         <tr key={dataItem.id}>
