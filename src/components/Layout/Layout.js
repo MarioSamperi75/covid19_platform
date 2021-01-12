@@ -23,20 +23,20 @@ class Layout extends Component {
                 { id: 5, name: 'Sofia', age: 4, email: 'Sofia@email.com' }
             ],
         covidData: [],
-        selectedRegion: 'Sverige'
+        covidDataRegion: [],
+        selectedRegionName: '',
+        selectedRegionObject: null
 
     };
 
 
     componentDidMount() {
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
-            this.setState({ covidData: response.data });
-            console.log(response);
-        });
-    }
+            this.setState({covidData: response.data});
+            this.setState({covidDataRegion: response.data.infectedByRegion})
+            console.log(response.data.infectedByRegion)
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return true;
+        });
     }
 
 
@@ -50,12 +50,29 @@ class Layout extends Component {
     };
 
     getRegion  = (region) => {
-        this.setState({selectedRegion : region});
+        this.setState({selectedRegionName : region});
+
+        const regionArray = this.state.covidData.infectedByRegion;
+        const selectedObjectArray = regionArray.filter(activity => (activity.region === region ));
+        this.setState({selectedRegionObject : selectedObjectArray[0]});
     }
 
 
 
     render() {
+        let regionRendered = <div>Select a region</div>
+        if (this.state.selectedRegionObject) {
+            regionRendered = (
+            <div className="table3Div">
+            Deceased: {this.state.selectedRegionObject.deathCount}
+            <br/>
+            Infected: {this.state.selectedRegionObject.infectedCount}
+            <br/>
+            IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
+            </div>
+            )
+        }
+
         return (
             <Fragment>
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
@@ -67,16 +84,27 @@ class Layout extends Component {
 
                     </div>
 
-                    <div className="TableDiv">
-                        <Table dummyData = {this.state.dummyData}/>
-                        <br/>
-                        Selected: {this.state.selectedRegion}
-                        <br/>
-                        Deceased: {this.state.covidData.deceased}
-                        <br/>
-                        Infected: {this.state.covidData.infected}
-                        <br/>
-                        IntensiveCare: {this.state.covidData.intensiveCare}
+                    <div className="TablesDiv">
+
+                        <div className="smallTables">
+                            <div className="table2Div">
+                                <h3>Sweden</h3>
+                                <br/>
+                                Deceased: {this.state.covidData.deceased}
+                                <br/>
+                                Infected: {this.state.covidData.infected}
+                                <br/>
+                                IntensiveCare: {this.state.covidData.intensiveCare}
+                                <br/>
+                                <br/>
+                                <h3>{this.state.selectedRegionName}</h3>
+                            </div>
+
+                            {regionRendered}
+                        </div>
+
+                        <Table dataRegion = {this.state.covidDataRegion}/>
+
                     </div>
 
 

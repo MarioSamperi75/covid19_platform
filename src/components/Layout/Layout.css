@@ -6,10 +6,17 @@ main {
 }
 
 .SvgDiv{
-width: 50%;
+width: 40%;
 }
 
-.TableDiv{
-    width: 50%;
+.TablesDiv {
+    width: 60%;
+    display: flex;
+    flex-flow: row;
+}
+
+.smallTables{
+    width: 40%;
+    margin-top: 56px;
 
 }

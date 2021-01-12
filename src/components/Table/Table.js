@@ -6,14 +6,14 @@ const table = (props) => {
 
 
 
-    const dummyData = props.dummyData
-    const tableData =dummyData.map((dataItem) =>{
+    const dataRegion = props.dataRegion
+    const tableData =dataRegion.map((dataItem) =>{
     return(
-        <tr key={dataItem.id}>
-            <td>{dataItem.id}</td>
-            <td>{dataItem.name}</td>
-            <td>{dataItem.age}</td>
-            <td>{dataItem.email}</td>
+        <tr key={dataItem.region}>
+            <td>{dataItem.region}</td>
+            <td>{dataItem.infectedCount}</td>
+            <td>{dataItem.deathCount}</td>
+            <td>{dataItem.intensiveCareCount}</td>
         </tr>)
     }
 )
@@ -21,7 +21,7 @@ const table = (props) => {
 
 
     return (
-        <div className="tableDiv">
+        <div className="table1Div">
             <h1>React Dynamic Table</h1>
                 <table className="table">
                     <tbody>
