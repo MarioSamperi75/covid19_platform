@@ -6,7 +6,9 @@ main {
 }
 
 .SvgDiv{
-width: 40%;
+    width: 40%;
+    height: 90%;
+    display: flex;
 }
 
 .TablesDiv {
