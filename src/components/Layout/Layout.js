@@ -29,8 +29,6 @@ class Layout extends Component {
     };
 
 
-
-
     componentDidMount() {
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
             this.setState({covidData: response.data});
@@ -49,9 +47,6 @@ class Layout extends Component {
         //           I reduce the big axios object in two arrays
         //           I create an object from two arrays
 
-        //const arrayRegion = regionData.reduce((newarray, e) => {
-        //    return newarray.concat(e.region);
-        //}, []);
         const arrayRegion = regionData.map(function (e) {
             return e.region
         });
@@ -102,8 +97,6 @@ class Layout extends Component {
             IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
             </div>
             )
-
-
         }
 
         return (
@@ -115,8 +108,6 @@ class Layout extends Component {
                     <div className="SvgDiv">
                         <DropDown options={this.state.options}></DropDown>
                         <SvgMap sendRegion = {this.getRegion} regionColor ={this.state.regionColor}/>
-
-
                     </div>
 
                     <div className="TablesDiv">
@@ -136,6 +127,7 @@ class Layout extends Component {
                             </div>
 
                             {regionRendered}
+
                         </div>
                         <Table dataRegion = {this.state.covidDataRegion}/>
                     </div>
