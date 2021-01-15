@@ -9,23 +9,22 @@ import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
 import SvgMap from "../SvgMap/SvgMap";
 import Table from "../Table/Table";
+import DropDown from "../DropDown/DropDown"
 
 class Layout extends Component {
 
     state = {
         showSideDrawer: false,
-        dummyData :
-            [
-                { id: 1, name: 'Mario', age: 25, email: 'Mario@email.com' },
-                { id: 2, name: 'Marcus', age: 22, email: 'Marcus@email.com' },
-                { id: 3, name: 'Mahmoud', age: 30, email: 'Mahmoud@email.com' },
-                { id: 4, name: 'Sigrun', age: 29, email: 'Sigrun@email.com' },
-                { id: 5, name: 'Sofia', age: 4, email: 'Sofia@email.com' }
-            ],
         covidData: [],
         covidDataRegion: [],
         selectedRegionName: '',
-        selectedRegionObject: null
+        selectedRegionObject: null,
+        regionColor: {Stockholm: 200, Gotland: 123},
+        options : [
+            { key: 'key-1', text: 'Infected' },
+            { key: 'key-2', text: 'Intensive Care' },
+            { key: 'key-3', text: 'Deceased' },
+        ]
 
     };
 
@@ -34,9 +33,36 @@ class Layout extends Component {
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
             this.setState({covidData: response.data});
             this.setState({covidDataRegion: response.data.infectedByRegion})
-            console.log(response.data.infectedByRegion)
+            console.log("Axios: ", response.data.infectedByRegion);
 
+            const regionColor = this.createRegionColorObject (response.data.infectedByRegion)
+            console.log(regionColor);;
+            this.setState({regionColor: regionColor })
         });
+    }
+
+
+    createRegionColorObject = (regionData) => {
+        //   create object regionColor (key:region value:intensiveCareCount)
+        //           I reduce the big axios object in two arrays
+        //           I create an object from two arrays
+
+        const arrayRegion = regionData.map(function (e) {
+            return e.region
+        });
+
+        //methoden create ArrayColors :select from dropdown, ändrar varde genom algoritm och returnerar arrayColor
+        const arrayColor = regionData.map(function (e) {
+            return e.intensiveCareCount
+        });
+
+        const regionColor = arrayRegion.reduce(
+            (accumulator, value, index) => Object.assign(accumulator, {
+                [value]: arrayColor[index],
+            }), {}
+        );
+        return regionColor;
+
     }
 
 
@@ -53,7 +79,7 @@ class Layout extends Component {
         this.setState({selectedRegionName : region});
 
         const regionArray = this.state.covidData.infectedByRegion;
-        const selectedObjectArray = regionArray.filter(activity => (activity.region === region ));
+        const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
     }
 
@@ -80,8 +106,8 @@ class Layout extends Component {
 
                 <main>
                     <div className="SvgDiv">
-                        <SvgMap sendRegion = {this.getRegion}/>
-
+                        <DropDown options={this.state.options}></DropDown>
+                        <SvgMap sendRegion = {this.getRegion} regionColor ={this.state.regionColor}/>
                     </div>
 
                     <div className="TablesDiv">
@@ -101,16 +127,10 @@ class Layout extends Component {
                             </div>
 
                             {regionRendered}
+
                         </div>
-
                         <Table dataRegion = {this.state.covidDataRegion}/>
-
                     </div>
-
-
-
-
-
                 </main>
 
             </Fragment>
