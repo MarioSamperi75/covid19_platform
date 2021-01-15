@@ -1,0 +1,16 @@
+.SvgMap{
+    margin: auto;
+    margin-top: 32px;
+    width: 50%;
+
+}
+
+.lan {
+    fill : RGB(255,255,0);
+    stroke : #cccccc;
+}
+
+
+.AB:hover{
+    opacity: 0.2;
+}
