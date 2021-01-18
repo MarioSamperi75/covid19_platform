@@ -1,4 +1,32 @@
-//database alla dagar from början : https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Layout.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Layout.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//database alla dagar from början : https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&amp;clean=1
 
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
@@ -55,7 +83,7 @@ class Layout extends Component {
      * @alias createRegionColorObject
      * @function
      * @memberOf Layout
-     * @param {Object} regionData -
+     * @param {Object} regionData - description
      * @returns {Object}
      * @description This method trasform data from an axios request objekt (regionData),
      * to an objekt that contains many key/value. The key is the name of the region,
@@ -153,56 +181,79 @@ class Layout extends Component {
          * The state 'selectedRegionValue' is true when starting the page,
          * and becomes something when the user clicks on the SvgMap
          */
-        let regionRendered = <div>Select a region</div>
+        let regionRendered = &lt;div>Select a region&lt;/div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
-            <div className="table3Div">
+            &lt;div className="table3Div">
             Deceased: {this.state.selectedRegionObject.deathCount}
-            <br/>
+            &lt;br/>
             Infected: {this.state.selectedRegionObject.infectedCount}
-            <br/>
+            &lt;br/>
             IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
-            </div>
+            &lt;/div>
             )
         }
 
         return (
-            <Fragment>
-                <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
-                <SideDrawer showState={this.state.showSideDrawer}/>
+            &lt;Fragment>
+                &lt;Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
+                &lt;SideDrawer showState={this.state.showSideDrawer}/>
 
-                <main>
-                    <div className="SvgDiv">
-                        <DropDown options={this.state.options}></DropDown>
-                        <SvgMap sendRegion = {this.getRegion} regionColor ={this.state.regionColor}/>
-                    </div>
+                &lt;main>
+                    &lt;div className="SvgDiv">
+                        &lt;DropDown options={this.state.options}>&lt;/DropDown>
+                        &lt;SvgMap sendRegion = {this.getRegion} regionColor ={this.state.regionColor}/>
+                    &lt;/div>
 
-                    <div className="TablesDiv">
+                    &lt;div className="TablesDiv">
 
-                        <div className="smallTables">
-                            <div className="table2Div">
-                                <h3>Sweden</h3>
-                                <br/>
+                        &lt;div className="smallTables">
+                            &lt;div className="table2Div">
+                                &lt;h3>Sweden&lt;/h3>
+                                &lt;br/>
                                 Deceased: {this.state.covidData.deceased}
-                                <br/>
+                                &lt;br/>
                                 Infected: {this.state.covidData.infected}
-                                <br/>
+                                &lt;br/>
                                 IntensiveCare: {this.state.covidData.intensiveCare}
-                                <br/>
-                                <br/>
-                                <h3>{this.state.selectedRegionName}</h3>
-                            </div>
+                                &lt;br/>
+                                &lt;br/>
+                                &lt;h3>{this.state.selectedRegionName}&lt;/h3>
+                            &lt;/div>
 
                             {regionRendered}
 
-                        </div>
-                        <Table dataRegion = {this.state.covidDataRegion}/>
-                    </div>
-                </main>
+                        &lt;/div>
+                        &lt;Table dataRegion = {this.state.covidDataRegion}/>
+                    &lt;/div>
+                &lt;/main>
 
-            </Fragment>
+            &lt;/Fragment>
         );
     }
 }
 
 export default Layout;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Layout.html">Layout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 12:43:38 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
