@@ -30,7 +30,7 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Layout<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>The class Layout is the container of the projekt. All the components and almost all the business logic is here.</p></div>
+            <div class="class-description"><p>The class component Layout is the container of the projekt. All the components and almost all the business logic is here.</p></div>
         
     
 </header>
@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line18">line 18</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -143,13 +143,13 @@
 
         
             
-<h4 class="name" id="arrayColor"><span class="type-signature">(constant) </span>arrayColor<span class="type-signature"> :function</span></h4>
+<h4 class="name" id="arrayColor"><span class="type-signature">(constant) </span>arrayColor<span class="type-signature"> :Array.&lt;number></span></h4>
 
 
 
 
 <div class="description">
-    <p>this constant get an array of number -the data of the selected region- through a map function</p>
+    <p>This constant get an array of number -the data of the selected region- through a map function.</p>
 </div>
 
 
@@ -158,7 +158,7 @@
     <ul>
         <li>
             
-<span class="param-type">function</span>
+<span class="param-type">Array.&lt;number></span>
 
 
         </li>
@@ -197,7 +197,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line87">line 87</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line86">line 86</a>
     </li></ul></dd>
     
 
@@ -215,13 +215,13 @@
 
         
             
-<h4 class="name" id="arrayRegion"><span class="type-signature">(constant) </span>arrayRegion<span class="type-signature"> :function</span></h4>
+<h4 class="name" id="arrayRegion"><span class="type-signature">(constant) </span>arrayRegion<span class="type-signature"> :Array.&lt;string></span></h4>
 
 
 
 
 <div class="description">
-    <p>this constant get an array of string -the name of the region- through a map function</p>
+    <p>This constant get an array of string -the name of the region- through a map function.</p>
 </div>
 
 
@@ -230,7 +230,7 @@
     <ul>
         <li>
             
-<span class="param-type">function</span>
+<span class="param-type">Array.&lt;string></span>
 
 
         </li>
@@ -269,7 +269,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line77">line 77</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line76">line 76</a>
     </li></ul></dd>
     
 
@@ -287,14 +287,15 @@
 
         
             
-<h4 class="name" id="regionColor"><span class="type-signature">(constant) </span>regionColor<span class="type-signature"> :function</span></h4>
+<h4 class="name" id="regionColor"><span class="type-signature">(constant) </span>regionColor<span class="type-signature"> :Objekt</span></h4>
 
 
 
 
 <div class="description">
-    <p>this constant is a Reduce function that creates an object that contains many value/key pairs.
-The function gets the keys from arrayRegion and the values from arrayColor</p>
+    <p>This constant is an object that contains many value/key pairs.
+The the keys come from arrayRegion and the values from arrayColor.
+The conversion is the result of the functions reduce and Object.assign.</p>
 </div>
 
 
@@ -303,7 +304,7 @@ The function gets the keys from arrayRegion and the values from arrayColor</p>
     <ul>
         <li>
             
-<span class="param-type">function</span>
+<span class="param-type">Objekt</span>
 
 
         </li>
@@ -342,7 +343,7 @@ The function gets the keys from arrayRegion and the values from arrayColor</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line96">line 96</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line96">line 96</a>
     </li></ul></dd>
     
 
@@ -366,12 +367,12 @@ The function gets the keys from arrayRegion and the values from arrayColor</p>
 
 
 <div class="description">
-    <p>regionRendered contains a JSX element that is rendered conditionally,
-depending on the value of the state 'selectedRegionValue'.
-This value become a table only if is true (not null),
+    <p>The variable regionRendered contains different JSX elements that are rendered conditionally,
+depending on the value of the state 'selectedRegionName'.
+The element becomes a table only if it's true (not null),
 otherwise it remains a text &quot;Select a region&quot;.
-The state 'selectedRegionValue' is true when starting the page,
-and becomes something when the user clicks on the SvgMap</p>
+The state 'selectedRegionName' is null when starting the page,
+and becomes a string (not null, true) when the user clicks on the SvgMap.</p>
 </div>
 
 
@@ -419,7 +420,81 @@ and becomes something when the user clicks on the SvgMap</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line156">line 156</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line158">line 158</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="variableClass"><span class="type-signature"></span>variableClass<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>This variable is the name of the css class that sideDrawer is conneted with.
+The css class &quot;Close&quot; translates the sideDrawer out of the screen with an animation.
+The css class &quot;Open&quot; move it in the original position (0,0) with another animation.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Navigation_SideDrawer_SideDrawer.js.html">Navigation/SideDrawer/SideDrawer.js</a>, <a href="Navigation_SideDrawer_SideDrawer.js.html#line25">line 25</a>
     </li></ul></dd>
     
 
@@ -455,11 +530,10 @@ and becomes something when the user clicks on the SvgMap</p>
 
 
 <div class="description">
-    <p>This method trasform data from an axios request objekt (regionData),
+    <p>This method trasform the data from an axios request objekt (regionData),
 to an objekt that contains many key/value. The key is the name of the region,
 the value is the green value that determines the color of the region.
-This method is an auxiliary function of componentdidMount.
-See <code>SvgMap</code></p>
+This method is an auxiliary function of componentdidMount.</p>
 </div>
 
 
@@ -511,7 +585,7 @@ See <code>SvgMap</code></p>
 
             
 
-            <td class="description last"><p>description</p></td>
+            <td class="description last"><p>A part of the object that comes from the axios request</p></td>
         </tr>
 
     
@@ -552,7 +626,7 @@ See <code>SvgMap</code></p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line66">line 66</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -606,6 +680,311 @@ See <code>SvgMap</code></p>
     
 
     
+    <h4 class="name" id="DrawerToggle"><span class="type-signature"></span>DrawerToggle<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>The functional component DrawerToggle return the element DrawerToggle,
+that is the element responsible to open and close the sideDrawer.
+The onClick properties is connected with Layout through the component SideDrawer
+and there, it change the boolean value of the state 'showSideDrawer' by invoking the method toggleSideDrawerHandler.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Navigation_SideDrawer_DrawerToggle_DrawerToggle.js.html">Navigation/SideDrawer/DrawerToggle/DrawerToggle.js</a>, <a href="Navigation_SideDrawer_DrawerToggle_DrawerToggle.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="Dropdown"><span class="type-signature"></span>Dropdown<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>The functional component dropdown return a dropdown as JSX element,
+and fill in it the list of array that receives as props.
+Those items are the dropDown options.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the dropDown Options (infected, deacesed, intensive Care)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="DropDown_DropDown.js.html">DropDown/DropDown.js</a>, <a href="DropDown_DropDown.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="getRegion"><span class="type-signature"></span>getRegion<span class="signature">(region)</span><span class="type-signature"></span></h4>
     
 
@@ -614,12 +993,12 @@ See <code>SvgMap</code></p>
 
 
 <div class="description">
-    <p>this method get the name of the region as parameter
+    <p>This method get the name of the region as parameter
 when the user clicks on a region in the SvgMap.
-the methods creates two state: selectedRegionName and selectedREgionObject.
-The first is just a the name that the metod receives (string).
-The second is the the objekt that contains all the information about the selected region:
-This object is obtained by fltering an axios requests by the parameter.</p>
+The method creates two state: selectedRegionName and selectedRegionObject.
+The first is just the name that the method receives (string).
+The second is the  objekt that contains all the information about the selected region:
+This object is obteined by filtering an axios requests by the parameter region.</p>
 </div>
 
 
@@ -712,7 +1091,7 @@ This object is obtained by fltering an axios requests by the parameter.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line134">line 134</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line136">line 136</a>
     </li></ul></dd>
     
 
@@ -737,6 +1116,16 @@ This object is obtained by fltering an axios requests by the parameter.</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>void</p>
+</div>
+
+
+
+    
 
 
 
@@ -756,7 +1145,11 @@ This object is obtained by fltering an axios requests by the parameter.</p>
 
 
 <div class="description">
-    <p>componentDidMount</p>
+    <p>ComponentDidMount gets the axios request and creates three states: covidData, covidDataRegion, regionColor.
+covidData is the entire objekt that the api returns.
+covidDataRegion is the sub-array that contains data for all the regions.
+regionColor is the objekt that contains the green values that determines the color of every region.
+componentDidMount receives this object with the help of the method 'createRegionColorObject'.</p>
 </div>
 
 
@@ -800,7 +1193,7 @@ This object is obtained by fltering an axios requests by the parameter.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line40">line 40</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -836,6 +1229,157 @@ This object is obtained by fltering an axios requests by the parameter.</p>
     
 
     
+    <h4 class="name" id="SideDrawer"><span class="type-signature"></span>SideDrawer<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>The functional component Sidedrawer returns a div element
+that disappears/appears when the user clicks on the drawerToggle element.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>props : showState</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Navigation_SideDrawer_SideDrawer.js.html">Navigation/SideDrawer/SideDrawer.js</a>, <a href="Navigation_SideDrawer_SideDrawer.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="toggleSideDrawerHandler"><span class="type-signature"></span>toggleSideDrawerHandler<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -844,9 +1388,9 @@ This object is obtained by fltering an axios requests by the parameter.</p>
 
 
 <div class="description">
-    <p>This method invert the boolean value of the state showSideSrawer,
-as response to de user's click on the component DrawerToggle.
-DrawerToggle is a child of component Toolbar</p>
+    <p>This method inverts the boolean value of the state showSideSrawer,
+as response to the user's click on the component DrawerToggle.
+DrawerToggle is a child of component Toolbar.</p>
 </div>
 
 
@@ -890,7 +1434,7 @@ DrawerToggle is a child of component Toolbar</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout.js.html">Layout.js</a>, <a href="Layout.js.html#line113">line 113</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line114">line 114</a>
     </li></ul></dd>
     
 
@@ -915,6 +1459,167 @@ DrawerToggle is a child of component Toolbar</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>void</p>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="Toolbar"><span class="type-signature"></span>Toolbar<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>The functional component Toolbar return the header of the page.
+It contains the DrawerToggle, Logo and the NavigationItems.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Navigation_Toolbar_Toolbar.js.html">Navigation/Toolbar/Toolbar.js</a>, <a href="Navigation_Toolbar_Toolbar.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -936,13 +1641,13 @@ DrawerToggle is a child of component Toolbar</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Layout.html">Layout</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Layout.html">Layout</a></li><li><a href="SvgMap.html">SvgMap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 18 2021 12:43:38 GMT+0100 (Central European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Jan 19 2021 12:10:42 GMT+0100 (Central European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

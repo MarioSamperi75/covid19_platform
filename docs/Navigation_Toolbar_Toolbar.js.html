@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Navigation/Toolbar/Toolbar.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,44 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Navigation/Toolbar/Toolbar.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
 
+import  "./Toolbar.css"
+import  DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle"
 
-    <h3> </h3>
+/**
+ * @alias Toolbar
+ * @memberOf Layout
+ * @param props
+ * @return {JSX.Element}
+ * @description The functional component Toolbar return the header of the page.
+ * It contains the DrawerToggle, Logo and the NavigationItems.
+ */
+const toolbar = (props) => (
+    &lt;header className="Toolbar">
+        &lt;DrawerToggle clicked={props.toggleSideDrawer}/>
+        &lt;div>
+            Logo
+        &lt;/div>
 
+        &lt;nav >
+            NavigationItems
+        &lt;/nav>
+    &lt;/header>
+);
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default toolbar;</code></pre>
+        </article>
+    </section>
 
 
 
