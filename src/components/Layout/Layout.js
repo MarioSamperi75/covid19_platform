@@ -11,7 +11,12 @@ import SvgMap from "../SvgMap/SvgMap";
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
 
+
+/**
+ * The class component Layout is the container of the projekt. All the components and almost all the business logic is here.
+ */
 class Layout extends Component {
+
 
     state = {
         showSideDrawer: false,
@@ -29,6 +34,13 @@ class Layout extends Component {
     };
 
 
+    /**
+     * @description ComponentDidMount gets the axios request and creates three states: covidData, covidDataRegion, regionColor.
+     * covidData is the entire objekt that the api returns.
+     * covidDataRegion is the sub-array that contains data for all the regions.
+     * regionColor is the objekt that contains the green values that determines the color of every region.
+     * componentDidMount receives this object with the help of the method 'createRegionColorObject'.
+     */
     componentDidMount() {
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
             this.setState({covidData: response.data});
@@ -36,36 +48,69 @@ class Layout extends Component {
             console.log("Axios: ", response.data.infectedByRegion);
 
             const regionColor = this.createRegionColorObject (response.data.infectedByRegion)
-            console.log(regionColor);;
+            console.log(regionColor);
+
             this.setState({regionColor: regionColor })
         });
     }
 
 
+    /**
+     * @alias createRegionColorObject
+     * @function
+     * @memberOf Layout
+     * @param {Object} regionData - A part of the object that comes from the axios request
+     * @returns {Object}
+     * @description This method trasform the data from an axios request objekt (regionData),
+     * to an objekt that contains many key/value. The key is the name of the region,
+     * the value is the green value that determines the color of the region.
+     * This method is an auxiliary function of componentdidMount.
+     */
     createRegionColorObject = (regionData) => {
-        //   create object regionColor (key:region value:intensiveCareCount)
-        //           I reduce the big axios object in two arrays
-        //           I create an object from two arrays
-
-        const arrayRegion = regionData.map(function (e) {
-            return e.region
-        });
+        /**
+         * @alias arrayRegion
+         * @memberOf Layout
+         * @type {Array<string>}
+         * @description This constant get an array of string -the name of the region- through a map function.
+         */
+        const arrayRegion = regionData.map(e => e.region)
+        console.log("arrayRegion:" , arrayRegion);
 
         //methoden create ArrayColors :select from dropdown, ändrar varde genom algoritm och returnerar arrayColor
-        const arrayColor = regionData.map(function (e) {
-            return e.intensiveCareCount
-        });
+        /**
+         * @alias arrayColor
+         * @memberOf Layout
+         * @type {Array<number>}
+         * @description This constant get an array of number -the data of the selected region- through a map function.
+         */
+        const arrayColor = regionData.map(e => e.intensiveCareCount);
 
+        /**
+         * @alias regionColor
+         * @memberOf Layout
+         * @type {Objekt}
+         * @description This constant is an object that contains many value/key pairs.
+         * The the keys come from arrayRegion and the values from arrayColor.
+         * The conversion is the result of the functions reduce and Object.assign.
+         */
         const regionColor = arrayRegion.reduce(
             (accumulator, value, index) => Object.assign(accumulator, {
                 [value]: arrayColor[index],
             }), {}
         );
         return regionColor;
-
     }
 
 
+    /**
+     * @alias toggleSideDrawerHandler
+     * @function
+     * @memberOf Layout
+     * @return void
+     * @description This method inverts the boolean value of the state showSideSrawer,
+     * as response to the user's click on the component DrawerToggle.
+     * DrawerToggle is a child of component Toolbar.
+     */
     toggleSideDrawerHandler = () => {
         this.setState((prevState) => {
             return {
@@ -75,6 +120,19 @@ class Layout extends Component {
         });
     };
 
+    /**
+     * @alias getRegion
+     * @function
+     * @param {string} region - the name of the region clicked by the user
+     * @memberOf Layout
+     * @return void
+     * @description This method get the name of the region as parameter
+     * when the user clicks on a region in the SvgMap.
+     * The method creates two state: selectedRegionName and selectedRegionObject.
+     * The first is just the name that the method receives (string).
+     * The second is the  objekt that contains all the information about the selected region:
+     * This object is obteined by filtering an axios requests by the parameter region.
+     */
     getRegion  = (region) => {
         this.setState({selectedRegionName : region});
 
@@ -86,6 +144,17 @@ class Layout extends Component {
 
 
     render() {
+        /**
+         * @alias regionRendered
+         * @memberOf Layout
+         * @type {JSX.Element}
+         * @Description The variable regionRendered contains different JSX elements that are rendered conditionally,
+         * depending on the value of the state 'selectedRegionName'.
+         * The element becomes a table only if it's true (not null),
+         * otherwise it remains a text "Select a region".
+         * The state 'selectedRegionName' is null when starting the page,
+         * and becomes a string (not null, true) when the user clicks on the SvgMap.
+         */
         let regionRendered = <div>Select a region</div>
         if (this.state.selectedRegionObject) {
             regionRendered = (

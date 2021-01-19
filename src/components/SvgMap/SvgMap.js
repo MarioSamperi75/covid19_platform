@@ -2,8 +2,22 @@ import React, { Component } from 'react';
 
 import "./SvgMap.css";
 
+/**
+ * The class component SvgMap contains the Svg image (Sweden) and all its parts (regions).
+ * All the parts are interactive and receives a color as props.
+ */
 class SvgMap extends Component {
 
+  /**
+   * @alias regionClickHandler
+   * @function
+   * @memberOf SvgMap
+   * @param {string} region -The name of the region clicked by the user
+   * @returns void
+   * @description This method receives the name of the region and use it as argument of the props sendRegion.
+   * That props is created in Layout.js.
+   * In Layout.js it invokes the method getProps and it pass the name of the region as argument.
+   */
   regionClickHandler = (region) => {
     this.props.sendRegion(region);
   }
