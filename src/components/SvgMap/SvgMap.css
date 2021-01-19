@@ -11,11 +11,13 @@
 }
 
 path:hover{
-    stroke-width: 3;
-    stroke: darkslateblue;
-    //opacity: 0.2;
+    //stroke-width: 3;
+    //stroke: darkslateblue;
+    opacity: 0.2;
 }
 
-.AB:hover{
-    opacity: 0.2;
+path:focus {
+    outline: 0;
+    stroke-width: 3;
+    stroke: darkslateblue;
 }
