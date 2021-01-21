@@ -167,7 +167,7 @@ class Layout extends Component {
             </div>
             )
         }
-
+ 
         return (
             <Fragment>
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
