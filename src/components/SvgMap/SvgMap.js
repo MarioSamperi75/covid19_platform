@@ -16,7 +16,7 @@ class SvgMap extends Component {
    * @returns void
    * @description This method receives the name of the region and use it as argument of the props sendRegion.
    * That props is created in Layout.js.
-   * In Layout.js it invokes the method getProps and it pass the name of the region as argument.
+   * In Layout.js it invokes the method getRegionNameFromMap and it pass the name of the region as argument.
    */
   regionClickHandler = (region) => {
     this.props.sendRegion(region)
