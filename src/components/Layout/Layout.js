@@ -1,4 +1,4 @@
-//database alla dagar from början : https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1
+//Data about population:  https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/kvartals--och-halvarsstatistik--kommun-lan-och-riket/-kvartal-3-2020/
 
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
@@ -10,6 +10,8 @@ import "./Layout.css"
 import SvgMap from "../SvgMap/SvgMap";
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
+
+import regionInhabitants from "../../inhabitants_by_region.json"
 
 
 /**
@@ -30,6 +32,10 @@ class Layout extends Component {
             { key: 'key-1', text: 'Infected' },
             { key: 'key-2', text: 'Deceased' },
             { key: 'key-3', text: 'Intensive Care' },
+            { key: 'key-4', text: 'Infected X 100000' },
+            { key: 'key-5', text: 'Deceased X 100000' },
+            { key: 'key-6', text: 'Intensive Care X 100000' },
+            { key: 'key-7', text: 'Population' },
         ]
 
     };
@@ -48,7 +54,7 @@ class Layout extends Component {
             this.setState({covidDataRegion: response.data.infectedByRegion})
             console.log("Axios: ", response.data.infectedByRegion);
             //create color in the map (THEN...)
-            this.createRegionColorObject (this.state.covidDataRegion)
+            this.createRegionColorObject ()
         });
     }
 
@@ -66,14 +72,16 @@ class Layout extends Component {
      * the value is the green value that determines the color of the region.
      * This method is an auxiliary function of componentdidMount.
      */
-    createRegionColorObject = (regionData) => {
+    createRegionColorObject = () => {
+
+        this.integrateData();
         /**
          * @alias covidValues
          * @memberOf Layout
          * @type {Array<number>}
          * @description This constant get an array of number -the data of the selected region- through a map function.
          */
-        let covidValues = this.selectCovidSubData(regionData);
+        const covidValues = this.selectCovidSubData();
         /**
          * @alias rgbValues
          * @memberOf Layout
@@ -81,14 +89,14 @@ class Layout extends Component {
          * @description This constant get an array of number -the RGB Green value for all the regions-
          * by invoking the function createRgbValues and passing as argument the entire axios object.
          */
-        let rgbValues = this.createRgbValues(covidValues);
+        const rgbValues = this.createRgbValues(covidValues);
         /**
          * @alias regions
          * @memberOf Layout
          * @type {Array<string>}
          * @description This constant get an array of string -the name of the region- through a map function.
          */
-        const regions = regionData.map(e => e.region)
+        const regions = this.state.covidDataRegion.map(e => e.region)
         /**
          * @alias regionColor
          * @memberOf Layout
@@ -106,6 +114,20 @@ class Layout extends Component {
         this.setState({regionColor: regionColor })
     }
 
+    integrateData = () => {
+            const updatedDataRegion = this.state.covidDataRegion.map((e) => {
+                return {
+                    ...e,
+                    deathsPer100000: Math.round(e.deathCount*100000/regionInhabitants.[e.region]),
+                    infectedPer100000: Math.round(e.infectedCount*100000/regionInhabitants.[e.region]),
+                    intensiveCarePer100000: Math.round(e.intensiveCareCount*100000/regionInhabitants.[e.region]),
+                    population : regionInhabitants.[e.region]
+                };
+            });
+
+            this.setState({ covidDataRegion: updatedDataRegion })
+    }
+
 
     /**
      * @alias selectCovidSubData
@@ -115,18 +137,32 @@ class Layout extends Component {
      * @description This method create en array values selecting between different sub-object in the region Data.
      * This selection is the response to the user's click on the component Dropdown.
      */
-    selectCovidSubData = (regionData) => {
-        let arrayColor = [];
+    selectCovidSubData = () => {
+        let arrayValues = [];
+        let regionData = this.state.covidDataRegion
         if (this.state.selectedDropdownOption === "Intensive Care") {
-            arrayColor = regionData.map(e => e.intensiveCareCount);
+            arrayValues = regionData.map(e => e.intensiveCareCount);
         }
         else if (this.state.selectedDropdownOption === "Deceased") {
-            arrayColor = regionData.map(e => e.deathCount);
+            arrayValues = regionData.map(e => e.deathCount);
         }
         else if (this.state.selectedDropdownOption === "Infected") {
-            arrayColor = regionData.map(e => e.infectedCount);
+            arrayValues = regionData.map(e => e.infectedCount);
         }
-        return arrayColor;
+        else if (this.state.selectedDropdownOption === "Intensive Care X 100000") {
+            arrayValues = regionData.map(e => e.intensiveCarePer100000);
+        }
+        else if (this.state.selectedDropdownOption === "Deceased X 100000") {
+            arrayValues = regionData.map(e => e.deathsPer100000);
+        }
+        else if (this.state.selectedDropdownOption === "Infected X 100000") {
+            arrayValues = regionData.map(e => e.infectedPer100000);
+        }
+        else if (this.state.selectedDropdownOption === "Population") {
+            arrayValues = regionData.map(e => e.population);
+        }
+
+        return arrayValues;
     }
 
     /**
@@ -182,6 +218,9 @@ class Layout extends Component {
         const regionArray = this.state.covidData.infectedByRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
+        console.log("prova abithanti: ", regionInhabitants.Stockholm)
+        console.log("prova regiondata updated: ", this.state.covidDataRegion)
+
     }
 
     /**
@@ -201,7 +240,6 @@ class Layout extends Component {
             .then((response) => {
             this.createRegionColorObject (response.data.infectedByRegion)
         });
-
     }
 
 
