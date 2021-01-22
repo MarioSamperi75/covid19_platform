@@ -26,10 +26,10 @@ const table = (props) => {
                 <table className="table">
                     <tbody>
                     <tr>
-                        <th>th1</th>
-                        <th>th2</th>
-                        <th>th3</th>
-                        <th>th4</th>
+                        <th>Region</th>
+                        <th>Infected</th>
+                        <th>Deaths</th>
+                        <th>Intensive Care</th>
                     </tr>
                     {tableData}
                     </tbody>

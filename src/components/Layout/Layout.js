@@ -24,35 +24,35 @@ class Layout extends Component {
         covidDataRegion: [],
         selectedRegionName: '',
         selectedRegionObject: null,
-        regionColor: {Stockholm: 200, Gotland: 123},
+        selectedDropdownOption: 'Infected',
+        regionColor: {},
         options : [
             { key: 'key-1', text: 'Infected' },
-            { key: 'key-2', text: 'Intensive Care' },
-            { key: 'key-3', text: 'Deceased' },
+            { key: 'key-2', text: 'Deceased' },
+            { key: 'key-3', text: 'Intensive Care' },
         ]
 
     };
 
 
     /**
-     * @description ComponentDidMount gets the axios request and creates three states: covidData, covidDataRegion, regionColor.
+     * @description ComponentDidMount gets the axios request,  creates two states ( ovidData, covidDataRegion)
+     * and invokes the method createRegionColorObject.
      * covidData is the entire objekt that the api returns.
      * covidDataRegion is the sub-array that contains data for all the regions.
-     * regionColor is the objekt that contains the green values that determines the color of every region.
-     * componentDidMount receives this object with the help of the method 'createRegionColorObject'.
      */
     componentDidMount() {
+        //fetching data and set states
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
             this.setState({covidData: response.data});
             this.setState({covidDataRegion: response.data.infectedByRegion})
             console.log("Axios: ", response.data.infectedByRegion);
-
-            const regionColor = this.createRegionColorObject (response.data.infectedByRegion)
-            console.log(regionColor);
-
-            this.setState({regionColor: regionColor })
+            //create color in the map (THEN...)
+            this.createRegionColorObject (this.state.covidDataRegion)
         });
     }
+
+
 
 
     /**
@@ -68,38 +68,81 @@ class Layout extends Component {
      */
     createRegionColorObject = (regionData) => {
         /**
-         * @alias arrayRegion
-         * @memberOf Layout
-         * @type {Array<string>}
-         * @description This constant get an array of string -the name of the region- through a map function.
-         */
-        const arrayRegion = regionData.map(e => e.region)
-        console.log("arrayRegion:" , arrayRegion);
-
-        //methoden create ArrayColors :select from dropdown, ändrar varde genom algoritm och returnerar arrayColor
-        /**
-         * @alias arrayColor
+         * @alias covidValues
          * @memberOf Layout
          * @type {Array<number>}
          * @description This constant get an array of number -the data of the selected region- through a map function.
          */
-        const arrayColor = regionData.map(e => e.intensiveCareCount);
-
+        let covidValues = this.selectCovidSubData(regionData);
+        /**
+         * @alias rgbValues
+         * @memberOf Layout
+         * @type {Array<number>}
+         * @description This constant get an array of number -the RGB Green value for all the regions-
+         * by invoking the function createRgbValues and passing as argument the entire axios object.
+         */
+        let rgbValues = this.createRgbValues(covidValues);
+        /**
+         * @alias regions
+         * @memberOf Layout
+         * @type {Array<string>}
+         * @description This constant get an array of string -the name of the region- through a map function.
+         */
+        const regions = regionData.map(e => e.region)
         /**
          * @alias regionColor
          * @memberOf Layout
          * @type {Objekt}
          * @description This constant is an object that contains many value/key pairs.
-         * The the keys come from arrayRegion and the values from arrayColor.
+         * The the keys come from Region and the values from RgbValues.
          * The conversion is the result of the functions reduce and Object.assign.
          */
-        const regionColor = arrayRegion.reduce(
+        const regionColor = regions.reduce(
             (accumulator, value, index) => Object.assign(accumulator, {
-                [value]: arrayColor[index],
+                // the yellow is the minimum but has greenvalue 255. We need to invert that. 255 - value.
+                [value]: (255 - rgbValues[index]),
             }), {}
         );
-        return regionColor;
+        this.setState({regionColor: regionColor })
     }
+
+
+    /**
+     * @alias selectCovidSubData
+     * @function
+     * @memberOf Layout
+     * @return {Array<number>} arrayColor
+     * @description This method create en array values selecting between different sub-object in the region Data.
+     * This selection is the response to the user's click on the component Dropdown.
+     */
+    selectCovidSubData = (regionData) => {
+        let arrayColor = [];
+        if (this.state.selectedDropdownOption === "Intensive Care") {
+            arrayColor = regionData.map(e => e.intensiveCareCount);
+        }
+        else if (this.state.selectedDropdownOption === "Deceased") {
+            arrayColor = regionData.map(e => e.deathCount);
+        }
+        else if (this.state.selectedDropdownOption === "Infected") {
+            arrayColor = regionData.map(e => e.infectedCount);
+        }
+        return arrayColor;
+    }
+
+    /**
+     * @alias createRgbValues
+     * @function
+     * @memberOf Layout
+     * @return {Array<number>} rgbValues
+     * @description This method receive en array values and convert them proportionally in a value between 0 and 255.
+     * Max and min? Different max and min? Variable to indicate witch kind of value and if/then? Selection data create the variable?
+     * sending variable as second argument when invoking createRgbValues?
+     */
+    createRgbValues = (covidValues) => {
+        //ALGORITHM TO CREATE
+        return covidValues;
+    }
+
 
 
     /**
@@ -121,7 +164,7 @@ class Layout extends Component {
     };
 
     /**
-     * @alias getRegion
+     * @alias getRegionNameFromMap
      * @function
      * @param {string} region - the name of the region clicked by the user
      * @memberOf Layout
@@ -133,12 +176,32 @@ class Layout extends Component {
      * The second is the  objekt that contains all the information about the selected region:
      * This object is obteined by filtering an axios requests by the parameter region.
      */
-    getRegion  = (region) => {
+    getRegionNameFromMap  = (region) => {
         this.setState({selectedRegionName : region});
 
         const regionArray = this.state.covidData.infectedByRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
+    }
+
+    /**
+     * @alias getOptionFromDropdown
+     * @function
+     * @param {string} region - the name of the region clicked by the user
+     * @memberOf Layout
+     * @return void
+     * @description This method get the name of the dropdown option as parameter
+     * when the user clicks on an option in the DropDown component.
+     * The method load the Data from the CovidAPI and invokes createRegionColorObject
+     * that is responsible to change the color of the regions in map.
+     */
+    getOptionFromDropdown  = (option) => {
+        this.setState({selectedDropdownOption : option});
+        axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true")
+            .then((response) => {
+            this.createRegionColorObject (response.data.infectedByRegion)
+        });
+
     }
 
 
@@ -167,7 +230,7 @@ class Layout extends Component {
             </div>
             )
         }
- 
+
         return (
             <Fragment>
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
@@ -175,8 +238,8 @@ class Layout extends Component {
 
                 <main>
                     <div className="SvgDiv">
-                        <DropDown options={this.state.options}></DropDown>
-                        <SvgMap sendRegion = {this.getRegion} regionColor ={this.state.regionColor}/>
+                        <DropDown options={this.state.options} selectedDropdownOption = {this.getOptionFromDropdown}></DropDown>
+                        <SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />
                     </div>
 
                     <div className="TablesDiv">
