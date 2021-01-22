@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Layout/Layout.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Layout/Layout.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//database alla dagar from början : https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&amp;clean=1
+
+import React, { Component, Fragment } from "react";
+import axios from 'axios';
+
+
+import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
+import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
+import "./Layout.css"
+import SvgMap from "../SvgMap/SvgMap";
+import Table from "../Table/Table";
+import DropDown from "../DropDown/DropDown"
+
+
+/**
+ * The class component Layout is the container of the projekt. All the components and almost all the business logic is here.
+ */
+class Layout extends Component {
+
+
+    state = {
+        showSideDrawer: false,
+        covidData: [],
+        covidDataRegion: [],
+        selectedRegionName: '',
+        selectedRegionObject: null,
+        regionColor: {Stockholm: 200, Gotland: 123},
+        options : [
+            { key: 'key-1', text: 'Infected' },
+            { key: 'key-2', text: 'Intensive Care' },
+            { key: 'key-3', text: 'Deceased' },
+        ]
+
+    };
+
+
+    /**
+     * @description ComponentDidMount gets the axios request and creates three states: covidData, covidDataRegion, regionColor.
+     * covidData is the entire objekt that the api returns.
+     * covidDataRegion is the sub-array that contains data for all the regions.
+     * regionColor is the objekt that contains the green values that determines the color of every region.
+     * componentDidMount receives this object with the help of the method 'createRegionColorObject'.
+     */
+    componentDidMount() {
+        axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
+            this.setState({covidData: response.data});
+            this.setState({covidDataRegion: response.data.infectedByRegion})
+            console.log("Axios: ", response.data.infectedByRegion);
+
+            const regionColor = this.createRegionColorObject (response.data.infectedByRegion)
+            console.log(regionColor);
+
+            this.setState({regionColor: regionColor })
+        });
+    }
+
+
+    /**
+     * @alias createRegionColorObject
+     * @function
+     * @memberOf Layout
+     * @param {Object} regionData - A part of the object that comes from the axios request
+     * @returns {Object}
+     * @description This method trasform the data from an axios request objekt (regionData),
+     * to an objekt that contains many key/value. The key is the name of the region,
+     * the value is the green value that determines the color of the region.
+     * This method is an auxiliary function of componentdidMount.
+     */
+    createRegionColorObject = (regionData) => {
+        /**
+         * @alias arrayRegion
+         * @memberOf Layout
+         * @type {Array&lt;string>}
+         * @description This constant get an array of string -the name of the region- through a map function.
+         */
+        const arrayRegion = regionData.map(e => e.region)
+        console.log("arrayRegion:" , arrayRegion);
+
+        //methoden create ArrayColors :select from dropdown, ändrar varde genom algoritm och returnerar arrayColor
+        /**
+         * @alias arrayColor
+         * @memberOf Layout
+         * @type {Array&lt;number>}
+         * @description This constant get an array of number -the data of the selected region- through a map function.
+         */
+        const arrayColor = regionData.map(e => e.intensiveCareCount);
+
+        /**
+         * @alias regionColor
+         * @memberOf Layout
+         * @type {Objekt}
+         * @description This constant is an object that contains many value/key pairs.
+         * The the keys come from arrayRegion and the values from arrayColor.
+         * The conversion is the result of the functions reduce and Object.assign.
+         */
+        const regionColor = arrayRegion.reduce(
+            (accumulator, value, index) => Object.assign(accumulator, {
+                [value]: arrayColor[index],
+            }), {}
+        );
+        return regionColor;
+    }
+
+
+    /**
+     * @alias toggleSideDrawerHandler
+     * @function
+     * @memberOf Layout
+     * @return void
+     * @description This method inverts the boolean value of the state showSideSrawer,
+     * as response to the user's click on the component DrawerToggle.
+     * DrawerToggle is a child of component Toolbar.
+     */
+    toggleSideDrawerHandler = () => {
+        this.setState((prevState) => {
+            return {
+                showSideDrawer: !prevState.showSideDrawer,
+            };
+
+        });
+    };
+
+    /**
+     * @alias getRegion
+     * @function
+     * @param {string} region - the name of the region clicked by the user
+     * @memberOf Layout
+     * @return void
+     * @description This method get the name of the region as parameter
+     * when the user clicks on a region in the SvgMap.
+     * The method creates two state: selectedRegionName and selectedRegionObject.
+     * The first is just the name that the method receives (string).
+     * The second is the  objekt that contains all the information about the selected region:
+     * This object is obteined by filtering an axios requests by the parameter region.
+     */
+    getRegion  = (region) => {
+        this.setState({selectedRegionName : region});
+
+        const regionArray = this.state.covidData.infectedByRegion;
+        const selectedObjectArray = regionArray.filter(e => (e.region === region ));
+        this.setState({selectedRegionObject : selectedObjectArray[0]});
+    }
+
+
+
+    render() {
+        /**
+         * @alias regionRendered
+         * @memberOf Layout
+         * @type {JSX.Element}
+         * @Description The variable regionRendered contains different JSX elements that are rendered conditionally,
+         * depending on the value of the state 'selectedRegionName'.
+         * The element becomes a table only if it's true (not null),
+         * otherwise it remains a text "Select a region".
+         * The state 'selectedRegionName' is null when starting the page,
+         * and becomes a string (not null, true) when the user clicks on the SvgMap.
+         */
+        let regionRendered = &lt;div>Select a region&lt;/div>
+        if (this.state.selectedRegionObject) {
+            regionRendered = (
+            &lt;div className="table3Div">
+            Deceased: {this.state.selectedRegionObject.deathCount}
+            &lt;br/>
+            Infected: {this.state.selectedRegionObject.infectedCount}
+            &lt;br/>
+            IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
+            &lt;/div>
+            )
+        }
+
+        return (
+            &lt;Fragment>
+                &lt;Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
+                &lt;SideDrawer showState={this.state.showSideDrawer}/>
+
+                &lt;main>
+                    &lt;div className="SvgDiv">
+                        &lt;DropDown options={this.state.options}>&lt;/DropDown>
+                        &lt;SvgMap sendRegion = {this.getRegion} regionColor ={this.state.regionColor}/>
+                    &lt;/div>
+
+                    &lt;div className="TablesDiv">
+
+                        &lt;div className="smallTables">
+                            &lt;div className="table2Div">
+                                &lt;h3>Sweden&lt;/h3>
+                                &lt;br/>
+                                Deceased: {this.state.covidData.deceased}
+                                &lt;br/>
+                                Infected: {this.state.covidData.infected}
+                                &lt;br/>
+                                IntensiveCare: {this.state.covidData.intensiveCare}
+                                &lt;br/>
+                                &lt;br/>
+                                &lt;h3>{this.state.selectedRegionName}&lt;/h3>
+                            &lt;/div>
+
+                            {regionRendered}
+
+                        &lt;/div>
+                        &lt;Table dataRegion = {this.state.covidDataRegion}/>
+                    &lt;/div>
+                &lt;/main>
+
+            &lt;/Fragment>
+        );
+    }
+}
+
+export default Layout;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Layout.html">Layout</a></li><li><a href="SvgMap.html">SvgMap</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Jan 19 2021 12:48:31 GMT+0100 (centraleuropeisk normaltid)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
