@@ -5,7 +5,7 @@
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
 
-
+import Backdrop from "../Backdrop/Backdrop"
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
@@ -23,6 +23,7 @@ class Layout extends Component {
 
 
     state = {
+        loadingAxios : true,
         showSideDrawer: false,
         covidData: [],
         covidDataRegion: [],
@@ -51,7 +52,13 @@ class Layout extends Component {
      * covidDataRegion is the sub-array that contains data for all the regions.
      */
     componentDidMount() {
-        axios.get("https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1").then((response) => {
+        const requestA = "https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true"
+        const requestB ="https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1"
+
+
+
+        axios.get(requestB)
+            .then((response) => {
             const partOfData = response.data.slice(response.data.length-15, response.data.length-1).filter(item=>item.deceased!==0);
 
             //extract substring
@@ -68,27 +75,19 @@ class Layout extends Component {
             const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
             console.log("diffInDays", diffInDays);
             console.log("partOfData", partOfData)
-
             //click to try deceased
 
-
-
-
-
-
+            return axios.get(requestA);
         })
-        //fetching data and set states
-        axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
+
+            .then((response) => {
             this.setState({covidData: response.data});
             this.setState({covidDataRegion: response.data.infectedByRegion});
             console.log("Axios all: ", response.data);
             console.log("Axios region: ", response.data.infectedByRegion);
             //create color in the map (THEN...)
             this.createRegionColorObject ()
-        });
-        axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
-            console.log("Axios all: ", response.data);
-
+            this.setState({loadingAxios:false})
         });
     }
 
@@ -319,6 +318,7 @@ class Layout extends Component {
 
         return (
             <Fragment>
+                <Backdrop show = {this.state.loadingAxios}/>
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
                 <SideDrawer showState={this.state.showSideDrawer}/>
 
