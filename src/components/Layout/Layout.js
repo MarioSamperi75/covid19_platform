@@ -1,5 +1,7 @@
 //Data about population:  https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/kvartals--och-halvarsstatistik--kommun-lan-och-riket/-kvartal-3-2020/
 
+//Historik: https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1
+
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
 
@@ -51,14 +53,13 @@ class Layout extends Component {
         //fetching data and set states
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
             this.setState({covidData: response.data});
-            this.setState({covidDataRegion: response.data.infectedByRegion})
-            console.log("Axios: ", response.data.infectedByRegion);
+            this.setState({covidDataRegion: response.data.infectedByRegion});
+            console.log("Axios all: ", response.data);
+            console.log("Axios region: ", response.data.infectedByRegion);
             //create color in the map (THEN...)
             this.createRegionColorObject ()
         });
     }
-
-
 
 
     /**
@@ -67,10 +68,12 @@ class Layout extends Component {
      * @memberOf Layout
      * @param {Object} regionData - A part of the object that comes from the axios request
      * @returns {Object}
-     * @description This method trasform the data from an axios request objekt (regionData),
-     * to an objekt that contains many key/value. The key is the name of the region,
-     * the value is the green value that determines the color of the region.
-     * This method is an auxiliary function of componentdidMount.
+     * @description  The method createRegionColorObject is an auxiliary function of componentdidMount.
+     * It trasforms the data from an axios request objekt (regionData),
+     * to an objekt that contains many key/value one for every region.
+     * The key is the name of the region, the value is the green value that determines the color of the region.
+     * The method has tre steps: integration - selection - rgb conversion.
+     * Each of them is delegated to a new function-
      */
     createRegionColorObject = () => {
 
@@ -114,6 +117,14 @@ class Layout extends Component {
         this.setState({regionColor: regionColor })
     }
 
+    /**
+     * @alias integrateData
+     * @function
+     * @memberOf Layout
+     * @return void
+     * @description This method integrates the object DataRegion - a part of the object that comes the axios request -
+     * with new keyvalues pairs concerning the all the exixtents value calculated in relation to the population.
+     */
     integrateData = () => {
             const updatedDataRegion = this.state.covidDataRegion.map((e) => {
                 return {
@@ -218,9 +229,6 @@ class Layout extends Component {
         const regionArray = this.state.covidData.infectedByRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
-        console.log("prova abithanti: ", regionInhabitants.Stockholm)
-        console.log("prova regiondata updated: ", this.state.covidDataRegion)
-
     }
 
     /**
