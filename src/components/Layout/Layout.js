@@ -38,7 +38,8 @@ class Layout extends Component {
             { key: 'key-5', text: 'Deceased X 100000' },
             { key: 'key-6', text: 'Intensive Care X 100000' },
             { key: 'key-7', text: 'Population' },
-        ]
+        ],
+        deceasedToday : 0,
 
     };
 
@@ -50,6 +51,32 @@ class Layout extends Component {
      * covidDataRegion is the sub-array that contains data for all the regions.
      */
     componentDidMount() {
+        axios.get("https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1").then((response) => {
+            const partOfData = response.data.slice(response.data.length-15, response.data.length-1).filter(item=>item.deceased!==0);
+
+            //extract substring
+            partOfData.map((item)=>console.log("updated", item.lastUpdatedAtApify.substring(0,10), "deceased", item.deceased));
+
+            const deceasedOggi= partOfData[partOfData.length-1].deceased
+            this.setState({deceasedToday : deceasedOggi})
+
+
+            //difference between two dates
+            const startDate  = '2021-01-01';
+            const endDate    = '2021-01-02';
+            const diffInMs   = new Date(endDate) - new Date(startDate)
+            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+            console.log("diffInDays", diffInDays);
+            console.log("partOfData", partOfData)
+
+            //click to try deceased
+
+
+
+
+
+
+        })
         //fetching data and set states
         axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
             this.setState({covidData: response.data});
@@ -59,7 +86,13 @@ class Layout extends Component {
             //create color in the map (THEN...)
             this.createRegionColorObject ()
         });
+        axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
+            console.log("Axios all: ", response.data);
+
+        });
     }
+
+
 
 
     /**
@@ -229,6 +262,13 @@ class Layout extends Component {
         const regionArray = this.state.covidData.infectedByRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
+        console.log("deceasedYesterday: ", this.state.deceasedToday)
+        console.log("deceasedToday: ", this.state.covidData.deceased)
+        console.log("differenza: ", this.state.covidData.deceased -this.state.deceasedToday)
+        console.log("deceasedToday: ", this.state.covidData.deceased)
+        console.log("per giorno: ", (this.state.covidData.deceased -this.state.deceasedToday)/3)
+
+
     }
 
     /**
