@@ -25,8 +25,11 @@ class Layout extends Component {
     state = {
         loadingAxios : true,
         showSideDrawer: false,
-        covidData: [],
+        covidDataSweden: [],
+        covidDataSwedenPrevious: [],
+        covidDataSwedenPreviousPrevious: [],
         covidDataRegion: [],
+        covidDataRegionPrevious: [],
         selectedRegionName: '',
         selectedRegionObject: null,
         selectedDropdownOption: 'Infected',
@@ -46,10 +49,10 @@ class Layout extends Component {
 
 
     /**
-     * @description ComponentDidMount gets the axios request,  creates two states ( ovidData, covidDataRegion)
+     * @description ComponentDidMount gets the axios request,  creates two states ( CovidDataSweden, covidDataSwedenRegion)
      * and invokes the method createRegionColorObject.
-     * covidData is the entire objekt that the api returns.
-     * covidDataRegion is the sub-array that contains data for all the regions.
+     * covidDataSweden is the entire objekt that the api returns.
+     * covidDataSwedenRegion is the sub-array that contains data for all the regions.
      */
     componentDidMount() {
         const requestA = "https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true"
@@ -59,13 +62,19 @@ class Layout extends Component {
 
         axios.get(requestB)
             .then((response) => {
-            const partOfData = response.data.slice(response.data.length-15, response.data.length-1).filter(item=>item.deceased!==0);
-
+            const partOfData = response.data.slice(response.data.length-15, response.data.length).filter(item=>item.deceased!==0);
             //extract substring
             partOfData.map((item)=>console.log("updated", item.lastUpdatedAtApify.substring(0,10), "deceased", item.deceased));
 
-            const deceasedOggi= partOfData[partOfData.length-1].deceased
-            this.setState({deceasedToday : deceasedOggi})
+            console.log("Historik:", partOfData);
+            const covidDataSwedenPreviousPrevious = partOfData.slice(partOfData.length-2, partOfData.length);
+            console.log("test coDaSwPP: ", covidDataSwedenPreviousPrevious);
+            const covidDataSwedenPrevious = partOfData[partOfData.length-1];
+            const covidDataRegionPrevious = partOfData[partOfData.length-1].infectedByRegion;
+
+            this.setState({covidDataRegionPreviousPrevious : covidDataSwedenPreviousPrevious})
+            this.setState({covidDataSwedenPrevious : covidDataSwedenPrevious})
+            this.setState({covidDataRegionPrevious : covidDataRegionPrevious})
 
 
             //difference between two dates
@@ -81,7 +90,7 @@ class Layout extends Component {
         })
 
             .then((response) => {
-            this.setState({covidData: response.data});
+            this.setState({covidDataSweden: response.data});
             this.setState({covidDataRegion: response.data.infectedByRegion});
             console.log("Axios all: ", response.data);
             console.log("Axios region: ", response.data.infectedByRegion);
@@ -258,15 +267,19 @@ class Layout extends Component {
     getRegionNameFromMap  = (region) => {
         this.setState({selectedRegionName : region});
 
-        const regionArray = this.state.covidData.infectedByRegion;
+        const regionArray = this.state.covidDataSweden.infectedByRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
-        console.log("deceasedYesterday: ", this.state.deceasedToday)
-        console.log("deceasedToday: ", this.state.covidData.deceased)
-        console.log("differenza: ", this.state.covidData.deceased -this.state.deceasedToday)
-        console.log("deceasedToday: ", this.state.covidData.deceased)
-        console.log("per giorno: ", (this.state.covidData.deceased -this.state.deceasedToday)/3)
-
+        //TEST
+        console.log("deceasedYesterday: ", this.state.covidDataSwedenPrevious.deceased)
+        console.log("deceasedToday: ", this.state.covidDataSweden.deceased)
+        console.log("differenza: ", this.state.covidDataSweden.deceased - this.state.covidDataSwedenPrevious.deceased)
+        console.log("per giorno: ", (this.state.covidDataSweden.deceased -this.state.covidDataSwedenPrevious.deceased)/3)
+        console.log("Regionlast: ", this.state.covidDataRegion);
+        console.log("Regionprevious: ", this.state.covidDataRegionPrevious);
+        console.log("SwedenLast: ", this.state.covidDataSweden);
+        console.log("SwedenPrevious: ", this.state.covidDataSwedenPrevious);
+        console.log("SwedenPreviousPrevious: ", this.state.covidDataSwedenPreviousPrevious);
 
     }
 
@@ -334,11 +347,11 @@ class Layout extends Component {
                             <div className="table2Div">
                                 <h3>Sweden</h3>
                                 <br/>
-                                Deceased: {this.state.covidData.deceased}
+                                Deceased: {this.state.covidDataSweden.deceased}
                                 <br/>
-                                Infected: {this.state.covidData.infected}
+                                Infected: {this.state.covidDataSweden.infected}
                                 <br/>
-                                IntensiveCare: {this.state.covidData.intensiveCare}
+                                IntensiveCare: {this.state.covidDataSweden.intensiveCare}
                                 <br/>
                                 <br/>
                                 <h3>{this.state.selectedRegionName}</h3>
