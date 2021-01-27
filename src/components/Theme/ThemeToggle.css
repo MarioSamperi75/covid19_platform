@@ -1,0 +1,14 @@
+.ThemeToggle button {
+    border: none;
+    background-color : transparent;
+    outline: none;
+}
+
+.ThemeToggle button:hover{
+    opacity: 0.3;
+}
+
+.ThemeToggle img {
+    width: 40px;
+    height: 40px;
+}
