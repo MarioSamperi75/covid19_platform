@@ -19,5 +19,5 @@ path:hover{
 path:focus {
     outline: 0;
     stroke-width: 3;
-    stroke: darkslateblue;
+    stroke: #483d8b;
 }
