@@ -25,9 +25,10 @@ class Layout extends Component {
     state = {
         loadingAxios : true,
         showSideDrawer: false,
+        lastUpdate: '',
+        previousUpdate: '',
         covidDataSweden: [],
         covidDataSwedenPrevious: [],
-        covidDataSwedenPreviousPrevious: [],
         covidDataRegion: [],
         covidDataRegionPrevious: [],
         selectedRegionName: '',
@@ -42,8 +43,7 @@ class Layout extends Component {
             { key: 'key-5', text: 'Deceased X 100000' },
             { key: 'key-6', text: 'Intensive Care X 100000' },
             { key: 'key-7', text: 'Population' },
-        ],
-        deceasedToday : 0,
+        ]
 
     };
 
@@ -55,49 +55,31 @@ class Layout extends Component {
      * covidDataSwedenRegion is the sub-array that contains data for all the regions.
      */
     componentDidMount() {
-        const requestA = "https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true"
-        const requestB ="https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1"
+        //const requestActual = "https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true"
+        const requestHystory ="https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1"
 
-
-
-        axios.get(requestB)
+        axios.get(requestHystory)
             .then((response) => {
             const partOfData = response.data.slice(response.data.length-15, response.data.length).filter(item=>item.deceased!==0);
             //extract substring
-            partOfData.map((item)=>console.log("updated", item.lastUpdatedAtApify.substring(0,10), "deceased", item.deceased));
+            //partOfData.map((item)=>console.log("updated", item.lastUpdatedAtApify.substring(0,10), "deceased", item.deceased));
+            const covidDataSwedenPrevious = partOfData[partOfData.length-2];
+            const covidDataRegionPrevious = partOfData[partOfData.length-2].infectedByRegion;
+            const covidDataSweden = partOfData[partOfData.length-1];
+            const covidDataRegion = partOfData[partOfData.length-1].infectedByRegion;
 
-            console.log("Historik:", partOfData);
-            const covidDataSwedenPreviousPrevious = partOfData.slice(partOfData.length-2, partOfData.length);
-            console.log("test coDaSwPP: ", covidDataSwedenPreviousPrevious);
-            const covidDataSwedenPrevious = partOfData[partOfData.length-1];
-            const covidDataRegionPrevious = partOfData[partOfData.length-1].infectedByRegion;
-
-            this.setState({covidDataRegionPreviousPrevious : covidDataSwedenPreviousPrevious})
             this.setState({covidDataSwedenPrevious : covidDataSwedenPrevious})
             this.setState({covidDataRegionPrevious : covidDataRegionPrevious})
+            this.setState({covidDataSweden: covidDataSweden});
+            this.setState({covidDataRegion: covidDataRegion});
+            this.setState({lastUpdate: covidDataSweden.lastUpdatedAtApify.substring(0,10)})
+            this.setState({previousUpdate: covidDataSwedenPrevious.lastUpdatedAtApify.substring(0,10)})
 
+            this.createRegionColorObject ()
 
-            //difference between two dates
-            const startDate  = '2021-01-01';
-            const endDate    = '2021-01-02';
-            const diffInMs   = new Date(endDate) - new Date(startDate)
-            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-            console.log("diffInDays", diffInDays);
-            console.log("partOfData", partOfData)
-            //click to try deceased
-
-            return axios.get(requestA);
+            this.setState({loadingAxios:false})
         })
 
-            .then((response) => {
-            this.setState({covidDataSweden: response.data});
-            this.setState({covidDataRegion: response.data.infectedByRegion});
-            console.log("Axios all: ", response.data);
-            console.log("Axios region: ", response.data.infectedByRegion);
-            //create color in the map (THEN...)
-            this.createRegionColorObject ()
-            this.setState({loadingAxios:false})
-        });
     }
 
 
@@ -167,16 +149,56 @@ class Layout extends Component {
      * with new keyvalues pairs concerning the all the exixtents value calculated in relation to the population.
      */
     integrateData = () => {
-            const updatedDataRegion = this.state.covidDataRegion.map((e) => {
+            //TO BE MORE READABLE
+            const dataRegion =  this.state.covidDataRegion;
+            const dataRegionPrevious =  this.state.covidDataRegionPrevious;
+            const dataSverige = this.state.covidDataSweden;
+            const dataSverigePrevious = this.state.covidDataSwedenPrevious;
+
+            //CALCULTE DIFFERENCE BETWEEN THE LAST TWO UPDATING DATES (HOW MANY DAYS?)
+            const startDate  = this.state.previousUpdate;
+            const endDate    = this.state.lastUpdate;
+            const diffInMs   = new Date(endDate) - new Date(startDate)
+            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+
+            // REGIONS INTEGRATION
+            const updatedDataRegion = dataRegion.map((e, index) => {
+                const newDeaths = ((e.deathCount - dataRegionPrevious[index].deathCount)/diffInDays).toFixed(1);
+                const newInfected = ((e.infectedCount - dataRegionPrevious[index].infectedCount)/diffInDays).toFixed(1);
+                const newIntensiveCare = ((e.intensiveCareCount - dataRegionPrevious[index].intensiveCareCount)/diffInDays).toFixed(1);
                 return {
                     ...e,
                     deathsPer100000: Math.round(e.deathCount*100000/regionInhabitants.[e.region]),
                     infectedPer100000: Math.round(e.infectedCount*100000/regionInhabitants.[e.region]),
                     intensiveCarePer100000: Math.round(e.intensiveCareCount*100000/regionInhabitants.[e.region]),
-                    population : regionInhabitants.[e.region]
+                    population : regionInhabitants.[e.region],
+                    newDeaths : newDeaths,
+                    newInfected : newInfected,
+                    newIntensiveCare : newIntensiveCare
                 };
             });
 
+
+            //SWEDEN INTEGRATION
+            const dailyDeaths = ((dataSverige.deceased - dataSverigePrevious.deceased)/diffInDays).toFixed(1);
+            const dailyInfected = ((dataSverige.infected - dataSverigePrevious.infected)/diffInDays).toFixed(1);
+            const dailyIntensiveCare = ((dataSverige.intensiveCare - dataSverigePrevious.intensiveCare)/diffInDays).toFixed(1);
+            const deathsPerMilion = Math.round(dataSverige.deceased*1000000/regionInhabitants.Total);
+            const infectedPerMilion = Math.round(dataSverige.infected*1000000/regionInhabitants.Total);
+            const intensiveCarePerMilion = Math.round(dataSverige.intensiveCare*1000000/regionInhabitants.Total);
+
+            const updatedDataSweden = { ...dataSverige,
+                deathsPerMilion : deathsPerMilion,
+                infectedPerMilion : infectedPerMilion,
+                intensiveCarePerMilion : intensiveCarePerMilion,
+                dailyDeaths : dailyDeaths,
+                dailyInfected : dailyInfected,
+                dailyIntensiveCare : dailyIntensiveCare,
+            }
+
+            //SETTING STATES
+            this.setState({covidDataSweden: updatedDataSweden})
             this.setState({ covidDataRegion: updatedDataRegion })
     }
 
@@ -267,20 +289,10 @@ class Layout extends Component {
     getRegionNameFromMap  = (region) => {
         this.setState({selectedRegionName : region});
 
-        const regionArray = this.state.covidDataSweden.infectedByRegion;
+        const regionArray = this.state.covidDataRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
         //TEST
-        console.log("deceasedYesterday: ", this.state.covidDataSwedenPrevious.deceased)
-        console.log("deceasedToday: ", this.state.covidDataSweden.deceased)
-        console.log("differenza: ", this.state.covidDataSweden.deceased - this.state.covidDataSwedenPrevious.deceased)
-        console.log("per giorno: ", (this.state.covidDataSweden.deceased -this.state.covidDataSwedenPrevious.deceased)/3)
-        console.log("Regionlast: ", this.state.covidDataRegion);
-        console.log("Regionprevious: ", this.state.covidDataRegionPrevious);
-        console.log("SwedenLast: ", this.state.covidDataSweden);
-        console.log("SwedenPrevious: ", this.state.covidDataSwedenPrevious);
-        console.log("SwedenPreviousPrevious: ", this.state.covidDataSwedenPreviousPrevious);
-
     }
 
     /**
@@ -300,6 +312,7 @@ class Layout extends Component {
             .then((response) => {
             this.createRegionColorObject (response.data.infectedByRegion)
         });
+        console.log("COVIDDATASWEDEN: ", this.state.covidDataSweden)
     }
 
 
@@ -320,12 +333,27 @@ class Layout extends Component {
         if (this.state.selectedRegionObject) {
             regionRendered = (
             <div className="table3Div">
+            <h3>{this.state.selectedRegionName}</h3>
             Deceased: {this.state.selectedRegionObject.deathCount}
             <br/>
+            DeceasedX100000: {this.state.selectedRegionObject.deathsPer100000}
+            <br/>
+            Daily increase: {this.state.selectedRegionObject.newDeaths}
+            <br/><br/>
             Infected: {this.state.selectedRegionObject.infectedCount}
             <br/>
+            InfectedX100000: {this.state.selectedRegionObject.infectedPer100000}
+            <br/>
+            Daily increase: {this.state.selectedRegionObject.newInfected}
+            <br/><br/>
             IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
+            <br/>
+            IntensiveCareX100000: {this.state.selectedRegionObject.intensiveCarePer100000}
+            <br/>
+            Daily increase: {this.state.selectedRegionObject.newIntensiveCare}
+            <br/>
             </div>
+
             )
         }
 
@@ -346,21 +374,31 @@ class Layout extends Component {
                         <div className="smallTables">
                             <div className="table2Div">
                                 <h3>Sweden</h3>
-                                <br/>
                                 Deceased: {this.state.covidDataSweden.deceased}
                                 <br/>
+                                Deceased(X M): {this.state.covidDataSweden.deathsPerMilion}
+                                <br/>
+                                Daily increase: {this.state.covidDataSweden.dailyDeaths}
+                                <br/><br/>
                                 Infected: {this.state.covidDataSweden.infected}
                                 <br/>
+                                Infected(X M): {this.state.covidDataSweden.infectedPerMilion}
+                                <br/>
+                                Daily increase: {this.state.covidDataSweden.dailyInfected}
+                                <br/><br/>
                                 IntensiveCare: {this.state.covidDataSweden.intensiveCare}
                                 <br/>
+                                IntensiveCare(X M): {this.state.covidDataSweden.intensiveCarePerMilion}
                                 <br/>
-                                <h3>{this.state.selectedRegionName}</h3>
+                                Daily increase: {this.state.covidDataSweden.dailyIntensiveCare}
+                                <br/>
+                                <br/>
                             </div>
 
                             {regionRendered}
 
                         </div>
-                        <Table dataRegion = {this.state.covidDataRegion}/>
+                        <Table dataRegion = {this.state.covidDataRegion} lastUpdate = {this.state.lastUpdate}/>
                     </div>
                 </main>
 

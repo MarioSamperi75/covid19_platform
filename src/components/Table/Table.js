@@ -22,7 +22,7 @@ const table = (props) => {
 
     return (
         <div className="table1Div">
-            <h1>React Dynamic Table</h1>
+            <h3>last update:  {props.lastUpdate}</h3>
                 <table className="table">
                     <tbody>
                     <tr>

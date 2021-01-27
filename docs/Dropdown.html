@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: SvgMap</title>
+    <title>JSDoc: Class: Dropdown</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: SvgMap</h1>
+    <h1 class="page-title">Class: Dropdown</h1>
 
     
 
@@ -28,10 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SvgMap<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>The class component SvgMap contains the Svg image (Sweden) and all its parts (regions).
-All the parts are interactive and receives a color as props.</p></div>
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="Layout.html">Layout</a></span>Dropdown<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
         
     
 </header>
@@ -42,115 +40,9 @@ All the parts are interactive and receives a color as props.</p></div>
         
 
     
-    <h2>Constructor</h2>
-    
 
     
-    <h4 class="name" id="SvgMap"><span class="type-signature"></span>new SvgMap<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SvgMap_SvgMap.js.html">SvgMap/SvgMap.js</a>, <a href="SvgMap_SvgMap.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="regionClickHandler"><span class="type-signature"></span>regionClickHandler<span class="signature">(region)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Dropdown"><span class="type-signature"></span>new Dropdown<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
     
@@ -158,9 +50,9 @@ All the parts are interactive and receives a color as props.</p></div>
 
 
 <div class="description">
-    <p>This method receives the name of the region and use it as argument of the props sendRegion.
-That props is created in Layout.js.
-In Layout.js it invokes the method getRegionNameFromMap and it pass the name of the region as argument.</p>
+    <p>The functional component dropdown return a dropdown as JSX element,
+and fill in it the list of array that receives as props.
+Those items are the dropDown options.</p>
 </div>
 
 
@@ -196,15 +88,10 @@ In Layout.js it invokes the method getRegionNameFromMap and it pass the name of 
 
         <tr>
             
-                <td class="name"><code>region</code></td>
+                <td class="name"><code>props</code></td>
             
 
             <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
             
             </td>
 
@@ -212,7 +99,7 @@ In Layout.js it invokes the method getRegionNameFromMap and it pass the name of 
 
             
 
-            <td class="description last"><p>The name of the region clicked by the user</p></td>
+            <td class="description last"><p>the dropDown Options (infected, deacesed, intensive Care)</p></td>
         </tr>
 
     
@@ -253,7 +140,184 @@ In Layout.js it invokes the method getRegionNameFromMap and it pass the name of 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SvgMap_SvgMap.js.html">SvgMap/SvgMap.js</a>, <a href="SvgMap_SvgMap.js.html#line21">line 21</a>
+        <a href="DropDown_DropDown.js.html">DropDown/DropDown.js</a>, <a href="DropDown_DropDown.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="dropdownOnchangeHandler"><span class="type-signature"></span>dropdownOnchangeHandler<span class="signature">(option)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This method receives the name of the option and use it as argument of the props dropdownOnchangeHandler.
+That props is created in Layout.js.
+In Layout.js it invokes the method getOptionFromDropdown and it pass the name of the option as argument.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>option</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The name of option selected by the user in the dropdown</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="DropDown_DropDown.js.html">DropDown/DropDown.js</a>, <a href="DropDown_DropDown.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
