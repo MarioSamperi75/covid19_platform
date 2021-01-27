@@ -1,15 +1,19 @@
-//database alla dagar from början : https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1
+//Data about population:  https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/kvartals--och-halvarsstatistik--kommun-lan-och-riket/-kvartal-3-2020/
+
+//Historik: https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1
 
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
 
-
+import Backdrop from "../Backdrop/Backdrop"
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
 import SvgMap from "../SvgMap/SvgMap";
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
+
+import regionInhabitants from "../../inhabitants_by_region.json"
 
 
 /**
@@ -19,9 +23,14 @@ class Layout extends Component {
 
 
     state = {
+        loadingAxios : true,
         showSideDrawer: false,
-        covidData: [],
+        lastUpdate: '',
+        previousUpdate: '',
+        covidDataSweden: [],
+        covidDataSwedenPrevious: [],
         covidDataRegion: [],
+        covidDataRegionPrevious: [],
         selectedRegionName: '',
         selectedRegionObject: null,
         selectedDropdownOption: 'Infected',
@@ -30,26 +39,47 @@ class Layout extends Component {
             { key: 'key-1', text: 'Infected' },
             { key: 'key-2', text: 'Deceased' },
             { key: 'key-3', text: 'Intensive Care' },
+            { key: 'key-4', text: 'Infected X 100000' },
+            { key: 'key-5', text: 'Deceased X 100000' },
+            { key: 'key-6', text: 'Intensive Care X 100000' },
+            { key: 'key-7', text: 'Population' },
         ]
 
     };
 
 
     /**
-     * @description ComponentDidMount gets the axios request,  creates two states ( ovidData, covidDataRegion)
+     * @description ComponentDidMount gets the axios request,  creates two states ( CovidDataSweden, covidDataSwedenRegion)
      * and invokes the method createRegionColorObject.
-     * covidData is the entire objekt that the api returns.
-     * covidDataRegion is the sub-array that contains data for all the regions.
+     * covidDataSweden is the entire objekt that the api returns.
+     * covidDataSwedenRegion is the sub-array that contains data for all the regions.
      */
     componentDidMount() {
-        //fetching data and set states
-        axios.get("https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true").then((response) => {
-            this.setState({covidData: response.data});
-            this.setState({covidDataRegion: response.data.infectedByRegion})
-            console.log("Axios: ", response.data.infectedByRegion);
-            //create color in the map (THEN...)
-            this.createRegionColorObject (this.state.covidDataRegion)
-        });
+        //const requestActual = "https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true"
+        const requestHystory ="https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1"
+
+        axios.get(requestHystory)
+            .then((response) => {
+            const partOfData = response.data.slice(response.data.length-15, response.data.length).filter(item=>item.deceased!==0);
+            //extract substring
+            //partOfData.map((item)=>console.log("updated", item.lastUpdatedAtApify.substring(0,10), "deceased", item.deceased));
+            const covidDataSwedenPrevious = partOfData[partOfData.length-2];
+            const covidDataRegionPrevious = partOfData[partOfData.length-2].infectedByRegion;
+            const covidDataSweden = partOfData[partOfData.length-1];
+            const covidDataRegion = partOfData[partOfData.length-1].infectedByRegion;
+
+            this.setState({covidDataSwedenPrevious : covidDataSwedenPrevious})
+            this.setState({covidDataRegionPrevious : covidDataRegionPrevious})
+            this.setState({covidDataSweden: covidDataSweden});
+            this.setState({covidDataRegion: covidDataRegion});
+            this.setState({lastUpdate: covidDataSweden.lastUpdatedAtApify.substring(0,10)})
+            this.setState({previousUpdate: covidDataSwedenPrevious.lastUpdatedAtApify.substring(0,10)})
+
+            this.createRegionColorObject ()
+
+            this.setState({loadingAxios:false})
+        })
+
     }
 
 
@@ -61,19 +91,23 @@ class Layout extends Component {
      * @memberOf Layout
      * @param {Object} regionData - A part of the object that comes from the axios request
      * @returns {Object}
-     * @description This method trasform the data from an axios request objekt (regionData),
-     * to an objekt that contains many key/value. The key is the name of the region,
-     * the value is the green value that determines the color of the region.
-     * This method is an auxiliary function of componentdidMount.
+     * @description  The method createRegionColorObject is an auxiliary function of componentdidMount.
+     * It trasforms the data from an axios request objekt (regionData),
+     * to an objekt that contains many key/value one for every region.
+     * The key is the name of the region, the value is the green value that determines the color of the region.
+     * The method has tre steps: integration - selection - rgb conversion.
+     * Each of them is delegated to a new function-
      */
-    createRegionColorObject = (regionData) => {
+    createRegionColorObject = () => {
+
+        this.integrateData();
         /**
          * @alias covidValues
          * @memberOf Layout
          * @type {Array<number>}
          * @description This constant get an array of number -the data of the selected region- through a map function.
          */
-        let covidValues = this.selectCovidSubData(regionData);
+        const covidValues = this.selectCovidSubData();
         /**
          * @alias rgbValues
          * @memberOf Layout
@@ -81,14 +115,14 @@ class Layout extends Component {
          * @description This constant get an array of number -the RGB Green value for all the regions-
          * by invoking the function createRgbValues and passing as argument the entire axios object.
          */
-        let rgbValues = this.createRgbValues(covidValues);
+        const rgbValues = this.createRgbValues(covidValues);
         /**
          * @alias regions
          * @memberOf Layout
          * @type {Array<string>}
          * @description This constant get an array of string -the name of the region- through a map function.
          */
-        const regions = regionData.map(e => e.region)
+        const regions = this.state.covidDataRegion.map(e => e.region)
         /**
          * @alias regionColor
          * @memberOf Layout
@@ -106,6 +140,68 @@ class Layout extends Component {
         this.setState({regionColor: regionColor })
     }
 
+    /**
+     * @alias integrateData
+     * @function
+     * @memberOf Layout
+     * @return void
+     * @description This method integrates the object DataRegion - a part of the object that comes the axios request -
+     * with new keyvalues pairs concerning the all the exixtents value calculated in relation to the population.
+     */
+    integrateData = () => {
+            //TO BE MORE READABLE
+            const dataRegion =  this.state.covidDataRegion;
+            const dataRegionPrevious =  this.state.covidDataRegionPrevious;
+            const dataSverige = this.state.covidDataSweden;
+            const dataSverigePrevious = this.state.covidDataSwedenPrevious;
+
+            //CALCULTE DIFFERENCE BETWEEN THE LAST TWO UPDATING DATES (HOW MANY DAYS?)
+            const startDate  = this.state.previousUpdate;
+            const endDate    = this.state.lastUpdate;
+            const diffInMs   = new Date(endDate) - new Date(startDate)
+            const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+
+            // REGIONS INTEGRATION
+            const updatedDataRegion = dataRegion.map((e, index) => {
+                const newDeaths = ((e.deathCount - dataRegionPrevious[index].deathCount)/diffInDays).toFixed(1);
+                const newInfected = ((e.infectedCount - dataRegionPrevious[index].infectedCount)/diffInDays).toFixed(1);
+                const newIntensiveCare = ((e.intensiveCareCount - dataRegionPrevious[index].intensiveCareCount)/diffInDays).toFixed(1);
+                return {
+                    ...e,
+                    deathsPer100000: Math.round(e.deathCount*100000/regionInhabitants.[e.region]),
+                    infectedPer100000: Math.round(e.infectedCount*100000/regionInhabitants.[e.region]),
+                    intensiveCarePer100000: Math.round(e.intensiveCareCount*100000/regionInhabitants.[e.region]),
+                    population : regionInhabitants.[e.region],
+                    newDeaths : newDeaths,
+                    newInfected : newInfected,
+                    newIntensiveCare : newIntensiveCare
+                };
+            });
+
+
+            //SWEDEN INTEGRATION
+            const dailyDeaths = ((dataSverige.deceased - dataSverigePrevious.deceased)/diffInDays).toFixed(1);
+            const dailyInfected = ((dataSverige.infected - dataSverigePrevious.infected)/diffInDays).toFixed(1);
+            const dailyIntensiveCare = ((dataSverige.intensiveCare - dataSverigePrevious.intensiveCare)/diffInDays).toFixed(1);
+            const deathsPerMilion = Math.round(dataSverige.deceased*1000000/regionInhabitants.Total);
+            const infectedPerMilion = Math.round(dataSverige.infected*1000000/regionInhabitants.Total);
+            const intensiveCarePerMilion = Math.round(dataSverige.intensiveCare*1000000/regionInhabitants.Total);
+
+            const updatedDataSweden = { ...dataSverige,
+                deathsPerMilion : deathsPerMilion,
+                infectedPerMilion : infectedPerMilion,
+                intensiveCarePerMilion : intensiveCarePerMilion,
+                dailyDeaths : dailyDeaths,
+                dailyInfected : dailyInfected,
+                dailyIntensiveCare : dailyIntensiveCare,
+            }
+
+            //SETTING STATES
+            this.setState({covidDataSweden: updatedDataSweden})
+            this.setState({ covidDataRegion: updatedDataRegion })
+    }
+
 
     /**
      * @alias selectCovidSubData
@@ -115,18 +211,32 @@ class Layout extends Component {
      * @description This method create en array values selecting between different sub-object in the region Data.
      * This selection is the response to the user's click on the component Dropdown.
      */
-    selectCovidSubData = (regionData) => {
-        let arrayColor = [];
+    selectCovidSubData = () => {
+        let arrayValues = [];
+        let regionData = this.state.covidDataRegion
         if (this.state.selectedDropdownOption === "Intensive Care") {
-            arrayColor = regionData.map(e => e.intensiveCareCount);
+            arrayValues = regionData.map(e => e.intensiveCareCount);
         }
         else if (this.state.selectedDropdownOption === "Deceased") {
-            arrayColor = regionData.map(e => e.deathCount);
+            arrayValues = regionData.map(e => e.deathCount);
         }
         else if (this.state.selectedDropdownOption === "Infected") {
-            arrayColor = regionData.map(e => e.infectedCount);
+            arrayValues = regionData.map(e => e.infectedCount);
         }
-        return arrayColor;
+        else if (this.state.selectedDropdownOption === "Intensive Care X 100000") {
+            arrayValues = regionData.map(e => e.intensiveCarePer100000);
+        }
+        else if (this.state.selectedDropdownOption === "Deceased X 100000") {
+            arrayValues = regionData.map(e => e.deathsPer100000);
+        }
+        else if (this.state.selectedDropdownOption === "Infected X 100000") {
+            arrayValues = regionData.map(e => e.infectedPer100000);
+        }
+        else if (this.state.selectedDropdownOption === "Population") {
+            arrayValues = regionData.map(e => e.population);
+        }
+
+        return arrayValues;
     }
 
     /**
@@ -179,9 +289,10 @@ class Layout extends Component {
     getRegionNameFromMap  = (region) => {
         this.setState({selectedRegionName : region});
 
-        const regionArray = this.state.covidData.infectedByRegion;
+        const regionArray = this.state.covidDataRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
+        //TEST
     }
 
     /**
@@ -201,7 +312,7 @@ class Layout extends Component {
             .then((response) => {
             this.createRegionColorObject (response.data.infectedByRegion)
         });
-
+        console.log("COVIDDATASWEDEN: ", this.state.covidDataSweden)
     }
 
 
@@ -222,17 +333,33 @@ class Layout extends Component {
         if (this.state.selectedRegionObject) {
             regionRendered = (
             <div className="table3Div">
+            <h3>{this.state.selectedRegionName}</h3>
             Deceased: {this.state.selectedRegionObject.deathCount}
             <br/>
+            DeceasedX100000: {this.state.selectedRegionObject.deathsPer100000}
+            <br/>
+            Daily increase: {this.state.selectedRegionObject.newDeaths}
+            <br/><br/>
             Infected: {this.state.selectedRegionObject.infectedCount}
             <br/>
+            InfectedX100000: {this.state.selectedRegionObject.infectedPer100000}
+            <br/>
+            Daily increase: {this.state.selectedRegionObject.newInfected}
+            <br/><br/>
             IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
+            <br/>
+            IntensiveCareX100000: {this.state.selectedRegionObject.intensiveCarePer100000}
+            <br/>
+            Daily increase: {this.state.selectedRegionObject.newIntensiveCare}
+            <br/>
             </div>
+
             )
         }
 
         return (
             <Fragment>
+                <Backdrop show = {this.state.loadingAxios}/>
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
                 <SideDrawer showState={this.state.showSideDrawer}/>
 
@@ -247,21 +374,31 @@ class Layout extends Component {
                         <div className="smallTables">
                             <div className="table2Div">
                                 <h3>Sweden</h3>
+                                Deceased: {this.state.covidDataSweden.deceased}
                                 <br/>
-                                Deceased: {this.state.covidData.deceased}
+                                Deceased(X M): {this.state.covidDataSweden.deathsPerMilion}
                                 <br/>
-                                Infected: {this.state.covidData.infected}
+                                Daily increase: {this.state.covidDataSweden.dailyDeaths}
+                                <br/><br/>
+                                Infected: {this.state.covidDataSweden.infected}
                                 <br/>
-                                IntensiveCare: {this.state.covidData.intensiveCare}
+                                Infected(X M): {this.state.covidDataSweden.infectedPerMilion}
+                                <br/>
+                                Daily increase: {this.state.covidDataSweden.dailyInfected}
+                                <br/><br/>
+                                IntensiveCare: {this.state.covidDataSweden.intensiveCare}
+                                <br/>
+                                IntensiveCare(X M): {this.state.covidDataSweden.intensiveCarePerMilion}
+                                <br/>
+                                Daily increase: {this.state.covidDataSweden.dailyIntensiveCare}
                                 <br/>
                                 <br/>
-                                <h3>{this.state.selectedRegionName}</h3>
                             </div>
 
                             {regionRendered}
 
                         </div>
-                        <Table dataRegion = {this.state.covidDataRegion}/>
+                        <Table dataRegion = {this.state.covidDataRegion} lastUpdate = {this.state.lastUpdate}/>
                     </div>
                 </main>
 
