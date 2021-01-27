@@ -1,8 +1,9 @@
 .table1Div{
-    margin-top: 10%;
+    /*margin-top: 10%;
     width: 50%;
-    margin:auto;
-
+    margin: auto; */
+    margin-top: 3%;
+    margin-left: 10%;
 }
 
 table {

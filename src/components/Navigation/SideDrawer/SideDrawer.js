@@ -1,6 +1,8 @@
 import React, {Fragment} from "react";
 
 import "./SideDrawer.css"
+import ThemeToggle from "../../Theme/ThemeToggle";
+import "../../Theme/Themes.css";
 
 //insert a backdrop: here or in layout?
 
@@ -29,6 +31,12 @@ const sideDrawer = (props) => {
         variableClass= "SideDrawer Open"}
 
 
+    if (!props.isDarkTheme) {
+        variableClass = variableClass + " lightTheme";
+    }
+    else {
+        variableClass = variableClass + " darkTheme";
+    }
 
     return (
 
@@ -38,6 +46,9 @@ const sideDrawer = (props) => {
                 <br/>
                 <br/>
                 Navigations Items
+                <br/>
+                <br/>
+                <ThemeToggle clicked={props.toggleTheme} />
             </div>
 
         </Fragment>

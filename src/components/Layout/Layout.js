@@ -2,23 +2,21 @@
 
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
-
-
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
 import SvgMap from "../SvgMap/SvgMap";
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
-
+import "../Theme/Themes.css";
 
 /**
  * The class component Layout is the container of the projekt. All the components and almost all the business logic is here.
  */
 class Layout extends Component {
 
-
     state = {
+        useDarkTheme: true,
         showSideDrawer: false,
         covidData: [],
         covidDataRegion: [],
@@ -33,7 +31,6 @@ class Layout extends Component {
         ]
 
     };
-
 
     /**
      * @description ComponentDidMount gets the axios request,  creates two states ( ovidData, covidDataRegion)
@@ -51,9 +48,6 @@ class Layout extends Component {
             this.createRegionColorObject (this.state.covidDataRegion)
         });
     }
-
-
-
 
     /**
      * @alias createRegionColorObject
@@ -143,8 +137,6 @@ class Layout extends Component {
         return covidValues;
     }
 
-
-
     /**
      * @alias toggleSideDrawerHandler
      * @function
@@ -204,7 +196,22 @@ class Layout extends Component {
 
     }
 
-
+    /**
+     * @alias toggleThemeHandler
+     * @function
+     * @memberOf Layout
+     * @return void
+     * @description This method inverts the boolean value of the state useDarkTheme,
+     * as response to the user's click on the component ThemeToggle.
+     * ThemeToggle is a child of the components Toolbar and SideDrawer.
+     */
+    toggleThemeHandler = () => {
+        this.setState((prevState) => {
+            return {
+                useDarkTheme: !prevState.useDarkTheme,
+            };
+        });
+    };
 
     render() {
         /**
@@ -219,6 +226,7 @@ class Layout extends Component {
          * and becomes a string (not null, true) when the user clicks on the SvgMap.
          */
         let regionRendered = <div>Select a region</div>
+
         if (this.state.selectedRegionObject) {
             regionRendered = (
             <div className="table3Div">
@@ -231,12 +239,27 @@ class Layout extends Component {
             )
         }
 
+        /**
+         * @alias layoutThemeClass
+         * @memberOf Layout
+         * @type {string}
+         * @description This variable is the name of the css class that the main element is conneted with.
+         * The css class "lightTheme" updates the css to a light-themed version of the application.
+         * The css class "darkTheme"  updates the css to a dark-themed version of the application.
+         */
+        let layoutThemeClass = null;
+        if (!this.state.useDarkTheme) {
+            layoutThemeClass = "lightTheme"}
+        else {
+            layoutThemeClass= "darkTheme"
+        }
+
         return (
             <Fragment>
-                <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} />
-                <SideDrawer showState={this.state.showSideDrawer}/>
+                <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
+                <SideDrawer showState={this.state.showSideDrawer} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
 
-                <main>
+                <main className={layoutThemeClass}>
                     <div className="SvgDiv">
                         <DropDown options={this.state.options} selectedDropdownOption = {this.getOptionFromDropdown}></DropDown>
                         <SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />

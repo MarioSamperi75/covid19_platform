@@ -1,0 +1,35 @@
+/* Dark theme code */
+
+.darkTheme {
+    background: #282c34;
+    color: whitesmoke;
+}
+
+header.darkTheme {
+    background: grey;
+    color: black;
+}
+
+.darkTheme table {
+    color: black;
+}
+
+div.darkTheme {
+    background: grey;
+    color: black;
+}
+
+/* Light theme css*/
+
+.lightTheme {
+    background: lightgray;
+}
+
+header.lightTheme {
+    background: ghostwhite;
+    color: black;
+}
+
+div.lightTheme {
+    background: ghostwhite;
+}

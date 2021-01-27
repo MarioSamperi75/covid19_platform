@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Navigation/SideDrawer/DrawerToggle/DrawerToggle.js</title>
+    <title>JSDoc: Source: Theme/ThemeToggle.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Navigation/SideDrawer/DrawerToggle/DrawerToggle.js</h1>
+    <h1 class="page-title">Source: Theme/ThemeToggle.js</h1>
 
     
 
@@ -26,30 +26,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-
-import "./DrawerToggle.css";
+            <pre class="prettyprint source linenums"><code>import "./ThemeToggle.css";
 
 /**
- * @alias DrawerToggle
+ * @alias ThemeToggle
  * @memberOf Layout
- * @param props
+ * @param props props declared in parent
  * @return {JSX.Element}
- * @description The functional component DrawerToggle return the element DrawerToggle,
- * that is the element responsible to open and close the sideDrawer.
- * The onClick properties is connected with Layout through the component SideDrawer
- * and there, it change the boolean value of the state 'showSideDrawer' by invoking the method toggleSideDrawerHandler.
+ * @description The functional component ThemeToggle returns the element themeToggle that
+ * is used to switch between the applications light and dark themes. The onClick properties is connected with Layout
+ * through the components SideDrawer and Toolbar where it inverts the boolean value of the state 'useDarkTheme' by invoking the method toggleThemeHandler.
  */
-const drawerToggle = (props) => (
-    &lt;div className="DrawerToggle" onClick={props.clicked}>
-        &lt;div />
-        &lt;div />
-        &lt;div />
-        &lt;div />
+const themeToggle = (props) => (
+    &lt;div className = "ThemeToggle">
+        &lt;button onClick={props.clicked}>
+            &lt;img src={"images/themeToggle.png"} alt={"Toggle theme!"} draggable={false} title="Toggle theme!"/>
+        &lt;/button>
     &lt;/div>
 );
 
-export default drawerToggle;</code></pre>
+export default themeToggle;</code></pre>
         </article>
     </section>
 

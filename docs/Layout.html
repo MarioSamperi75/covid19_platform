@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line18">line 18</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -131,6 +131,13 @@
     
 
     
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="Dropdown.html">Dropdown</a></dt>
+            <dd></dd>
+        </dl>
+    
 
     
 
@@ -143,7 +150,7 @@
 
         
             
-<h4 class="name" id="arrayColor"><span class="type-signature">(constant) </span>arrayColor<span class="type-signature"> :Array.&lt;number></span></h4>
+<h4 class="name" id="covidValues"><span class="type-signature"></span>covidValues<span class="type-signature"> :Array.&lt;number></span></h4>
 
 
 
@@ -197,7 +204,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line86">line 86</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -215,13 +222,15 @@
 
         
             
-<h4 class="name" id="arrayRegion"><span class="type-signature">(constant) </span>arrayRegion<span class="type-signature"> :Array.&lt;string></span></h4>
+<h4 class="name" id="layoutThemeClass"><span class="type-signature"></span>layoutThemeClass<span class="type-signature"> :string</span></h4>
 
 
 
 
 <div class="description">
-    <p>This constant get an array of string -the name of the region- through a map function.</p>
+    <p>This variable is the name of the css class that the main element is conneted with.
+The css class &quot;lightTheme&quot; updates the css to a light-themed version of the application.
+The css class &quot;darkTheme&quot;  updates the css to a dark-themed version of the application.</p>
 </div>
 
 
@@ -230,7 +239,7 @@
     <ul>
         <li>
             
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">string</span>
 
 
         </li>
@@ -269,7 +278,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line76">line 76</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line250">line 250</a>
     </li></ul></dd>
     
 
@@ -294,7 +303,7 @@
 
 <div class="description">
     <p>This constant is an object that contains many value/key pairs.
-The the keys come from arrayRegion and the values from arrayColor.
+The the keys come from Region and the values from RgbValues.
 The conversion is the result of the functions reduce and Object.assign.</p>
 </div>
 
@@ -343,7 +352,7 @@ The conversion is the result of the functions reduce and Object.assign.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line96">line 96</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -420,7 +429,226 @@ and becomes a string (not null, true) when the user clicks on the SvgMap.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line158">line 158</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line228">line 228</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="regions"><span class="type-signature">(constant) </span>regions<span class="type-signature"> :Array.&lt;string></span></h4>
+
+
+
+
+<div class="description">
+    <p>This constant get an array of string -the name of the region- through a map function.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;string></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line85">line 85</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="rgbValues"><span class="type-signature"></span>rgbValues<span class="type-signature"> :Array.&lt;number></span></h4>
+
+
+
+
+<div class="description">
+    <p>This constant get an array of number -the RGB Green value for all the regions-
+by invoking the function createRgbValues and passing as argument the entire axios object.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;number></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="toolbarThemeClass"><span class="type-signature"></span>toolbarThemeClass<span class="type-signature"> :string</span></h4>
+
+
+
+
+<div class="description">
+    <p>This variable is the name of the css classes that the header element is conneted with.
+The css class &quot;lightTheme&quot; updates the css to a light-themed version of the application.
+The css class &quot;darkTheme&quot;  updates the css to a dark-themed version of the application.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">string</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Navigation_Toolbar_Toolbar.js.html">Navigation/Toolbar/Toolbar.js</a>, <a href="Navigation_Toolbar_Toolbar.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -494,7 +722,7 @@ The css class &quot;Open&quot; move it in the original position (0,0) with anoth
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Navigation_SideDrawer_SideDrawer.js.html">Navigation/SideDrawer/SideDrawer.js</a>, <a href="Navigation_SideDrawer_SideDrawer.js.html#line25">line 25</a>
+        <a href="Navigation_SideDrawer_SideDrawer.js.html">Navigation/SideDrawer/SideDrawer.js</a>, <a href="Navigation_SideDrawer_SideDrawer.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -626,7 +854,7 @@ This method is an auxiliary function of componentdidMount.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line69">line 69</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line63">line 63</a>
     </li></ul></dd>
     
 
@@ -663,6 +891,118 @@ This method is an auxiliary function of componentdidMount.</p>
     <dd>
         
 <span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createRgbValues"><span class="type-signature"></span>createRgbValues<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This method receive en array values and convert them proportionally in a value between 0 and 255.
+Max and min? Different max and min? Variable to indicate witch kind of value and if/then? Selection data create the variable?
+sending variable as second argument when invoking createRgbValues?</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line135">line 135</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>rgbValues</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;number></span>
 
 
     </dd>
@@ -833,7 +1173,7 @@ and there, it change the boolean value of the state 'showSideDrawer' by invoking
     
 
     
-    <h4 class="name" id="Dropdown"><span class="type-signature"></span>Dropdown<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    <h4 class="name" id="getOptionFromDropdown"><span class="type-signature"></span>getOptionFromDropdown<span class="signature">(region)</span><span class="type-signature"></span></h4>
     
 
     
@@ -841,9 +1181,10 @@ and there, it change the boolean value of the state 'showSideDrawer' by invoking
 
 
 <div class="description">
-    <p>The functional component dropdown return a dropdown as JSX element,
-and fill in it the list of array that receives as props.
-Those items are the dropDown options.</p>
+    <p>This method get the name of the dropdown option as parameter
+when the user clicks on an option in the DropDown component.
+The method load the Data from the CovidAPI and invokes createRegionColorObject
+that is responsible to change the color of the regions in map.</p>
 </div>
 
 
@@ -879,10 +1220,15 @@ Those items are the dropDown options.</p>
 
         <tr>
             
-                <td class="name"><code>props</code></td>
+                <td class="name"><code>region</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
             
             </td>
 
@@ -890,7 +1236,7 @@ Those items are the dropDown options.</p>
 
             
 
-            <td class="description last"><p>the dropDown Options (infected, deacesed, intensive Care)</p></td>
+            <td class="description last"><p>the name of the region clicked by the user</p></td>
         </tr>
 
     
@@ -931,7 +1277,7 @@ Those items are the dropDown options.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DropDown_DropDown.js.html">DropDown/DropDown.js</a>, <a href="DropDown_DropDown.js.html#line15">line 15</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line190">line 190</a>
     </li></ul></dd>
     
 
@@ -959,19 +1305,11 @@ Those items are the dropDown options.</p>
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>void</p>
+</div>
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">JSX.Element</span>
-
-
-    </dd>
-</dl>
 
     
 
@@ -985,7 +1323,7 @@ Those items are the dropDown options.</p>
     
 
     
-    <h4 class="name" id="getRegion"><span class="type-signature"></span>getRegion<span class="signature">(region)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getRegionNameFromMap"><span class="type-signature"></span>getRegionNameFromMap<span class="signature">(region)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1091,7 +1429,7 @@ This object is obteined by filtering an axios requests by the parameter region.<
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line136">line 136</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line171">line 171</a>
     </li></ul></dd>
     
 
@@ -1145,11 +1483,10 @@ This object is obteined by filtering an axios requests by the parameter region.<
 
 
 <div class="description">
-    <p>ComponentDidMount gets the axios request and creates three states: covidData, covidDataRegion, regionColor.
+    <p>ComponentDidMount gets the axios request,  creates two states ( ovidData, covidDataRegion)
+and invokes the method createRegionColorObject.
 covidData is the entire objekt that the api returns.
-covidDataRegion is the sub-array that contains data for all the regions.
-regionColor is the objekt that contains the green values that determines the color of every region.
-componentDidMount receives this object with the help of the method 'createRegionColorObject'.</p>
+covidDataRegion is the sub-array that contains data for all the regions.</p>
 </div>
 
 
@@ -1193,7 +1530,7 @@ componentDidMount receives this object with the help of the method 'createRegion
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line44">line 44</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -1218,6 +1555,117 @@ componentDidMount receives this object with the help of the method 'createRegion
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="selectCovidSubData"><span class="type-signature"></span>selectCovidSubData<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This method create en array values selecting between different sub-object in the region Data.
+This selection is the response to the user's click on the component Dropdown.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>arrayColor</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;number></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1326,7 +1774,159 @@ that disappears/appears when the user clicks on the drawerToggle element.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Navigation_SideDrawer_SideDrawer.js.html">Navigation/SideDrawer/SideDrawer.js</a>, <a href="Navigation_SideDrawer_SideDrawer.js.html#line15">line 15</a>
+        <a href="Navigation_SideDrawer_SideDrawer.js.html">Navigation/SideDrawer/SideDrawer.js</a>, <a href="Navigation_SideDrawer_SideDrawer.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="ThemeToggle"><span class="type-signature"></span>ThemeToggle<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>The functional component ThemeToggle returns the element themeToggle that
+is used to switch between the applications light and dark themes. The onClick properties is connected with Layout
+through the components SideDrawer and Toolbar where it inverts the boolean value of the state 'useDarkTheme' by invoking the method toggleThemeHandler.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>props declared in parent</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Theme_ThemeToggle.js.html">Theme/ThemeToggle.js</a>, <a href="Theme_ThemeToggle.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -1434,7 +2034,107 @@ DrawerToggle is a child of component Toolbar.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line114">line 114</a>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>void</p>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toggleThemeHandler"><span class="type-signature"></span>toggleThemeHandler<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This method inverts the boolean value of the state useDarkTheme,
+as response to the user's click on the component ThemeToggle.
+ThemeToggle is a child of the components Toolbar and SideDrawer.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Layout_Layout.js.html">Layout/Layout.js</a>, <a href="Layout_Layout.js.html#line208">line 208</a>
     </li></ul></dd>
     
 
@@ -1489,7 +2189,7 @@ DrawerToggle is a child of component Toolbar.</p>
 
 <div class="description">
     <p>The functional component Toolbar return the header of the page.
-It contains the DrawerToggle, Logo and the NavigationItems.</p>
+It contains the DrawerToggle, Logo and the NavigationItem ThemeToggle.</p>
 </div>
 
 
@@ -1577,7 +2277,7 @@ It contains the DrawerToggle, Logo and the NavigationItems.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Navigation_Toolbar_Toolbar.js.html">Navigation/Toolbar/Toolbar.js</a>, <a href="Navigation_Toolbar_Toolbar.js.html#line14">line 14</a>
+        <a href="Navigation_Toolbar_Toolbar.js.html">Navigation/Toolbar/Toolbar.js</a>, <a href="Navigation_Toolbar_Toolbar.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -1641,13 +2341,13 @@ It contains the DrawerToggle, Logo and the NavigationItems.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Layout.html">Layout</a></li><li><a href="SvgMap.html">SvgMap</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dropdown.html">Dropdown</a></li><li><a href="Layout.html">Layout</a></li><li><a href="SvgMap.html">SvgMap</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Jan 19 2021 12:48:31 GMT+0100 (centraleuropeisk normaltid)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Jan 26 2021 21:01:34 GMT+0100 (centraleuropeisk normaltid)
 </footer>
 
 <script> prettyPrint(); </script>
