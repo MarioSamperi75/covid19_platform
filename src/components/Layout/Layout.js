@@ -5,7 +5,7 @@
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
 
-import Backdrop from "../Backdrop/Backdrop"
+import Modal from "../Modal/Modal"
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
@@ -132,7 +132,7 @@ class Layout extends Component {
         const regionColor = regions.reduce(
             (accumulator, value, index) => Object.assign(accumulator, {
                 // the yellow is the minimum but has greenvalue 255. We need to invert that. 255 - value.
-                [value]: (255 - rgbValues[index]),
+                [value]: rgbValues[index],
             }), {}
         );
         this.setState({regionColor: regionColor })
@@ -162,9 +162,9 @@ class Layout extends Component {
 
             // REGIONS INTEGRATION
             const updatedDataRegion = dataRegion.map((e, index) => {
-                const newDeaths = ((e.deathCount - dataRegionPrevious[index].deathCount)/diffInDays).toFixed(1);
-                const newInfected = ((e.infectedCount - dataRegionPrevious[index].infectedCount)/diffInDays).toFixed(1);
-                const newIntensiveCare = ((e.intensiveCareCount - dataRegionPrevious[index].intensiveCareCount)/diffInDays).toFixed(1);
+                const newDeaths = Math.round(e.deathCount - dataRegionPrevious[index].deathCount)/diffInDays;
+                const newInfected = Math.round(e.infectedCount - dataRegionPrevious[index].infectedCount)/diffInDays;
+                const newIntensiveCare = Math.round(e.intensiveCareCount - dataRegionPrevious[index].intensiveCareCount)/diffInDays;
                 return {
                     ...e,
                     deathsPer100000: Math.round(e.deathCount*100000/regionInhabitants.[e.region]),
@@ -179,9 +179,9 @@ class Layout extends Component {
 
 
             //SWEDEN INTEGRATION
-            const dailyDeaths = ((dataSverige.deceased - dataSverigePrevious.deceased)/diffInDays).toFixed(1);
-            const dailyInfected = ((dataSverige.infected - dataSverigePrevious.infected)/diffInDays).toFixed(1);
-            const dailyIntensiveCare = ((dataSverige.intensiveCare - dataSverigePrevious.intensiveCare)/diffInDays).toFixed(1);
+            const dailyDeaths = ((dataSverige.deceased - dataSverigePrevious.deceased)/diffInDays).toFixed(0);
+            const dailyInfected = ((dataSverige.infected - dataSverigePrevious.infected)/diffInDays).toFixed(0);
+            const dailyIntensiveCare = ((dataSverige.intensiveCare - dataSverigePrevious.intensiveCare)/diffInDays).toFixed(0);
             const deathsPerMilion = Math.round(dataSverige.deceased*1000000/regionInhabitants.Total);
             const infectedPerMilion = Math.round(dataSverige.infected*1000000/regionInhabitants.Total);
             const intensiveCarePerMilion = Math.round(dataSverige.intensiveCare*1000000/regionInhabitants.Total);
@@ -212,28 +212,33 @@ class Layout extends Component {
     selectCovidSubData = () => {
         let arrayValues = [];
         let regionData = this.state.covidDataRegion
-        if (this.state.selectedDropdownOption === "Intensive Care") {
-            arrayValues = regionData.map(e => e.intensiveCareCount);
-        }
-        else if (this.state.selectedDropdownOption === "Deceased") {
-            arrayValues = regionData.map(e => e.deathCount);
-        }
-        else if (this.state.selectedDropdownOption === "Infected") {
-            arrayValues = regionData.map(e => e.infectedCount);
-        }
-        else if (this.state.selectedDropdownOption === "Intensive Care X 100000") {
-            arrayValues = regionData.map(e => e.intensiveCarePer100000);
-        }
-        else if (this.state.selectedDropdownOption === "Deceased X 100000") {
-            arrayValues = regionData.map(e => e.deathsPer100000);
-        }
-        else if (this.state.selectedDropdownOption === "Infected X 100000") {
-            arrayValues = regionData.map(e => e.infectedPer100000);
-        }
-        else if (this.state.selectedDropdownOption === "Population") {
-            arrayValues = regionData.map(e => e.population);
-        }
+        let option = this.state.selectedDropdownOption;
 
+        switch(option) {
+            case "Infected":
+                arrayValues = regionData.map(e => e.infectedCount);
+                break;
+            case "Deceased":
+                arrayValues = regionData.map(e => e.deathCount);
+                break;
+            case "Intensive Care":
+                arrayValues = regionData.map(e => e.intensiveCareCount);
+                break;
+            case "Infected X 100000":
+                arrayValues = regionData.map(e => e.infectedPer100000);
+                break;
+            case "Deceased X 100000":
+                arrayValues = regionData.map(e => e.deathsPer100000);
+                break;
+            case "Intensive Care X 100000":
+                arrayValues = regionData.map(e => e.intensiveCarePer100000);
+                break;
+            case "Population":
+                arrayValues = regionData.map(e => e.population);
+                break;
+            default:
+                arrayValues = regionData.map(e => e.intensiveCareCount);
+        }
         return arrayValues;
     }
 
@@ -243,12 +248,53 @@ class Layout extends Component {
      * @memberOf Layout
      * @return {Array<number>} rgbValues
      * @description This method receive en array values and convert them proportionally in a value between 0 and 255.
-     * Max and min? Different max and min? Variable to indicate witch kind of value and if/then? Selection data create the variable?
-     * sending variable as second argument when invoking createRgbValues?
+     * The pair of max and min values determine the limit beyond which the color becomes red and yellow, respectively.
+     * Max and min values are different depending on the selected option in the dropdown component.
      */
     createRgbValues = (covidValues) => {
-        //ALGORITHM TO CREATE
-        return covidValues;
+        let option= this.state.selectedDropdownOption;
+        let max = null;
+        let min = null;
+        let delta = null;
+
+
+        switch(option) {
+            case "Infected":
+                max = 60000;
+                min = 10000;
+            break;
+            case "Deceased":
+                max = 2000;
+                min = 200;
+                break;
+            case "Intensive Care":
+                max = 1000;
+                min = 100;
+                break;
+            case "Infected X 100000":
+                max = 8000;
+                min = 1000;
+                break;
+            case "Deceased X 100000":
+                max = 200;
+                min = 50;
+                break;
+            case "Intensive Care X 100000":
+                max = 70;
+                min = 10;
+                break;
+            case "Population":
+                max = 1000000;
+                min = 100000;
+                break;
+            default:
+                max = 1000000;
+                min = 100000;
+        }
+
+        delta = max - min;
+        const rgbValues = covidValues.map(e => Math.round(255-(e*255/delta)));
+        return rgbValues;
     }
 
     /**
@@ -388,7 +434,10 @@ class Layout extends Component {
             <Fragment>
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
                 <SideDrawer showState={this.state.showSideDrawer} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
-                <Backdrop show = {this.state.loadingAxios}/>
+                <Modal show = {this.state.loadingAxios}>
+                    <h2>Loading...</h2>
+                    <img src={"images/loading.svg"} style={{marginTop : '-15%'}} alt={"loading"} draggable={false}/>
+                </Modal>
 
                 <main className={layoutThemeClass}>
                     <div className="SvgDiv">

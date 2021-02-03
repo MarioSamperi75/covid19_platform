@@ -9,13 +9,13 @@ main {
 }
 
 .SvgDiv{
-    width: 40%;
+    width: 37%;
     height: 90%;
     display: flex;
 }
 
 .TablesDiv {
-    width: 60%;
+    width: 63%;
     display: flex;
     flex-flow: row;
 }
