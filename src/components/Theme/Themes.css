@@ -19,6 +19,11 @@ div.darkTheme {
     color: black;
 }
 
+.darkTheme select{
+    color: white;
+    background: dimgrey;
+}
+
 /* Light theme css*/
 
 .lightTheme {

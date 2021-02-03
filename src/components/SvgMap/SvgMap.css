@@ -14,6 +14,7 @@ path:hover{
     //stroke-width: 3;
     //stroke: darkslateblue;
     opacity: 0.2;
+    cursor: pointer;
 }
 
 path:focus {

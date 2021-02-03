@@ -6,6 +6,7 @@
 
 .ThemeToggle button:hover{
     opacity: 0.3;
+    cursor: pointer;
 }
 
 .ThemeToggle img {

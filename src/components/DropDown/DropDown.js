@@ -33,7 +33,7 @@ class Dropdown extends Component {
 
         return (
              <>
-                <select className="DropDown" onChange={(event) => this.dropdownOnchangeHandler(event.target.value)} >
+                <select className="DropDown" onChange={(event) => this.dropdownOnchangeHandler(event.target.value)} title="Filter data">
                     {this.props.options &&
                     this.props.options.map(o =>
                         <option key={o.text} value={o.text}>
