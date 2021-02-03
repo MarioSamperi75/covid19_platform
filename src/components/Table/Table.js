@@ -23,7 +23,7 @@ const table = (props) => {
     return (
         <div className="table1Div">
             <h3>last update:  {props.lastUpdate}</h3>
-                <table className="table">
+                <table className="table" title = "Statistics">
                     <tbody>
                     <tr>
                         <th>Region</th>
