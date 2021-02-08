@@ -14,7 +14,7 @@ import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
 
 import "../Theme/Themes.css";
-import regionInhabitants from "../../inhabitants_by_region.json"
+import regionInhabitants from "../../data/inhabitants_by_region.json"
 
 
 /**
