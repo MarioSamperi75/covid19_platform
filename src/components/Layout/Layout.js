@@ -39,10 +39,10 @@ class Layout extends Component {
         regionColor: {},
         options : [
             { key: 'key-1', text: 'Infected' },
-            { key: 'key-2', text: 'Deceased' },
-            { key: 'key-3', text: 'Intensive Care' },
-            { key: 'key-4', text: 'Infected X 100000' },
-            { key: 'key-5', text: 'Deceased X 100000' },
+            { key: 'key-2', text: 'Infected X 100000' },
+            { key: 'key-3', text: 'Deceased' },
+            { key: 'key-4', text: 'Deceased X 100000' },
+            { key: 'key-5', text: 'Intensive Care' },
             { key: 'key-6', text: 'Intensive Care X 100000' },
             { key: 'key-7', text: 'Population' },
         ]
@@ -387,31 +387,29 @@ class Layout extends Component {
          * and becomes a string (not null, true) when the user clicks on the SvgMap.
          */
         let regionRendered = <div>Select a region</div>
-
         if (this.state.selectedRegionObject) {
             regionRendered = (
             <div className="table3Div">
-            <h3>{this.state.selectedRegionName}</h3>
-            Deceased: {this.state.selectedRegionObject.deathCount}
-            <br/>
-            DeceasedX100000: {this.state.selectedRegionObject.deathsPer100000}
-            <br/>
-            Daily increase: {this.state.selectedRegionObject.newDeaths}
-            <br/><br/>
-            Infected: {this.state.selectedRegionObject.infectedCount}
-            <br/>
-            InfectedX100000: {this.state.selectedRegionObject.infectedPer100000}
-            <br/>
-            Daily increase: {this.state.selectedRegionObject.newInfected}
-            <br/><br/>
-            IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}
-            <br/>
-            IntensiveCareX100000: {this.state.selectedRegionObject.intensiveCarePer100000}
-            <br/>
-            Daily increase: {this.state.selectedRegionObject.newIntensiveCare}
-            <br/>
-            </div>
+                <h3>{this.state.selectedRegionName}</h3>
 
+                <p style={ this.state.selectedDropdownOption === 'Infected' ? { fontWeight: 'bold'} : {}}>
+                    Infected: {this.state.selectedRegionObject.infectedCount}</p>
+                <p style={ this.state.selectedDropdownOption === 'Infected X 100000' ? { fontWeight: 'bold'} : {}}>
+                    InfectedX100000: {this.state.selectedRegionObject.infectedPer100000}</p>
+                <p>Daily increase: {this.state.selectedRegionObject.newInfected}</p><br/>
+
+                <p style={ this.state.selectedDropdownOption === 'Deceased' ? { fontWeight: 'bold'} : {}}>
+                    Deceased: {this.state.selectedRegionObject.deathCount}</p>
+                <p style={ this.state.selectedDropdownOption === 'Deceased X 100000' ? { fontWeight: 'bold'} : {}}>
+                    DeceasedX100000: {this.state.selectedRegionObject.deathsPer100000}</p>
+                <p>Daily increase: {this.state.selectedRegionObject.newDeaths}</p><br/>
+
+                <p style={ this.state.selectedDropdownOption === 'Intensive Care' ? { fontWeight: 'bold'} : {}}>
+                    IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}</p>
+                <p style={ this.state.selectedDropdownOption === 'Intensive Care X 100000' ? { fontWeight: 'bold'} : {}}>
+                    IntensiveCareX100000: {this.state.selectedRegionObject.intensiveCarePer100000}</p>
+                <p>Daily increase: {this.state.selectedRegionObject.newIntensiveCare}</p><br/>
+            </div>
             )
         }
 
@@ -450,25 +448,17 @@ class Layout extends Component {
                         <div className="smallTables">
                             <div className="table2Div">
                                 <h3>Sweden</h3>
-                                Deceased: {this.state.covidDataSweden.deceased}
-                                <br/>
-                                Deceased(X M): {this.state.covidDataSweden.deathsPerMilion}
-                                <br/>
-                                Daily increase: {this.state.covidDataSweden.dailyDeaths}
-                                <br/><br/>
-                                Infected: {this.state.covidDataSweden.infected}
-                                <br/>
-                                Infected(X M): {this.state.covidDataSweden.infectedPerMilion}
-                                <br/>
-                                Daily increase: {this.state.covidDataSweden.dailyInfected}
-                                <br/><br/>
-                                IntensiveCare: {this.state.covidDataSweden.intensiveCare}
-                                <br/>
-                                IntensiveCare(X M): {this.state.covidDataSweden.intensiveCarePerMilion}
-                                <br/>
-                                Daily increase: {this.state.covidDataSweden.dailyIntensiveCare}
-                                <br/>
-                                <br/>
+                                <p>Deceased: {this.state.covidDataSweden.deceased}</p>
+                                <p>Deceased(X M): {this.state.covidDataSweden.deathsPerMilion}</p>
+                                <p>Daily increase: {this.state.covidDataSweden.dailyDeaths}</p><br/>
+
+                                <p>Infected: {this.state.covidDataSweden.infected}</p>
+                                <p>Infected(X M): {this.state.covidDataSweden.infectedPerMilion}</p>
+                                <p>Daily increase: {this.state.covidDataSweden.dailyInfected}</p><br/>
+
+                                <p>IntensiveCare: {this.state.covidDataSweden.intensiveCare}</p>
+                                <p>IntensiveCare(X M): {this.state.covidDataSweden.intensiveCarePerMilion}</p>
+                                <p>Daily increase: {this.state.covidDataSweden.dailyIntensiveCare}</p><br/>
                             </div>
 
                             {regionRendered}

@@ -24,3 +24,11 @@ main {
     width: 40%;
     margin-top: 18px;
 }
+
+p {
+    margin: 2px;
+}
+
+.selected{
+    font-weight: lighter;
+}
