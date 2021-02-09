@@ -34,7 +34,7 @@ const toolbar = (props) => {
         <header className = {toolbarThemeClass}>
             <DrawerToggle clicked={props.toggleSideDrawer}/>
             <div>
-                <img src={"images/logo.png"} draggable={false} title={"Logo design by nan_curinar"}/>
+                <img src={"images/logo.png"} draggable={false} title={"Logo design by nan_curinar"} alt="Logo"/>
             </div>
 
             <nav >

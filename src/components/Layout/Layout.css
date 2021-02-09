@@ -8,11 +8,7 @@ main {
     position: absolute;
 }
 
-.SvgDiv{
-    width: 30%;
-    height: 90%;
-    display: flex;
-}
+
 
 SwedenTable {
 display: flex;
@@ -24,17 +20,24 @@ RegionTable{
     height: 50%;
 }
 
-.TablesDiv {
-    width: 30%;
+.SvgDiv{
+    width: 35%;
+    height: 90%;
     display: flex;
 }
 
 .smallTables{
     display: flex;
     flex-flow: column;
-    width: 40%;
+    width: 30%;
     margin-top: 32px;
 }
+
+.TablesDiv {
+    width: 35%;
+    display: flex;
+}
+
 
 p {
     margin: 1px;

@@ -8,24 +8,23 @@ const table = (props) => {
     const tableData =dataRegion.map((dataItem) =>{
     return(
         <tr key={dataItem.region}>
-            <td>{dataItem.region}</td>
+            <td className="LeftAlign">{dataItem.region}</td>
             <td>{dataItem.infectedCount}</td>
             <td>{dataItem.deathCount}</td>
             <td>{dataItem.intensiveCareCount}</td>
         </tr>)
         }
     )
-       //<h3>last update:  {props.lastUpdate}</h3>
 
     return (
         <div className="table1Div">
-            <table className="table" title = "Statistics">
+            <table  className="table" style={{borderSpacing: '3px'}} title = "Statistics">
                     <tbody>
                     <tr>
-                        <th>Region</th>
-                        <th>Infected</th>
-                        <th>Deaths</th>
-                        <th>Intensive Care</th>
+                        <th className="LeftAlign">Region</th>
+                        <th>Infected </th>
+                        <th>Deceased </th>
+                        <th>Intensive</th>
                     </tr>
                     {tableData}
                     </tbody>
