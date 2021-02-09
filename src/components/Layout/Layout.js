@@ -10,11 +10,13 @@ import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
 import SvgMap from "../SvgMap/SvgMap";
+import SwedenTable from "../SwedenTable/SwedenTable"
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
 
 import "../Theme/Themes.css";
-import regionInhabitants from "../../data/inhabitants_by_region.json"
+import regionInhabitants from "../../data/inhabitants_by_region.json";
+import  imagePath from "../../data/imagePath.json"
 
 
 /**
@@ -389,7 +391,7 @@ class Layout extends Component {
         let regionRendered = <div>Select a region</div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
-            <div className="table3Div">
+            <div className="RegionTable">
                 <h3>{this.state.selectedRegionName}</h3>
 
                 <p style={ this.state.selectedDropdownOption === 'Infected' ? { fontWeight: 'bold'} : {}}>
@@ -408,7 +410,8 @@ class Layout extends Component {
                     IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}</p>
                 <p style={ this.state.selectedDropdownOption === 'Intensive Care X 100000' ? { fontWeight: 'bold'} : {}}>
                     IntensiveCareX100000: {this.state.selectedRegionObject.intensiveCarePer100000}</p>
-                <p>Daily increase: {this.state.selectedRegionObject.newIntensiveCare}</p><br/>
+                <p>Daily incryyse: {this.state.selectedRegionObject.newIntensiveCare}</p><br/>
+                <img src={imagePath.[this.state.selectedRegionName]}  alt="Vapen" style={{width: '20%'}}/>
             </div>
             )
         }
@@ -443,27 +446,13 @@ class Layout extends Component {
                         <SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />
                     </div>
 
+                    <div className="smallTables">
+                        <SwedenTable  data = {this.state.covidDataSweden} lastUpdate = {this.state.lastUpdate}/>
+                        {regionRendered}
+                    </div>
+
                     <div className="TablesDiv">
 
-                        <div className="smallTables">
-                            <div className="table2Div">
-                                <h3>Sweden</h3>
-                                <p>Deceased: {this.state.covidDataSweden.deceased}</p>
-                                <p>Deceased(X M): {this.state.covidDataSweden.deathsPerMilion}</p>
-                                <p>Daily increase: {this.state.covidDataSweden.dailyDeaths}</p><br/>
-
-                                <p>Infected: {this.state.covidDataSweden.infected}</p>
-                                <p>Infected(X M): {this.state.covidDataSweden.infectedPerMilion}</p>
-                                <p>Daily increase: {this.state.covidDataSweden.dailyInfected}</p><br/>
-
-                                <p>IntensiveCare: {this.state.covidDataSweden.intensiveCare}</p>
-                                <p>IntensiveCare(X M): {this.state.covidDataSweden.intensiveCarePerMilion}</p>
-                                <p>Daily increase: {this.state.covidDataSweden.dailyIntensiveCare}</p><br/>
-                            </div>
-
-                            {regionRendered}
-
-                        </div>
                         <Table dataRegion = {this.state.covidDataRegion} lastUpdate = {this.state.lastUpdate}/>
                     </div>
                 </main>
