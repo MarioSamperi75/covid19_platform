@@ -24,17 +24,21 @@ div.darkTheme {
     background: dimgrey;
 }
 
+.darkTheme table{
+    color: white;
+}
+
 /* Light theme css*/
 
 .lightTheme {
-    background: lightgray;
+    background: whitesmoke;
 }
 
 header.lightTheme {
-    background: ghostwhite;
+    background:  #DCDCDC;
     color: black;
 }
 
 div.lightTheme {
-    background: ghostwhite;
+    background: #DCDCDC;
 }

@@ -4,8 +4,6 @@ import "./Table.css"
 
 const table = (props) => {
 
-
-
     const dataRegion = props.dataRegion
     const tableData =dataRegion.map((dataItem) =>{
     return(
@@ -15,15 +13,13 @@ const table = (props) => {
             <td>{dataItem.deathCount}</td>
             <td>{dataItem.intensiveCareCount}</td>
         </tr>)
-    }
-)
-
-
+        }
+    )
+       //<h3>last update:  {props.lastUpdate}</h3>
 
     return (
         <div className="table1Div">
-            <h3>last update:  {props.lastUpdate}</h3>
-                <table className="table" title = "Statistics">
+            <table className="table" title = "Statistics">
                     <tbody>
                     <tr>
                         <th>Region</th>
@@ -34,8 +30,6 @@ const table = (props) => {
                     {tableData}
                     </tbody>
                 </table>
-
-
         </div>
     );
 };

@@ -1,15 +1,18 @@
 .table1Div{
-    /*margin-top: 10%;
     width: 50%;
-    margin: auto; */
+    height: 100%;
     margin-top: 3%;
     margin-left: 10%;
-
+    margin-right: 4%;
 }
 
 table {
-    margin:auto;
-    background-color: yellow;
+    width: 100%;
+    background-color: transparent;
+    border-collapse: separate;
+    border-spacing: 12px;
+    border-style: solid;
+    border-color: darkgray;
 }
 
 h1 {
