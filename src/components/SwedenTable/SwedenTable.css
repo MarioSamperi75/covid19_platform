@@ -1,0 +1,46 @@
+
+Container {
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+}
+
+
+.Vapen{
+    height: 160px;
+}
+
+.Part {
+    height: 310px;
+    width: 232px;
+    border-style: solid;
+    border-color: grey;
+    border-width: 1px;
+    border-radius: 3%;
+    margin: 0px 16px 0px 0px;
+
+}
+
+
+.Title {
+    font-size: 180%;
+    margin-bottom: 13%;
+    margin-top: 2%;
+}
+
+.UpdateText{
+    text-align: left;
+    padding-left: 20px;
+    margin: 7% 0px 20px;
+}
+
+.Key {
+    width: 140px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.Value {
+    width: 60px;
+    text-align: right;
+}
