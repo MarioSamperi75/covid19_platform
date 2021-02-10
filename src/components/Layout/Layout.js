@@ -11,12 +11,12 @@ import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
 import SvgMap from "../SvgMap/SvgMap";
 import SwedenTable from "../SwedenTable/SwedenTable"
+import RegionTable from "../RegionTable/RegionTable"
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
 
 import "../Theme/Themes.css";
 import regionInhabitants from "../../data/inhabitants_by_region.json";
-import  imagePath from "../../data/imagePath.json"
 
 
 /**
@@ -391,28 +391,11 @@ class Layout extends Component {
         let regionRendered = <div>Select a region</div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
-            <div className="RegionTable">
-                <h3>{this.state.selectedRegionName}</h3>
-
-                <p style={ this.state.selectedDropdownOption === 'Infected' ? { fontWeight: 'bold'} : {}}>
-                    Infected: {this.state.selectedRegionObject.infectedCount}</p>
-                <p style={ this.state.selectedDropdownOption === 'Infected X 100000' ? { fontWeight: 'bold'} : {}}>
-                    InfectedX100000: {this.state.selectedRegionObject.infectedPer100000}</p>
-                <p>Daily increase: {this.state.selectedRegionObject.newInfected}</p><br/>
-
-                <p style={ this.state.selectedDropdownOption === 'Deceased' ? { fontWeight: 'bold'} : {}}>
-                    Deceased: {this.state.selectedRegionObject.deathCount}</p>
-                <p style={ this.state.selectedDropdownOption === 'Deceased X 100000' ? { fontWeight: 'bold'} : {}}>
-                    DeceasedX100000: {this.state.selectedRegionObject.deathsPer100000}</p>
-                <p>Daily increase: {this.state.selectedRegionObject.newDeaths}</p><br/>
-
-                <p style={ this.state.selectedDropdownOption === 'Intensive Care' ? { fontWeight: 'bold'} : {}}>
-                    IntensiveCare: {this.state.selectedRegionObject.intensiveCareCount}</p>
-                <p style={ this.state.selectedDropdownOption === 'Intensive Care X 100000' ? { fontWeight: 'bold'} : {}}>
-                    IntensiveCareX100000: {this.state.selectedRegionObject.intensiveCarePer100000}</p>
-                <p>Daily incryyse: {this.state.selectedRegionObject.newIntensiveCare}</p><br/>
-                <img src={imagePath.[this.state.selectedRegionName]}  alt="Vapen" style={{width: '20%'}}/>
-            </div>
+                <RegionTable
+                    data = {this.state.selectedRegionObject}
+                    option = {this.state.selectedDropdownOption}
+                    regionName = {this.state.selectedRegionName}
+                    />
             )
         }
 
