@@ -1,9 +1,10 @@
 .DropDown {
-    width: 110px;
+    width: 170px;
     height: 30px;
+    margin: 35px -186px 0px 21px;
+    z-index: 90;
 
-    margin-top: 32px;
-    margin-left: 32px;
+
 }
 
 .DropDown:hover{

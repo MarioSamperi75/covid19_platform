@@ -1,0 +1,33 @@
+.KeyTableDiv1 {
+    margin: 90px 0px 0px 0px;
+    height: 40px;
+}
+.KeyTableDiv2 {
+    margin: -10px 0px 0px 0px;
+    height: 40px;
+}
+
+.Yellow {
+    display: inline-block;
+    background-color: yellow;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    margin: 5px -10px -5px 14px;
+}
+
+.Label {
+    display: inline-block;
+    margin: 0px 0px 4px 10px;
+    height: 20px;
+    font-size: 13px;
+}
+
+.Red {
+    display: inline-block;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    margin: 5px -10px -5px 14px;
+}

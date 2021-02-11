@@ -1,7 +1,11 @@
+
+
 .SvgMap{
     margin: auto;
-    margin-top: 32px;
+
     width: 50%;
+
+
 
 }
 
@@ -13,7 +17,7 @@
 path:hover{
     //stroke-width: 3;
     //stroke: darkslateblue;
-    opacity: 0.2;
+    opacity: 0.5;
     cursor: pointer;
 }
 

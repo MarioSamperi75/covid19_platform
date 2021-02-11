@@ -1,0 +1,64 @@
+
+Container {
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+}
+
+
+.Vapen{
+    height: 210px;
+}
+
+.Part {
+    height: 306px;
+    width: 232px;
+    border-style: solid;
+    border-color: darkgray;
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 15px 0px;
+    margin: 0px 16px 0px 0px;
+
+}
+
+
+.Title {
+    font-size: 180%;
+    margin-bottom: 13%;
+    margin-top: 0;
+}
+
+
+
+.UpdateText1{
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 9px;
+    margin: 7% 0px 0px;
+    font-size: 13px;
+    font-style: italic;
+}
+.UpdateText2{
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 9px;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.Key {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.Value {
+    text-align: right;
+    padding-right: 15px;
+}
+
+.PaddingTop {
+ padding-top: 15px;
+}

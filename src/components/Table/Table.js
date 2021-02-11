@@ -4,38 +4,31 @@ import "./Table.css"
 
 const table = (props) => {
 
-
-
     const dataRegion = props.dataRegion
     const tableData =dataRegion.map((dataItem) =>{
     return(
         <tr key={dataItem.region}>
-            <td>{dataItem.region}</td>
+            <td className="LeftAlign">{dataItem.region}</td>
             <td>{dataItem.infectedCount}</td>
             <td>{dataItem.deathCount}</td>
             <td>{dataItem.intensiveCareCount}</td>
         </tr>)
-    }
-)
-
-
+        }
+    )
 
     return (
-        <div className="table1Div">
-            <h3>last update:  {props.lastUpdate}</h3>
-                <table className="table" title = "Statistics">
+        <div className="SummaryTableDiv">
+            <table  className="SummaryTable" style={{borderSpacing: '0.24rem'}} title = "Statistics">
                     <tbody>
                     <tr>
-                        <th>Region</th>
-                        <th>Infected</th>
-                        <th>Deaths</th>
-                        <th>Intensive Care</th>
+                        <th className="LeftAlign">Region</th>
+                        <th>Infected </th>
+                        <th>Deceased </th>
+                        <th>Intensive</th>
                     </tr>
                     {tableData}
                     </tbody>
                 </table>
-
-
         </div>
     );
 };
