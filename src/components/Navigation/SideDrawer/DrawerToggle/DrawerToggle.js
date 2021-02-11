@@ -13,8 +13,7 @@ import "./DrawerToggle.css";
  * and there, it change the boolean value of the state 'showSideDrawer' by invoking the method toggleSideDrawerHandler.
  */
 const drawerToggle = (props) => (
-    <div className="DrawerToggle" onClick={props.clicked}>
-        <div />
+    <div title="Öppna Meny" className="DrawerToggle" onClick={props.clicked}>
         <div />
         <div />
         <div />

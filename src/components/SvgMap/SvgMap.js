@@ -33,6 +33,7 @@ class SvgMap extends Component {
             version="1.0"
             id="svg2">
 
+
           <g className="lan" id="Lan" transform="translate(-4.7710876,-6.361446)">
             <path
                 className="Stockholm"
