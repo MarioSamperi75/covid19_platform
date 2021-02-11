@@ -22,15 +22,21 @@ RegionTable{
 
 .SvgDiv{
     width: 35%;
-    height: 90%;
+    height: 654px;
     display: flex;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px  ;
+    border-color: darkgray;
+    margin: 22px 25px 0px 22px;
+
 }
 
 .smallTables{
     display: flex;
     flex-flow: column;
     width: 30%;
-    margin-top: 32px;
+    margin-top: 22px;
 }
 
 .TablesDiv {

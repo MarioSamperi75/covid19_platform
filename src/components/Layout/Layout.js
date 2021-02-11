@@ -14,6 +14,7 @@ import SwedenTable from "../SwedenTable/SwedenTable"
 import RegionTable from "../RegionTable/RegionTable"
 import Table from "../Table/Table";
 import DropDown from "../DropDown/DropDown"
+import KeyTable from "../KeyTable/KeyTable"
 
 import "../Theme/Themes.css";
 import regionInhabitants from "../../data/inhabitants_by_region.json";
@@ -424,13 +425,18 @@ class Layout extends Component {
                 </Modal>
 
                 <main className={layoutThemeClass}>
-                    <div className="SvgDiv">
+                    <div className="SvgDiv" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                         <DropDown options={this.state.options} selectedDropdownOption = {this.getOptionFromDropdown}></DropDown>
+                        <KeyTable/>
                         <SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />
                     </div>
 
                     <div className="smallTables">
-                        <SwedenTable  data = {this.state.covidDataSweden} lastUpdate = {this.state.lastUpdate}/>
+                        <SwedenTable
+                            data = {this.state.covidDataSweden}
+                            lastUpdate = {this.state.lastUpdate}
+                            darkTheme = {this.state.useDarkTheme}
+                    />
                         {regionRendered}
                     </div>
 

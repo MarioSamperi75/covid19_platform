@@ -11,12 +11,12 @@ const swedenTable = (props) => {
 
 
        <div className="Container" style={{display : 'flex', margin : '0 auto 12px'}}>
-           <div className = "Part">
+           <div className = "Part" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <p className="Title">Sweden</p>
                <img className="Vapen" src={imagePath.Sweden}  alt="Vapen"/>
 
            </div>
-           <table className = "Part">
+           <table className = "Part" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
 
                <tbody>
 
