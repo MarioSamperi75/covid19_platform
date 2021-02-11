@@ -8,18 +8,19 @@ Container {
 
 .RegionVapen{
     height: 140px;
+    text-align: center;
 }
 
 .RegionSubDiv {
-    height: 264px;
-    width: 232px;
+    height: 100%;
+    width: 50%;
     border-style: solid;
     border-color: darkgray;
     border-width: 1px;
     border-radius: 6px;
-    padding: 11px 0px;
-    margin: 19px 16px 0px 0px;
-
+    padding: 10px 0px;
+    margin: 17px 8px 0px 0px;
+    box-sizing: border-box;
 }
 
 
@@ -27,6 +28,7 @@ Container {
     font-size: 180%;
     margin-bottom: 20%;
     margin-top: 0;
+    text-align: center;
 }
 
 

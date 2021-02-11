@@ -10,15 +10,17 @@ Container {
     height: 210px;
 }
 
-.Part {
-    height: 306px;
-    width: 232px;
+.SwedenSubDiv {
+
+    height: 100%;
+    width: 50%;
     border-style: solid;
     border-color: darkgray;
     border-width: 1px;
     border-radius: 6px;
-    padding: 15px 0px;
-    margin: 0px 16px 0px 0px;
+    padding: 10px 0px;
+    margin: 0px 8px 0px 0px;
+    box-sizing: border-box;
 
 }
 

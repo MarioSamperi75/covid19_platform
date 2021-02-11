@@ -10,13 +10,14 @@ const swedenTable = (props) => {
     return (
 
 
-       <div className="Container" style={{display : 'flex', margin : '0 auto 12px'}}>
-           <div className = "Part" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+       <div className="Container" style={{display : 'flex', margin : '0 0 12px'}}>
+           <div className = "SwedenSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <p className="Title">Sweden</p>
                <img className="Vapen" src={imagePath.Sweden}  alt="Vapen"/>
 
            </div>
-           <table className = "Part" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+           <table className = "SwedenSubDiv"
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '0px 0px 0px 8px'}:{}}>
 
                <tbody>
 

@@ -426,13 +426,13 @@ class Layout extends Component {
                 </Modal>
 
                 <main className={layoutThemeClass}>
-                    <div className="SvgDiv" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+                    <div className="Left" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                         <DropDown options={this.state.options} selectedDropdownOption = {this.getOptionFromDropdown}></DropDown>
                         <KeyTable/>
                         <SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />
                     </div>
 
-                    <div className="smallTables">
+                    <div className="Center">
                         <SwedenTable
                             data = {this.state.covidDataSweden}
                             lastUpdate = {this.state.lastUpdate}
@@ -441,9 +441,12 @@ class Layout extends Component {
                         {regionRendered}
                     </div>
 
-                    <div className="TablesDiv">
+                    <div className="Right" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
 
-                        <Table dataRegion = {this.state.covidDataRegion} lastUpdate = {this.state.lastUpdate}/>
+                        <Table
+                            dataRegion = {this.state.covidDataRegion}
+                            lastUpdate = {this.state.lastUpdate}
+                            darkTheme = {this.state.useDarkTheme}/>
                     </div>
                 </main>
 

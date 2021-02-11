@@ -18,7 +18,7 @@ const table = (props) => {
 
     return (
         <div className="SummaryTableDiv">
-            <table  className="SummaryTable" style={{borderSpacing: '0.24rem'}} title = "Statistics">
+            <table  className="SummaryTable" title = "Statistics">
                     <tbody>
                     <tr>
                         <th className="LeftAlign">Region</th>
