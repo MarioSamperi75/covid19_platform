@@ -162,7 +162,6 @@ class Layout extends Component {
             const diffInMs   = new Date(endDate) - new Date(startDate)
             const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
 
-
             // REGIONS INTEGRATION
             const updatedDataRegion = dataRegion.map((e, index) => {
                 const newDeaths = Math.round(e.deathCount - dataRegionPrevious[index].deathCount)/diffInDays;

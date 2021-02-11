@@ -4,9 +4,6 @@
     margin: auto;
 
     width: 50%;
-
-
-
 }
 
 .lan {
@@ -22,7 +19,10 @@ path:hover{
 }
 
 path:focus {
-    outline: 0;
-    stroke-width: 3;
+    //transform-origin: center;
+    //transform: scale(1.07);
     stroke: #483d8b;
+    stroke-miterlimit:10;
+    stroke-width: 3;
+    outline: 0;
 }

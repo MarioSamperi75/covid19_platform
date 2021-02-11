@@ -1,4 +1,4 @@
-/* Dark theme code */
+/* Dark theme css */
 
 .darkTheme {
     background: #282c34;
@@ -35,10 +35,10 @@ div.darkTheme {
 }
 
 header.lightTheme {
-    background:  #DCDCDC;
+    background: #d6d1d1;
     color: black;
 }
 
 div.lightTheme {
-    background: #DCDCDC;
+    background: #d6d1d1;
 }
