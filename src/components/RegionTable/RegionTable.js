@@ -9,12 +9,12 @@ const regionTable = (props) => {
 
        <div className="Container" style={{display : 'flex', margin : '0 auto 12px'}}>
 
-           <div className = "RegionSubDiv">
+           <div className = "RegionSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <p className="RegionTitle">{props.regionName}</p>
                <img className="RegionVapen" src={imagePath.[props.regionName]}  alt="Vapen"/>
            </div>
 
-           <table className = "RegionSubDiv">
+           <table className = "RegionSubDiv"style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <tbody>
 
                    <tr key="r1">

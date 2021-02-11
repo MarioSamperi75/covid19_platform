@@ -396,6 +396,7 @@ class Layout extends Component {
                     data = {this.state.selectedRegionObject}
                     option = {this.state.selectedDropdownOption}
                     regionName = {this.state.selectedRegionName}
+                    darkTheme = {this.state.useDarkTheme}
                     />
             )
         }
