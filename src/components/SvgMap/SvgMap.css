@@ -1,7 +1,6 @@
-
-
 .SvgMap{
     margin: auto;
+  
         width: 10rem;
 }
 
@@ -21,4 +20,6 @@ path:focus {
     outline: 0;
     opacity: 0.1;
     stroke: #483d8b;
+    stroke-width: 3;
+    outline: 0;
 }

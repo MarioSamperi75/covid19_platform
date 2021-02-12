@@ -12,7 +12,7 @@ import "./ThemeToggle.css";
 const themeToggle = (props) => (
     <div className = "ThemeToggle">
         <button onClick={props.clicked}>
-            <img src={"images/themeToggle.png"} alt={"Toggle theme!"} draggable={false} title="Toggle theme"/>
+            <img src={"images/themeToggle.png"} alt={"Toggle theme!"} draggable={false} title="Växla tema"/>
         </button>
     </div>
 );

@@ -9,9 +9,6 @@ const regionTable = (props) => {
 
        <div className="Container">
 
-
-
-
            <table className = "RegionSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <tbody>
 
@@ -23,7 +20,7 @@ const regionTable = (props) => {
                    </tr>
                    <tr key="r02">
                        <td style={{textAlign: 'center'}}>
-                       <img className="RegionVapen" src={imagePath.[props.regionName]}  alt="Vapen"/>
+                       <img className="RegionVapen" src={imagePath.[props.regionName]}  title = {props.regionName} alt="Vapen" draggable={false}/>
                        </td>
                    </tr>
 
@@ -38,12 +35,13 @@ const regionTable = (props) => {
 
                    <tr key="r1">
                        <td
-                           style={props.option === 'Infected' ? { fontWeight: 'bold'} : {}}
+                           title="Totalt antal infekterade"
+                           style={props.option === 'Infekterade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
-                           Infected:
+                           Infekterade:
                        </td>
                        <td
-                           style={props.option === 'Infected' ? { fontWeight: 'bold'} : {}}
+                           style={props.option === 'Infekterade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.infectedCount}
                        </td>
@@ -51,12 +49,13 @@ const regionTable = (props) => {
 
                    <tr key="r2">
                        <td
-                           style={props.option === 'Infected X 100000' ? { fontWeight: 'bold'} : {}}
+                           title="Infekterade per 100000"
+                           style={props.option === 'Infekterade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
                        </td>
                        <td
-                           style={props.option === 'Infected X 100000' ? { fontWeight: 'bold'} : {}}
+                           style={props.option === 'Infekterade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.infectedPer100000}
                        </td>
@@ -64,8 +63,9 @@ const regionTable = (props) => {
 
                    <tr key="r3">
                        <td
+                           title="Daglig ökning av infektering"
                            className="Key">
-                           Daily increase:
+                           Daglig ökning:
                        </td>
                        <td
                            className="Value">
@@ -75,12 +75,13 @@ const regionTable = (props) => {
 
                    <tr key="r4">
                        <td
-                           style={props.option === 'Deceased' ? { fontWeight: 'bold'} : {}}
+                           title="Totalt antal avlidna"
+                           style={props.option === 'Avlidna' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
-                           Infected:
+                           Avlidna:
                        </td>
                        <td
-                           style={props.option === 'Deceased' ? { fontWeight: 'bold'} : {}}
+                           style={props.option === 'Avlidna' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.deathCount}
                        </td>
@@ -88,12 +89,13 @@ const regionTable = (props) => {
 
                    <tr key="r5">
                        <td
-                           style={props.option === 'Deceased X 100000' ? { fontWeight: 'bold'} : {}}
+                           title="Avlidna per 100000"
+                           style={props.option === 'Avlidna per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
                        </td>
                        <td
-                           style={props.option === 'Deceased X 100000' ? { fontWeight: 'bold'} : {}}
+                           style={props.option === 'Avlidna per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.deathsPer100000}
                        </td>
@@ -101,8 +103,9 @@ const regionTable = (props) => {
 
                    <tr key="r6">
                        <td
+                           title="Daglig ökning av avlidna"
                            className="Key">
-                           Daily increase:
+                           Daglig ökning:
                        </td>
                        <td
                            className="Value">
@@ -112,13 +115,13 @@ const regionTable = (props) => {
 
                    <tr key="r7">
                        <td
-                           title="intensive Care"
-                           style={props.option === 'Intensive Care' ? { fontWeight: 'bold'} : {}}
+                           title="Totalt antal intensivvårds patienter"
+                           style={props.option === 'Intensivvård' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
-                           IntensiveCare:
+                           Intensivvård:
                        </td>
                        <td
-                           style={props.option === 'Intensive Care' ? { fontWeight: 'bold'} : {}}
+                           style={props.option === 'Intensivvård' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.intensiveCareCount}
                        </td>
@@ -126,12 +129,13 @@ const regionTable = (props) => {
 
                    <tr key="r8">
                        <td
-                           style={props.option === 'Intensive Care X 100000' ? { fontWeight: 'bold'} : {}}
+                           title="Intensivvårds patienter per 100000"
+                           style={props.option === 'Intensivvård per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
                        </td>
                        <td
-                           style={props.option === 'Intensive Care X 100000' ? { fontWeight: 'bold'} : {}}
+                           style={props.option === 'Intensivvård per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.intensiveCarePer100000}
                        </td>
@@ -139,8 +143,9 @@ const regionTable = (props) => {
 
                    <tr key="r9">
                        <td
+                           title="Daglig ökning av intensivvårds patienter"
                            className="Key">
-                           Daily increase:
+                           Daglig ökning:
                        </td>
                        <td
                            className="Value">

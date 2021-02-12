@@ -11,10 +11,10 @@ import "./KeyTable.css";
 const keyTable = (props) => (
     <div>
         <div className = "KeyTableDiv1">
-            <div className = "Yellow"></div> <p className = "Label">min</p>
+            <div className = "Yellow" title = "Gul"></div> <p className = "Label" title = "Minimal">min</p>
         </div>
         <div className = "KeyTableDiv2">
-            <div className = "Red"></div> <p className = "Label">max</p>
+            <div className = "Red" title = "Röd"></div> <p className = "Label" title = "Maximal">max</p>
         </div>
     </div>
 );
