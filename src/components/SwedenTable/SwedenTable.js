@@ -11,7 +11,7 @@ const swedenTable = (props) => {
 
 
 
-       <div className="Container" style={{display : 'flex', margin : '0 auto 12px'}}>
+       <div className="Container">
            <div className = "SwedenSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <p className="Title">Sverige</p>
                <img className="Vapen" src={imagePath.Sweden}  alt="Vapen" draggable={false}/>
