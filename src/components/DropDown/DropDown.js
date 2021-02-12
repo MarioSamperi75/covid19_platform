@@ -30,16 +30,14 @@ class Dropdown extends Component {
     }
 
     render() {
-
         return (
              <>
-                <select className="DropDown" onChange={(event) => this.dropdownOnchangeHandler(event.target.value)} title="Filter data">
+                <select className="DropDown" onChange={(event) => this.dropdownOnchangeHandler(event.target.value)} title="Filtrera statistik">
                     {this.props.options &&
                     this.props.options.map(o =>
                         <option key={o.text} value={o.text}>
                             {o.text}</option>)
                     }
-
                 </select>
             </>
         )

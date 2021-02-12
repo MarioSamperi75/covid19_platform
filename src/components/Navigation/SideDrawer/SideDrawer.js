@@ -42,9 +42,9 @@ const sideDrawer = (props) => {
 
         <Fragment>
             <div className={variableClass}>
-                <ThemeToggle clicked={props.toggleTheme} />
+                <ThemeToggle clicked={props.toggleTheme}/>
                 <br/>
-                <a title="Besök sidans datakälla" target = "_blank" href="https://apify.com/covid-19"> Besök datakälla  </a>
+                <a title="Besök sidans datakälla" target = "_blank" rel="noreferrer" href="https://apify.com/covid-19"> Besök datakälla  </a>
                 <br/>
             </div>
 

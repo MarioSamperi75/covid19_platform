@@ -38,16 +38,16 @@ class Layout extends Component {
         covidDataRegionPrevious: [],
         selectedRegionName: '',
         selectedRegionObject: null,
-        selectedDropdownOption: 'Infected',
+        selectedDropdownOption: 'Infekterade',
         regionColor: {},
         options : [
-            { key: 'key-1', text: 'Infected' },
-            { key: 'key-2', text: 'Infected X 100000' },
-            { key: 'key-3', text: 'Deceased' },
-            { key: 'key-4', text: 'Deceased X 100000' },
-            { key: 'key-5', text: 'Intensive Care' },
-            { key: 'key-6', text: 'Intensive Care X 100000' },
-            { key: 'key-7', text: 'Population' },
+            { key: 'key-1', text: 'Infekterade' },
+            { key: 'key-2', text: 'Infekterade per 100000' },
+            { key: 'key-3', text: 'Avlidna' },
+            { key: 'key-4', text: 'Avlidna per 100000' },
+            { key: 'key-5', text: 'Intensivvård' },
+            { key: 'key-6', text: 'Intensivvård per 100000' },
+            { key: 'key-7', text: 'Befolkning' },
         ]
 
     };
@@ -217,25 +217,25 @@ class Layout extends Component {
         let option = this.state.selectedDropdownOption;
 
         switch(option) {
-            case "Infected":
+            case "Infekterade":
                 arrayValues = regionData.map(e => e.infectedCount);
                 break;
-            case "Deceased":
+            case "Avlidna":
                 arrayValues = regionData.map(e => e.deathCount);
                 break;
-            case "Intensive Care":
+            case "Intensivvård":
                 arrayValues = regionData.map(e => e.intensiveCareCount);
                 break;
-            case "Infected X 100000":
+            case "Infekterade per 100000":
                 arrayValues = regionData.map(e => e.infectedPer100000);
                 break;
-            case "Deceased X 100000":
+            case "Avlidna per 100000":
                 arrayValues = regionData.map(e => e.deathsPer100000);
                 break;
-            case "Intensive Care X 100000":
+            case "Intensivvård per 100000":
                 arrayValues = regionData.map(e => e.intensiveCarePer100000);
                 break;
-            case "Population":
+            case "Befolkning":
                 arrayValues = regionData.map(e => e.population);
                 break;
             default:
@@ -261,31 +261,31 @@ class Layout extends Component {
 
 
         switch(option) {
-            case "Infected":
+            case "Infekterade":
                 max = 60000;
                 min = 10000;
             break;
-            case "Deceased":
+            case "Avlidna":
                 max = 2000;
                 min = 200;
                 break;
-            case "Intensive Care":
+            case "Intensivvård":
                 max = 1000;
                 min = 100;
                 break;
-            case "Infected X 100000":
+            case "Infekterade per 100000":
                 max = 8000;
                 min = 1000;
                 break;
-            case "Deceased X 100000":
+            case "Avlidna per 100000":
                 max = 200;
                 min = 50;
                 break;
-            case "Intensive Care X 100000":
+            case "Intensivvård per 100000":
                 max = 70;
                 min = 10;
                 break;
-            case "Population":
+            case "Befolkning":
                 max = 1000000;
                 min = 100000;
                 break;
@@ -388,7 +388,7 @@ class Layout extends Component {
          * The state 'selectedRegionName' is null when starting the page,
          * and becomes a string (not null, true) when the user clicks on the SvgMap.
          */
-        let regionRendered = <div>Select a region</div>
+        let regionRendered = <div>Välj en region</div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
                 <RegionTable
@@ -419,7 +419,7 @@ class Layout extends Component {
                 <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
                 <SideDrawer showState={this.state.showSideDrawer} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
                 <Modal show = {this.state.loadingAxios}>
-                    <h2>Loading...</h2>
+                    <h2>Läser in data...</h2>
                     <img src={"images/loading.svg"} style={{marginTop : '-15%'}} alt={"loading"} draggable={false}/>
                 </Modal>
 

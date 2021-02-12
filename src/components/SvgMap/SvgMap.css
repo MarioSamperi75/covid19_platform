@@ -1,8 +1,5 @@
-
-
 .SvgMap{
     margin: auto;
-
     width: 50%;
 }
 
@@ -12,17 +9,12 @@
 }
 
 path:hover{
-    //stroke-width: 3;
-    //stroke: darkslateblue;
     opacity: 0.5;
     cursor: pointer;
 }
 
 path:focus {
-    //transform-origin: center;
-    //transform: scale(1.07);
     stroke: #483d8b;
-    stroke-miterlimit:10;
     stroke-width: 3;
     outline: 0;
 }

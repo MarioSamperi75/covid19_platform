@@ -18,13 +18,13 @@ const table = (props) => {
 
     return (
         <div className="SummaryTableDiv">
-            <table  className="SummaryTable" style={{borderSpacing: '0.24rem'}} title = "Statistics">
+            <table  className="SummaryTable" style={{borderSpacing: '0.24rem'}} title = "Överblick">
                     <tbody>
                     <tr>
                         <th className="LeftAlign">Region</th>
-                        <th>Infected </th>
-                        <th>Deceased </th>
-                        <th>Intensive</th>
+                        <th>Infekterade </th>
+                        <th>Avlidna </th>
+                        <th>Intensivvård</th>
                     </tr>
                     {tableData}
                     </tbody>
