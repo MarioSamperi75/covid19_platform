@@ -2,11 +2,7 @@
 
 .SvgMap{
     margin: auto;
-
-    width: 50%;
-
-
-
+        width: 10rem;
 }
 
 .lan {
@@ -15,14 +11,14 @@
 }
 
 path:hover{
-    //stroke-width: 3;
-    //stroke: darkslateblue;
+    stroke-width: 0.2rem;
+    stroke: darkslateblue;
     opacity: 0.5;
     cursor: pointer;
 }
 
 path:focus {
     outline: 0;
-    stroke-width: 3;
+    opacity: 0.1;
     stroke: #483d8b;
 }

@@ -422,7 +422,7 @@ class Layout extends Component {
                 <SideDrawer showState={this.state.showSideDrawer} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
                 <Modal show = {this.state.loadingAxios}>
                     <h2>Loading...</h2>
-                    <img src={"images/loading.svg"} style={{marginTop : '-15%'}} alt={"loading"} draggable={false}/>
+                    <img src={"images/loading.svg"} style={{marginTop : '-2rem'}} alt={"loading"} draggable={false}/>
                 </Modal>
 
                 <main className={layoutThemeClass}>

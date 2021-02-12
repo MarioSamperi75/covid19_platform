@@ -10,20 +10,19 @@ const swedenTable = (props) => {
     return (
 
 
-       <div className="Container" style={{display : 'flex', margin : '0 0 12px'}}>
+       <div className="Container">
            <div className = "SwedenSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <p className="Title">Sweden</p>
                <img className="Vapen" src={imagePath.Sweden}  alt="Vapen"/>
 
            </div>
            <table className = "SwedenSubDiv"
-                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '0px 0px 0px 8px'}:{}}>
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '0 0 0 0.5rem'}:{}}>
 
                <tbody>
 
-                   <tr><td className="UpdateText1">last update:</td>
-                       <td className="UpdateText2">{props.lastUpdate}</td>
-                   </tr>
+                   <tr><td className="UpdateText1">last update:</td></tr>
+                   <tr><td className="UpdateText2">{props.lastUpdate}</td></tr>
 
 
                    <tr key="r1">

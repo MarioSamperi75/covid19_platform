@@ -4,10 +4,10 @@
     background-color: white;
     width: 20%;
     height: 20%;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 1px 1px 30px white;
-    padding: 16px;
+    border: 0.06rem solid #ccc;
+    border-radius: 0.63rem;
+    box-shadow: 0.06rem 0.06rem 1.88rem white;
+    padding: 0.06rem;
     left: 40%;
     top: 30%;
     box-sizing: border-box;

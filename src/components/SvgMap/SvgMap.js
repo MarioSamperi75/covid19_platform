@@ -27,8 +27,8 @@ class SvgMap extends Component {
 
       <div className="SvgMap">
         <svg
-            width="290"
-            height="648"
+            width="18.13rem"
+            height="40.5rem"
             xmlns="http://www.w3.org/2000/svg"
             version="1.0"
             id="svg2">

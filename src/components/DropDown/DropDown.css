@@ -1,8 +1,10 @@
 .DropDown {
-    width: 170px;
-    height: 30px;
-    margin: 35px -186px 0px 21px;
+    width: 10.62rem;
+    height: 1.88rem;
+    margin: 2.19rem -11.62rem 0rem 1.31rem;
     z-index: 90;
+    border-radius: 0.37rem;
+    border-color: darkgray;
 
 
 }

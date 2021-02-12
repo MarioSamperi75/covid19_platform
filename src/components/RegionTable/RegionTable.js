@@ -7,7 +7,7 @@ const regionTable = (props) => {
 
     return (
 
-       <div className="Container" style={{display : 'flex', margin : '0 0 12px'}}>
+       <div className="Container">
 
 
 
@@ -33,7 +33,7 @@ const regionTable = (props) => {
 
 
            <table className = "RegionSubDiv"
-                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '17px 0px 0px 8px'}:{}}>
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <tbody>
 
                    <tr key="r1">
