@@ -7,14 +7,30 @@ const regionTable = (props) => {
 
     return (
 
-       <div className="Container" style={{display : 'flex', margin : '0 auto 12px'}}>
+       <div className="Container">
 
-           <div className = "RegionSubDiv">
-               <p className="RegionTitle">{props.regionName}</p>
-               <img className="RegionVapen" src={imagePath.[props.regionName]} title = {props.regionName} alt="Vapen" draggable={false}/>
-           </div>
+           <table className = "RegionSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+               <tbody>
 
-           <table className = "RegionSubDiv">
+                   <tr key="r01">
+                       <td
+                           className="RegionTitle">
+                           {props.regionName}
+                       </td>
+                   </tr>
+                   <tr key="r02">
+                       <td style={{textAlign: 'center'}}>
+                       <img className="RegionVapen" src={imagePath.[props.regionName]}  title = {props.regionName} alt="Vapen" draggable={false}/>
+                       </td>
+                   </tr>
+
+               </tbody>
+           </table>
+
+
+
+           <table className = "RegionSubDiv"
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
                <tbody>
 
                    <tr key="r1">

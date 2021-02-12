@@ -1,6 +1,7 @@
 .SvgMap{
     margin: auto;
-    width: 50%;
+  
+        width: 10rem;
 }
 
 .lan {
@@ -9,11 +10,15 @@
 }
 
 path:hover{
+    stroke-width: 0.2rem;
+    stroke: darkslateblue;
     opacity: 0.5;
     cursor: pointer;
 }
 
 path:focus {
+    outline: 0;
+    opacity: 0.1;
     stroke: #483d8b;
     stroke-width: 3;
     outline: 0;
