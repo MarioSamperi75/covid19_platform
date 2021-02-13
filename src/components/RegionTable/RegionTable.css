@@ -11,13 +11,13 @@
 }
 
 .RegionSubDiv {
-    height: 100%;
+    height: 19.19rem;
     width: 50%;
     border-style: solid;
     border-color: darkgray;
     border-width: 0.06rem;
     border-radius: 0.38rem;
-    padding: 0.63rem 0;
+    padding: 0.70rem 0;
     margin: 1.06rem 0.5rem 0 0;
     box-sizing: border-box;
 }
@@ -46,12 +46,7 @@
  padding-top: 0.94rem;
 }
 
-@media (max-width: 82.88rem) {
-    .RegionSubDiv {
-        padding: 2rem 0;
 
-    }
-}
 
 @media (max-width: 66.81rem) {
 
@@ -59,3 +54,5 @@
         font-size: 1.44rem;
     }
 }
+
+

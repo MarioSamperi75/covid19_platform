@@ -11,18 +11,32 @@ const swedenTable = (props) => {
 
 
 
-       <div className="Container">
-           <div className = "SwedenSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
-               <p className="Title">Sverige</p>
-               <img className="Vapen" src={imagePath.Sweden}  alt="Vapen" draggable={false}/>
-
-           </div>
+       <div className="SwedenContainer">
            <table className = "SwedenSubDiv"
-                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '0 0 0 0.5rem'}:{}}>
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+               <tbody>
+
+                   <tr key="r01">
+                       <td
+                           className="Title">
+                           Sverige
+                       </td>
+                   </tr>
+                   <tr key="r02">
+                       <td style={{textAlign: 'center'}}>
+                           <img className="Vapen" src={imagePath.Sweden}  title = "Sverige" alt="Vapen" draggable={false}/>
+                       </td>
+                   </tr>
+
+               </tbody>
+           </table>
+
+           <table className = "SwedenSubDiv"
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', marginLeft : '0.5rem', marginRight :'0'}:{marginLeft : '0.5rem', marginRight :'0'}}>
 
                <tbody>
 
-                   <tr><td className="UpdateText1" title="Senast statistiken uppdaterades">Senast uppdaterad:</td></tr>
+                   <tr><td className="UpdateText1" title="Senast statistiken uppdaterades">Uppdaterad:</td></tr>
                    <tr><td className="UpdateText2">{props.lastUpdate}</td></tr>
 
 

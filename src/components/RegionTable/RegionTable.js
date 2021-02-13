@@ -30,7 +30,7 @@ const regionTable = (props) => {
 
 
            <table className = "RegionSubDiv"
-                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '1.06rem 0 0 0.5rem'}:{margin : '1.06rem 0 0 0.5rem'}}>
                <tbody>
 
                    <tr key="r1">
