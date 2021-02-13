@@ -1,5 +1,10 @@
+.KeyContainer {
+    margin-left: 1.6rem;
+    z-index: 50;
+}
+
 .KeyTableDiv1 {
-    margin: 5.63rem 0rem 0rem 0rem;
+    margin: 3.7rem 0rem 0rem 0rem;
     height: 2.5rem;
     width: 4.01rem;
 
@@ -13,10 +18,10 @@
 .Yellow {
     display: inline-block;
     background-color: yellow;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 0.2rem;
-    margin: 0.31rem -0.63rem -0.31rem 0.88rem;
+    margin: 0.31rem -0.63rem -0.31rem 0;
     border-style: solid;
     border-width: 0.06rem;
     border-color: grey;
@@ -26,16 +31,16 @@
     display: inline-block;
     margin: 0rem 0rem 0.25rem 0.63rem;
     height: 1.25rem;
-    font-size: 0.81rem;
+    font-size: 0.70rem;
 }
 
 .Red {
     display: inline-block;
     background-color: red;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 0.2rem;
-    margin: 0.31rem -0.63rem -0.31rem 0.88rem;
+    margin: 0.31rem -0.63rem -0.31rem 0;
     border-style: solid;
     border-width: 0.06rem;
     border-color: grey;

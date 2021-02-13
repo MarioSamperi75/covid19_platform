@@ -9,7 +9,7 @@ import "./KeyTable.css";
  * No interaction is allowed.
  */
 const keyTable = (props) => (
-    <div>
+    <div className="KeyContainer">
         <div className = "KeyTableDiv1">
             <div className = "Yellow" title = "Gul"></div> <p className = "Label" title = "Minimal">min</p>
         </div>

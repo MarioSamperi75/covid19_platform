@@ -13,6 +13,7 @@
 .RegionSubDiv {
     height: 19.19rem;
     width: 50%;
+    min-width: 9.5rem;
     border-style: solid;
     border-color: darkgray;
     border-width: 0.06rem;
@@ -24,7 +25,7 @@
 
 
 .RegionTitle {
-    font-size: 1.88rem;
+    font-size: 1.60rem;
     text-align: center;
     margin-bottom: 20%;
     margin-top: 0;
@@ -48,11 +49,11 @@
 
 
 
-@media (max-width: 66.81rem) {
+/*@media (max-width: 66.81rem) {
 
     .RegionTitle{
         font-size: 1.44rem;
     }
-}
+}*/
 
 

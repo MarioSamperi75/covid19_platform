@@ -38,15 +38,15 @@ class Layout extends Component {
         covidDataRegionPrevious: [],
         selectedRegionName: '',
         selectedRegionObject: null,
-        selectedDropdownOption: 'Infekterade',
+        selectedDropdownOption: 'Smittade',
         regionColor: {},
         options : [
-            { key: 'key-1', text: 'Infekterade' },
-            { key: 'key-2', text: 'Infekterade per 100000' },
+            { key: 'key-1', text: 'Smittade' },
+            { key: 'key-2', text: 'Smittade per 100000' },
             { key: 'key-3', text: 'Avlidna' },
             { key: 'key-4', text: 'Avlidna per 100000' },
-            { key: 'key-5', text: 'Intensivvård' },
-            { key: 'key-6', text: 'Intensivvård per 100000' },
+            { key: 'key-5', text: 'IVA' },
+            { key: 'key-6', text: 'IVA per 100000' },
             { key: 'key-7', text: 'Befolkning' },
         ]
 

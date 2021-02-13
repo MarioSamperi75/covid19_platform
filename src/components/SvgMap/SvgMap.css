@@ -1,6 +1,6 @@
 .SvgMap{
-    margin: 1rem;
-    width: 10rem;
+    margin: 1rem 1rem 0 0;
+    width: 18rem;
 }
 
 .lan {
@@ -20,4 +20,12 @@ path:focus {
     stroke: #483d8b;
     stroke-width: 3;
     outline: 0;
+}
+
+@media (max-width: 1160px) {
+
+    .SvgMap{
+        margin: 1rem 1rem 0 -30px;
+        width: 18rem;
+    }
 }

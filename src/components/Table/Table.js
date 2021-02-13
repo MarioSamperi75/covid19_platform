@@ -19,14 +19,14 @@ const table = (props) => {
     return (
         <div className="SummaryTableDiv">
 
-            <table  className="SummaryTable" title = "Överblick">
+            <table  className="SummaryTable">
 
                     <tbody>
                     <tr>
                         <th className="LeftAlign">Region</th>
-                        <th>Infekterade </th>
-                        <th>Avlidna </th>
-                        <th>Intensivvård</th>
+                        <th title="Infekterade Totalt">Smittade </th>
+                        <th title="Avlidna totalt">Avlidna </th>
+                        <th title="Intensivvårds patienter totalt">IVA</th>
                     </tr>
                     {tableData}
                     </tbody>

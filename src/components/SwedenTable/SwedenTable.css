@@ -6,13 +6,15 @@
 }
 
 .Vapen{
-    height: 13.13rem;
+    height: 12.5rem;
+    padding: 1rem;
 }
 
 .SwedenSubDiv {
 
     height: 20.3rem;
     width: 50%;
+    min-width: 9.5rem;
     border-style: solid;
     border-color: darkgray;
     border-width: 0.06rem;
@@ -25,7 +27,7 @@
 
 
 .Title {
-    font-size: 1.88rem;
+    font-size: 1.60rem;
     margin-bottom: 1rem;
     margin-top: 0;
     text-align: center;

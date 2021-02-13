@@ -41,7 +41,7 @@ const swedenTable = (props) => {
 
 
                    <tr key="r1">
-                       <td className="Key PaddingTop" title="Infekterade Totalt">Infekterade: </td>
+                       <td className="Key PaddingTop" title="Infekterade Totalt">Smittade: </td>
                        <td className="Value PaddingTop">{props.data.infected}</td>
                    </tr>
                    <tr key="r2">
@@ -49,7 +49,7 @@ const swedenTable = (props) => {
                        <td className="Value">{props.data.infectedPerMilion}</td>
                    </tr>
                    <tr key="r3">
-                       <td className="Key" title="Daglig ökning av infekterade">Daglig ökning: </td>
+                       <td className="Key" title="Daglig ökning av infekterade">Ökning: </td>
                        <td className="Value">{props.data.dailyInfected}</td>
                    </tr>
 
@@ -63,7 +63,7 @@ const swedenTable = (props) => {
                        <td className="Value">{props.data.deathsPerMilion}</td>
                    </tr>
                    <tr key="r6">
-                       <td className="Key" title="Daglig ökning av dödsfall">Daglig ökning: </td>
+                       <td className="Key" title="Daglig ökning av dödsfall">Ökning: </td>
                        <td className="Value">{props.data.dailyDeaths}</td>
                    </tr>
 
@@ -77,7 +77,7 @@ const swedenTable = (props) => {
                        <td className="Value">{props.data.intensiveCarePerMilion}</td>
                    </tr>
                    <tr key="r9">
-                       <td className="Key" title="Daglig ökning av intensivvårds patienter">Daglig ökning: </td>
+                       <td className="Key" title="Daglig ökning av intensivvårds patienter">Ökning: </td>
                        <td className="Value">{props.data.dailyIntensiveCare}</td>
                    </tr>
                </tbody>
