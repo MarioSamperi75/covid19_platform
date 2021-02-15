@@ -9,6 +9,7 @@ import Modal from "../Modal/Modal"
 import Toolbar from "../../components/Navigation/Toolbar/Toolbar";
 import SideDrawer from "../../components/Navigation/SideDrawer/SideDrawer";
 import "./Layout.css"
+import "../RegionTable/RegionTable.css"
 import SvgMap from "../SvgMap/SvgMap";
 import SwedenTable from "../SwedenTable/SwedenTable"
 import RegionTable from "../RegionTable/RegionTable"
@@ -391,7 +392,7 @@ class Layout extends Component {
          * The state 'selectedRegionName' is null when starting the page,
          * and becomes a string (not null, true) when the user clicks on the SvgMap.
          */
-        let regionRendered = <div>Välj en region</div>
+        let regionRendered = <div style={{height :'19.19rem'}}>Välj en region</div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
                 <RegionTable
