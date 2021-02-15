@@ -1,14 +1,15 @@
 .Modal {
-    position: fixed;
     z-index: 500;
     background-color: white;
-    width: 20%;
-    height: 20%;
+    width: 20rem;
+    height: 10rem;
     border: 0.06rem solid #ccc;
     border-radius: 0.63rem;
     box-shadow: 0.06rem 0.06rem 1.88rem white;
     padding: 0.06rem;
-    left: 40%;
-    top: 30%;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
     box-sizing: border-box;
 }
