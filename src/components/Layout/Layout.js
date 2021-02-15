@@ -263,20 +263,20 @@ class Layout extends Component {
 
         switch(option) {
             case "Smittade":
-                max = 60000;
+                max = 50000;
                 min = 10000;
             break;
             case "Avlidna":
-                max = 2000;
-                min = 200;
+                max = 2500;
+                min = 50;
                 break;
             case "IVA":
                 max = 1000;
                 min = 100;
                 break;
             case "Smittade per 100000":
-                max = 9000;
-                min = 1000;
+                max = 6000;
+                min = 3000;
                 break;
             case "Avlidna per 100000":
                 max = 250;
@@ -296,8 +296,9 @@ class Layout extends Component {
         }
 
         delta = max - min;
-        const rgbValues = covidValues.map(e => Math.round(255-(e*255/delta)));
+        const rgbValues = covidValues.map(e => 255-(Math.round(255*((e-min)/delta))));
         return rgbValues;
+
     }
 
 
