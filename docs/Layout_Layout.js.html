@@ -1,6 +1,34 @@
-//Data about population:  https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/kvartals--och-halvarsstatistik--kommun-lan-och-riket/-kvartal-3-2020/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Layout/Layout.js</title>
 
-//Historik: https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Layout/Layout.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//Data about population:  https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning/befolkningens-sammansattning/befolkningsstatistik/pong/tabell-och-diagram/kvartals--och-halvarsstatistik--kommun-lan-och-riket/-kvartal-3-2020/
+
+//Historik: https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&amp;clean=1
 
 import React, { Component, Fragment } from "react";
 import axios from 'axios';
@@ -60,7 +88,7 @@ class Layout extends Component {
      */
     componentDidMount() {
         //const requestActual = "https://api.apify.com/v2/key-value-stores/8mRFdwyukavRNCr42/records/LATEST?disableRedirect=true"
-        const requestHystory ="https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&clean=1"
+        const requestHystory ="https://api.apify.com/v2/datasets/Nq3XwHX262iDwsFJS/items?format=json&amp;clean=1"
 
         axios.get(requestHystory)
             .then((response) => {
@@ -105,14 +133,14 @@ class Layout extends Component {
         /**
          * @alias covidValues
          * @memberOf Layout
-         * @type {Array<number>}
+         * @type {Array&lt;number>}
          * @description This constant get an array of number -the data of the selected region- through a map function.
          */
         const covidValues = this.selectCovidSubData();
         /**
          * @alias rgbValues
          * @memberOf Layout
-         * @type {Array<number>}
+         * @type {Array&lt;number>}
          * @description This constant get an array of number -the RGB Green value for all the regions-
          * by invoking the function createRgbValues and passing as argument the entire axios object.
          */
@@ -120,7 +148,7 @@ class Layout extends Component {
         /**
          * @alias regions
          * @memberOf Layout
-         * @type {Array<string>}
+         * @type {Array&lt;string>}
          * @description This constant get an array of string -the name of the region- through a map function.
          */
         const regions = this.state.covidDataRegion.map(e => e.region)
@@ -207,7 +235,7 @@ class Layout extends Component {
      * @alias selectCovidSubData
      * @function
      * @memberOf Layout
-     * @return {Array<number>} arrayColor
+     * @return {Array&lt;number>} arrayColor
      * @description This method create en array values selecting between different sub-object in the region Data.
      * This selection is the response to the user's click on the component Dropdown.
      */
@@ -217,22 +245,22 @@ class Layout extends Component {
         let option = this.state.selectedDropdownOption;
 
         switch(option) {
-            case "Smittade":
+            case "Infekterade":
                 arrayValues = regionData.map(e => e.infectedCount);
                 break;
             case "Avlidna":
                 arrayValues = regionData.map(e => e.deathCount);
                 break;
-            case "IVA":
+            case "Intensivvård":
                 arrayValues = regionData.map(e => e.intensiveCareCount);
                 break;
-            case "Smittade per 100000":
+            case "Infekterade per 100000":
                 arrayValues = regionData.map(e => e.infectedPer100000);
                 break;
             case "Avlidna per 100000":
                 arrayValues = regionData.map(e => e.deathsPer100000);
                 break;
-            case "IVA per 100000":
+            case "Intensivvård per 100000":
                 arrayValues = regionData.map(e => e.intensiveCarePer100000);
                 break;
             case "Befolkning":
@@ -248,7 +276,7 @@ class Layout extends Component {
      * @alias createRgbValues
      * @function
      * @memberOf Layout
-     * @return {Array<number>} rgbValues
+     * @return {Array&lt;number>} rgbValues
      * @description This method receives an array values and convert it proportionally in a new array
      * where each value is between 0 and 255.
      * The pair of max and min values determine the limit beyond which the color becomes red and yellow, respectively.
@@ -262,7 +290,7 @@ class Layout extends Component {
 
 
         switch(option) {
-            case "Smittade":
+            case "Infekterade":
                 max = 60000;
                 min = 10000;
             break;
@@ -270,19 +298,19 @@ class Layout extends Component {
                 max = 2000;
                 min = 200;
                 break;
-            case "IVA":
+            case "Intensivvård":
                 max = 1000;
                 min = 100;
                 break;
-            case "Smittade per 100000":
-                max = 9000;
+            case "Infekterade per 100000":
+                max = 8000;
                 min = 1000;
                 break;
             case "Avlidna per 100000":
-                max = 250;
+                max = 200;
                 min = 50;
                 break;
-            case "IVA per 100000":
+            case "Intensivvård per 100000":
                 max = 70;
                 min = 10;
                 break;
@@ -299,7 +327,6 @@ class Layout extends Component {
         const rgbValues = covidValues.map(e => Math.round(255-(e*255/delta)));
         return rgbValues;
     }
-
 
     /**
      * @alias toggleSideDrawerHandler
@@ -390,10 +417,10 @@ class Layout extends Component {
          * The state 'selectedRegionName' is null when starting the page,
          * and becomes a string (not null, true) when the user clicks on the SvgMap.
          */
-        let regionRendered = <div>Välj en region</div>
+        let regionRendered = &lt;div>Välj en region&lt;/div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
-                <RegionTable
+                &lt;RegionTable
                     data = {this.state.selectedRegionObject}
                     option = {this.state.selectedDropdownOption}
                     regionName = {this.state.selectedRegionName}
@@ -418,42 +445,65 @@ class Layout extends Component {
         }
 
         return (
-            <Fragment>
-                <Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
-                <SideDrawer showState={this.state.showSideDrawer} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
-                <Modal show = {this.state.loadingAxios}>
-                    <h2>Läser in data...</h2>
-                    <img src={"images/loading.svg"} style={{marginTop : '-15%'}} alt={"loading"} draggable={false}/>
-                </Modal>
+            &lt;Fragment>
+                &lt;Toolbar toggleSideDrawer={this.toggleSideDrawerHandler} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
+                &lt;SideDrawer showState={this.state.showSideDrawer} toggleTheme={this.toggleThemeHandler} isDarkTheme = {this.state.useDarkTheme}/>
+                &lt;Modal show = {this.state.loadingAxios}>
+                    &lt;h2>Läser in data...&lt;/h2>
+                    &lt;img src={"images/loading.svg"} style={{marginTop : '-15%'}} alt={"loading"} draggable={false}/>
+                &lt;/Modal>
 
-                <main className={layoutThemeClass}>
-                    <div className="Left" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
-                        <DropDown options={this.state.options} selectedDropdownOption = {this.getOptionFromDropdown}></DropDown>
-                        <KeyTable/>
-                        <SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />
-                    </div>
+                &lt;main className={layoutThemeClass}>
+                    &lt;div className="Left" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+                        &lt;DropDown options={this.state.options} selectedDropdownOption = {this.getOptionFromDropdown}>&lt;/DropDown>
+                        &lt;KeyTable/>
+                        &lt;SvgMap regionColor ={this.state.regionColor} sendRegion = {this.getRegionNameFromMap} />
+                    &lt;/div>
 
-                    <div className="Center">
-                        <SwedenTable
+                    &lt;div className="Center">
+                        &lt;SwedenTable
                             data = {this.state.covidDataSweden}
                             lastUpdate = {this.state.lastUpdate}
                             darkTheme = {this.state.useDarkTheme}
                     />
                         {regionRendered}
-                    </div>
+                    &lt;/div>
 
-                    <div className="Right" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+                    &lt;div className="Right" style = {this.state.useDarkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
 
-                        <Table
+                        &lt;Table
                             dataRegion = {this.state.covidDataRegion}
                             lastUpdate = {this.state.lastUpdate}
                             darkTheme = {this.state.useDarkTheme}/>
-                    </div>
-                </main>
+                    &lt;/div>
+                &lt;/main>
 
-            </Fragment>
+            &lt;/Fragment>
         );
     }
 }
 
 export default Layout;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dropdown.html">Dropdown</a></li><li><a href="Layout.html">Layout</a></li><li><a href="SvgMap.html">SvgMap</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Feb 15 2021 09:56:27 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

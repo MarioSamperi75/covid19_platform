@@ -8,8 +8,8 @@ import "./DropDown.css"
  * @memberOf Layout
  * @param {} props - the dropDown Options (infected, deacesed, intensive Care)
  * @return {JSX.Element}
- * @description The functional component dropdown return a dropdown as JSX element,
- * and fill in it the list of array that receives as props.
+ * @description The class dropdown returns a dropdown as JSX element,
+ * and fills in it the list of array that receives as props.
  * Those items are the dropDown options.
  */
 class Dropdown extends Component {
