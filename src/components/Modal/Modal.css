@@ -1,12 +1,13 @@
 .Modal {
+    color: whitesmoke;
     position: fixed;
     z-index: 500;
-    background-color: white;
+    background-color: #736f6f;
     width: 20%;
     height: 20%;
-    border: 0.06rem solid #ccc;
+    border: 0.06rem solid #343333;
     border-radius: 0.63rem;
-    box-shadow: 0.06rem 0.06rem 1.88rem white;
+    box-shadow: 0.06rem 0.06rem 1.88rem #5d5b5b;
     padding: 0.06rem;
     left: 40%;
     top: 30%;

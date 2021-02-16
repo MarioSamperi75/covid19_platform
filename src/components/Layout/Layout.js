@@ -391,7 +391,7 @@ class Layout extends Component {
          * The state 'selectedRegionName' is null when starting the page,
          * and becomes a string (not null, true) when the user clicks on the SvgMap.
          */
-        let regionRendered = <div>Välj en region</div>
+        let regionRendered = <div style={{fontSize : '25px'}} title="Tryck på en region på kartan"> Välj region på kartan </div>
         if (this.state.selectedRegionObject) {
             regionRendered = (
                 <RegionTable
