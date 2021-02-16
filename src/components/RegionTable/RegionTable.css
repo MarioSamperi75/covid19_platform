@@ -11,7 +11,7 @@
 }
 
 .RegionSubDiv {
-    height: 19.19rem;
+    min-height: 19.19rem;
     width: 50%;
     min-width: 9.5rem;
     border-style: solid;
