@@ -3,7 +3,13 @@ import React, { Component } from 'react';
 import "./SvgMap.css";
 
 /**
- * The class component SvgMap contains the Svg image (Sweden) and all its parts (regions).
+ * @alias SvgMap
+ * @memberOf Layout
+ * @param  {object} props.regionColor - An objects that contains data for the regions. Key: name of the region, Value: rgb (green) value.
+ * @param  {function} props.sendName - A connection to the method getRegionNameFromMap(Layout).
+ * The method receives the name of the region and set the state selectedRegionObject.
+ * @return {JSX.Element}
+ * @description The class component SvgMap contains the Svg image (Sweden) and all its parts (regions).
  * All the parts are interactive and receives a color as props.
  */
 class SvgMap extends Component {

@@ -1,4 +1,32 @@
-import React from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: RegionTable/RegionTable.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: RegionTable/RegionTable.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
 
 import "./RegionTable.css"
 import  imagePath from "../../data/imagePath.json"
@@ -6,7 +34,7 @@ import  imagePath from "../../data/imagePath.json"
 /**
  * @alias RegionTable
  * @memberOf Layout
- * @param {Array<Object>} props.data the data object regarding the region selected by the user
+ * @param {Array&lt;Object>} props.data the data object regarding the region selected by the user
  * @param {string} props.option the selected option in Dropdown
  * @param {string} props.regionName - the selected region in the SVGMap
  * @param {boolean} props.darkTheme -To communicate the state of the theme (dark/light) to the component
@@ -21,155 +49,155 @@ const regionTable = (props) => {
 
     return (
 
-       <div className="Container">
+       &lt;div className="Container">
 
-           <table className = "RegionSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
-               <tbody>
+           &lt;table className = "RegionSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+               &lt;tbody>
 
-                   <tr key="r01">
-                       <td
+                   &lt;tr key="r01">
+                       &lt;td
                            className="RegionTitle">
                            {props.regionName}
-                       </td>
-                   </tr>
-                   <tr key="r02">
-                       <td style={{textAlign: 'center'}}>
-                       <img className="RegionVapen" src={imagePath.[props.regionName]}  title = {props.regionName} alt="Vapen" draggable={false}/>
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
+                   &lt;tr key="r02">
+                       &lt;td style={{textAlign: 'center'}}>
+                       &lt;img className="RegionVapen" src={imagePath.[props.regionName]}  title = {props.regionName} alt="Vapen" draggable={false}/>
+                       &lt;/td>
+                   &lt;/tr>
 
-               </tbody>
-           </table>
+               &lt;/tbody>
+           &lt;/table>
 
 
 
-           <table className = "RegionSubDiv"
+           &lt;table className = "RegionSubDiv"
                   style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '1.06rem 0 0 0.5rem'}:{margin : '1.06rem 0 0 0.5rem'}}>
-               <tbody>
+               &lt;tbody>
 
-                   <tr key="r1">
-                       <td
+                   &lt;tr key="r1">
+                       &lt;td
                            title="Totalt antal infekterade"
                            style={props.option === 'Smittade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
                            Smittade:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            style={props.option === 'Smittade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.infectedCount}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r2">
-                       <td
+                   &lt;tr key="r2">
+                       &lt;td
                            title="Infekterade per 100000"
                            style={props.option === 'Smittade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            style={props.option === 'Smittade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.infectedPer100000}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r3">
-                       <td
+                   &lt;tr key="r3">
+                       &lt;td
                            title="Daglig ökning av infektering"
                            className="Key">
                            Ökning:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            className="Value">
                            {props.data.newInfected}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r4">
-                       <td
+                   &lt;tr key="r4">
+                       &lt;td
                            title="Totalt antal avlidna"
                            style={props.option === 'Avlidna' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
                            Avlidna:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            style={props.option === 'Avlidna' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.deathCount}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r5">
-                       <td
+                   &lt;tr key="r5">
+                       &lt;td
                            title="Avlidna per 100000"
                            style={props.option === 'Avlidna per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            style={props.option === 'Avlidna per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.deathsPer100000}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r6">
-                       <td
+                   &lt;tr key="r6">
+                       &lt;td
                            title="Daglig ökning av avlidna"
                            className="Key">
                            Ökning:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            className="Value">
                            {props.data.newDeaths}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r7">
-                       <td
+                   &lt;tr key="r7">
+                       &lt;td
                            title="Totalt antal intensivvårds patienter"
                            style={props.option === 'IVA' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
                            Intensivvård:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            style={props.option === 'IVA' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.intensiveCareCount}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r8">
-                       <td
+                   &lt;tr key="r8">
+                       &lt;td
                            title="Intensivvårds patienter per 100000"
                            style={props.option === 'IVA per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            style={props.option === 'IVA per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.intensiveCarePer100000}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-                   <tr key="r9">
-                       <td
+                   &lt;tr key="r9">
+                       &lt;td
                            title="Daglig ökning av intensivvårds patienter"
                            className="Key">
                            Ökning:
-                       </td>
-                       <td
+                       &lt;/td>
+                       &lt;td
                            className="Value">
                            {props.data.newIntensiveCare}
-                       </td>
-                   </tr>
+                       &lt;/td>
+                   &lt;/tr>
 
-               </tbody>
-           </table>
-       </div>
+               &lt;/tbody>
+           &lt;/table>
+       &lt;/div>
     );
 };
 
@@ -177,3 +205,26 @@ export default regionTable;
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Dropdown.html">Dropdown</a></li><li><a href="Layout.html">Layout</a></li><li><a href="SvgMap.html">SvgMap</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Feb 17 2021 12:19:34 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

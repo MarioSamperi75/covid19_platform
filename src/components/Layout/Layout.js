@@ -22,7 +22,7 @@ import regionInhabitants from "../../data/inhabitants_by_region.json";
 
 
 /**
- * The class component Layout is the container of the projekt. All the components and almost all the business logic is here.
+ * The class component Layout is the container of the project. All the components and almost all the business logic is here.
  */
 class Layout extends Component {
 
@@ -54,7 +54,7 @@ class Layout extends Component {
     };
 
     /**
-     * @description ComponentDidMount gets the axios request,  creates two states ( CovidDataSweden, covidDataSwedenRegion)
+     * @description ComponentDidMount gets the axios request,  creates two states ( covidDataSweden, covidDataSwedenRegion)
      * and invokes the method createRegionColorObject.
      * covidDataSweden is the entire objekt that the api returns.
      * covidDataSwedenRegion is the sub-array that contains data for all the regions.
@@ -98,7 +98,7 @@ class Layout extends Component {
      * to an objekt that contains many key/value one for every region.
      * The key is the name of the region, the value is the green value that determines the color of the region.
      * The method has tre steps: integration - selection - rgb conversion.
-     * Each of them is delegated to a new function-
+     * Each of them is delegated to a new function.
      */
     createRegionColorObject = () => {
 
@@ -107,14 +107,14 @@ class Layout extends Component {
          * @alias covidValues
          * @memberOf Layout
          * @type {Array<number>}
-         * @description This constant get an array of number -the data of the selected region- through a map function.
+         * @description This constant gets an array of number -the data of the selected region- through a map function.
          */
         const covidValues = this.selectCovidSubData();
         /**
          * @alias rgbValues
          * @memberOf Layout
          * @type {Array<number>}
-         * @description This constant get an array of number -the RGB Green value for all the regions-
+         * @description This constant gets an array of number -the RGB Green value for all the regions-
          * by invoking the function createRgbValues and passing as argument the entire axios object.
          */
         const rgbValues = this.createRgbValues(covidValues);
@@ -122,20 +122,19 @@ class Layout extends Component {
          * @alias regions
          * @memberOf Layout
          * @type {Array<string>}
-         * @description This constant get an array of string -the name of the region- through a map function.
+         * @description This constant gets an array of string -the name of the region- through a map function.
          */
         const regions = this.state.covidDataRegion.map(e => e.region)
         /**
          * @alias regionColor
          * @memberOf Layout
          * @type {Objekt}
-         * @description This constant is an object that contains many value/key pairs.
-         * The the keys come from Region and the values from RgbValues.
+         * @description This constant is an object that contains many key/value pairs.
+         * The  keys come from Region and the values from RgbValues.
          * The conversion is the result of the functions reduce and Object.assign.
          */
         const regionColor = regions.reduce(
             (accumulator, value, index) => Object.assign(accumulator, {
-                // the yellow is the minimum but has greenvalue 255. We need to invert that. 255 - value.
                 [value]: rgbValues[index],
             }), {}
         );
@@ -148,7 +147,9 @@ class Layout extends Component {
      * @memberOf Layout
      * @return void
      * @description This method integrates the object DataRegion - a part of the object that comes the axios request -
-     * with new keyvalues pairs concerning the all the exixtents value calculated in relation to the population.
+     * with new key/values pairs concerning all the existent values calculated in relation to the population
+     * and the last updating.
+     * The method gets all data from states and update them.
      */
     integrateData = () => {
             //TO BE MORE READABLE
@@ -209,7 +210,7 @@ class Layout extends Component {
      * @function
      * @memberOf Layout
      * @return {Array<number>} arrayColor
-     * @description This method create en array values selecting between different sub-object in the region Data.
+     * @description This method creates en array values by selecting one object between different sub-object in the covidRegionData.
      * This selection is the response to the user's click on the component Dropdown.
      */
     selectCovidSubData = () => {
@@ -249,10 +250,11 @@ class Layout extends Component {
      * @alias createRgbValues
      * @function
      * @memberOf Layout
+     * @param {Array<number>} covidValues - a selected array of value from the axios request
      * @return {Array<number>} rgbValues
-     * @description This method receives an array values and convert it proportionally in a new array
+     * @description This method receives an array values and converts it proportionally in a new array
      * where each value is between 0 and 255.
-     * The pair of max and min values determine the limit beyond which the color becomes red and yellow, respectively.
+     * The pair of max and min values determines the limit beyond which the color becomes red and yellow, respectively.
      * Max and min values are different depending on the selected option in the dropdown component.
      */
     createRgbValues = (covidValues) => {
@@ -327,11 +329,11 @@ class Layout extends Component {
      * @param {string} region - the name of the region clicked by the user
      * @memberOf Layout
      * @return void
-     * @description This method get the name of the region as parameter
+     * @description This method gets the name of the region as parameter
      * when the user clicks on a region in the SvgMap.
-     * The method creates two state: selectedRegionName and selectedRegionObject.
+     * The method creates two states: selectedRegionName and selectedRegionObject.
      * The first is just the name that the method receives (string).
-     * The second is the  objekt that contains all the information about the selected region:
+     * The second is the  objekt that contains all the information about the selected region.
      * This object is obteined by filtering an axios requests by the parameter region.
      */
     getRegionNameFromMap  = (region) => {
@@ -340,7 +342,6 @@ class Layout extends Component {
         const regionArray = this.state.covidDataRegion;
         const selectedObjectArray = regionArray.filter(e => (e.region === region ));
         this.setState({selectedRegionObject : selectedObjectArray[0]});
-        //TEST
     }
 
     /**
@@ -349,9 +350,9 @@ class Layout extends Component {
      * @param {string} region - the name of the region clicked by the user
      * @memberOf Layout
      * @return void
-     * @description This method get the name of the dropdown option as parameter
+     * @description This method gets the name of the dropdown option as parameter
      * when the user clicks on an option in the DropDown component.
-     * The method load the Data from the CovidAPI and invokes createRegionColorObject
+     * The method loads the Data from the CovidAPI and invokes createRegionColorObject
      * that is responsible to change the color of the regions in map.
      */
     getOptionFromDropdown  = (option) => {
@@ -360,7 +361,6 @@ class Layout extends Component {
             .then((response) => {
             this.createRegionColorObject (response.data.infectedByRegion)
         });
-        console.log("COVIDDATASWEDEN: ", this.state.covidDataSweden)
     }
 
     /**

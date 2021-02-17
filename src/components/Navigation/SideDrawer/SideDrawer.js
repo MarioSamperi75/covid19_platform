@@ -9,7 +9,9 @@ import "../../Theme/Themes.css";
 /**
  * @alias SideDrawer
  * @memberOf Layout
- * @param props - props : showState
+ * @param {boolean} props.showState - communicate the state of the SideDrawer (open/close) to the component
+ * @param {function} props.toggleTheme - To toggle the theme between dark and light
+ * @param {boolean} props.isDarkTheme - To communicate the state of the theme (dark/light) to the component
  * @return {JSX.Element}
  * @description The functional component Sidedrawer returns a div element
  * that disappears/appears when the user clicks on the drawerToggle element.
@@ -20,7 +22,7 @@ const sideDrawer = (props) => {
      * @alias variableClass
      * @memberOf Layout
      * @type {string}
-     * @description This variable is the name of the css class that sideDrawer is conneted with.
+     * @description This variable is the name of the css class that sideDrawer is connected with.
      * The css class "Close" translates the sideDrawer out of the screen with an animation.
      * The css class "Open" move it in the original position (0,0) with another animation.
      */

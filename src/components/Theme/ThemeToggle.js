@@ -3,7 +3,7 @@ import "./ThemeToggle.css";
 /**
  * @alias ThemeToggle
  * @memberOf Layout
- * @param props props declared in parent
+ * @param {function} props.toggleTheme To toggle the theme between dark and light
  * @return {JSX.Element}
  * @description The functional component ThemeToggle returns the element themeToggle that
  * is used to switch between the applications light and dark themes. The onClick properties is connected with Layout

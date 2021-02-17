@@ -6,9 +6,11 @@ import "./DropDown.css"
 /**
  * @alias Dropdown
  * @memberOf Layout
- * @param {} props - the dropDown Options (infected, deacesed, intensive Care)
+ * @param {Array<string>} props.options -The array string to fill the dropdown
+ * @param {function} props.selectedDropdownOption -The connection with the method getOptionFromDropdown(Layout).
+ * The methode receives the selected name, uppdate the state selectedDropdownOption and invokes the method createRegionColorObject
  * @return {JSX.Element}
- * @description The class dropdown returns a dropdown as JSX element,
+ * @description The class component dropdown returns a dropdown as JSX element,
  * and fills in it the list of array that receives as props.
  * Those items are the dropDown options.
  */

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: KeyTable/KeyTable.js</title>
+    <title>JSDoc: Source: Backdrop/Backdrop.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: KeyTable/KeyTable.js</h1>
+    <h1 class="page-title">Source: Backdrop/Backdrop.js</h1>
 
     
 
@@ -26,27 +26,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import "./KeyTable.css";
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import "./Backdrop.css";
+
 
 /**
- * @alias KeyTable
+ * @alias Backdrop
  * @memberOf Layout
+ * @param void
  * @return {JSX.Element}
- * @description This component is just a key table, a grafical element that explains the meaning of the colors.
- * No interaction is allowed.
+ * @description The functional component Backdrop is just a semi-trasparent div that fills the whole screen
+ * and makes any user interaction impossible. It is often used as a child of a modal.
+ *
  */
-const keyTable = () => (
-    &lt;div className="KeyContainer">
-        &lt;div className = "KeyTableDiv1">
-            &lt;div className = "Yellow" title = "Gul">&lt;/div> &lt;p className = "Label" title = "Minimal">min&lt;/p>
-        &lt;/div>
-        &lt;div className = "KeyTableDiv2">
-            &lt;div className = "Red" title = "Röd">&lt;/div> &lt;p className = "Label" title = "Maximal">max&lt;/p>
-        &lt;/div>
-    &lt;/div>
-);
+const backdrop = () =>
 
-export default keyTable;</code></pre>
+    &lt;div className="Backdrop">&lt;/div>
+
+export default backdrop;
+</code></pre>
         </article>
     </section>
 

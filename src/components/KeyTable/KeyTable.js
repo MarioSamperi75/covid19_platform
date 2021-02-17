@@ -3,12 +3,11 @@ import "./KeyTable.css";
 /**
  * @alias KeyTable
  * @memberOf Layout
- * @param props
  * @return {JSX.Element}
- * @description This component is just a key table, a grafical element that explain the meaning of the colors.
+ * @description This component is just a key table, a grafical element that explains the meaning of the colors.
  * No interaction is allowed.
  */
-const keyTable = (props) => (
+const keyTable = () => (
     <div className="KeyContainer">
         <div className = "KeyTableDiv1">
             <div className = "Yellow" title = "Gul"></div> <p className = "Label" title = "Minimal">min</p>
