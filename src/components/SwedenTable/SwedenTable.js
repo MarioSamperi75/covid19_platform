@@ -3,14 +3,17 @@ import React from "react";
 import "./SwedenTable.css"
 import  imagePath from "../../data/imagePath.json"
 
+/**
+ * @alias SwedenTable
+ * @memberOf Layout
+ * @param props props declared in parent
+ * @return {JSX.Element}
+ * @description The component SwedenTable returns the element swedenTable that
+ * presents a summery of swedens combined statistics. Props is used to theme the component and
+ * get data from state of Layout.js
+ */
 const swedenTable = (props) => {
-
-
-
     return (
-
-
-
        <div className="SwedenContainer">
            <table className = "SwedenSubDiv"
                   style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
