@@ -65,21 +65,25 @@ class Layout extends Component {
 
         axios.get(requestHystory)
             .then((response) => {
-            const partOfData = response.data.slice(response.data.length-15, response.data.length).filter(item=>item.deceased!==0);
-            //extract substring
-            //partOfData.map((item)=>console.log("updated", item.lastUpdatedAtApify.substring(0,10), "deceased", item.deceased));
+            // Filtering api to avoid empty data
+            const partOfData = response.data.slice(response.data.length-5, response.data.length).filter(item=>item.deceased!==0);
+
+            // Selecting the last two updating for Sweden and regions
             const covidDataSwedenPrevious = partOfData[partOfData.length-2];
             const covidDataRegionPrevious = partOfData[partOfData.length-2].infectedByRegion;
             const covidDataSweden = partOfData[partOfData.length-1];
             const covidDataRegion = partOfData[partOfData.length-1].infectedByRegion;
 
+            // saving as state
             this.setState({covidDataSwedenPrevious : covidDataSwedenPrevious})
             this.setState({covidDataRegionPrevious : covidDataRegionPrevious})
             this.setState({covidDataSweden: covidDataSweden});
             this.setState({covidDataRegion: covidDataRegion});
+
+            // creating strings with the date of the last two updating
             this.setState({lastUpdate: covidDataSweden.lastUpdatedAtApify.substring(0,10)})
             this.setState({previousUpdate: covidDataSwedenPrevious.lastUpdatedAtApify.substring(0,10)})
-
+                
             this.createRegionColorObject ()
 
             this.setState({loadingAxios:false})
