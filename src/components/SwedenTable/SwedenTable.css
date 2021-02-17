@@ -1,64 +1,66 @@
 
-Container {
+.SwedenContainer {
     margin: auto;
     display: flex;
-    flex-flow: column;
+    margin : 0 0 0.75rem
 }
-
 
 .Vapen{
-    height: 210px;
+    height: 12.5rem;
+    padding: 1rem;
 }
 
-.Part {
-    height: 306px;
-    width: 232px;
+.SwedenSubDiv {
+
+    height: 20.3rem;
+    width: 50%;
+    min-width: 9.5rem;
     border-style: solid;
     border-color: darkgray;
-    border-width: 1px;
-    border-radius: 6px;
-    padding: 15px 0px;
-    margin: 0px 16px 0px 0px;
+    border-width: 0.06rem;
+    border-radius: 0.38rem;
+    padding: 0.63rem 0;
+    margin: 0 0.5rem 0 0;
+    box-sizing: border-box;
 
 }
 
 
 .Title {
-    font-size: 180%;
-    margin-bottom: 13%;
+    font-size: 1.60rem;
+    margin-bottom: 1rem;
     margin-top: 0;
+    text-align: center;
 }
 
 
 
 .UpdateText1{
     text-align: left;
-    padding-left: 15px;
-    padding-top: 15px;
-    padding-bottom: 9px;
-    margin: 7% 0px 0px;
-    font-size: 13px;
+    padding-left: 0.94rem;
+    font-size: 0.81rem;
     font-style: italic;
 }
 .UpdateText2{
-    text-align: right;
-    padding-right: 15px;
-    padding-top: 15px;
-    padding-bottom: 9px;
-    font-size: 13px;
+    text-align: left;
+    padding-left: 0.94rem;
+    padding-bottom: 0.31rem;
+    font-size: 0.81rem;
     font-style: italic;
 }
 
 .Key {
     text-align: left;
-    padding-left: 15px;
+    padding-left: 0.94rem;
 }
 
 .Value {
     text-align: right;
-    padding-right: 15px;
+    padding-right: 0.94rem;
 }
 
 .PaddingTop {
- padding-top: 15px;
+ padding-top: 0.81rem;
 }
+
+

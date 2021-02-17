@@ -1,14 +1,35 @@
 .Toolbar {
-    height: 56px;
+    height: 3.5rem;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
-    background-color: Grey;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 1.25rem;
     box-sizing: border-box;
     z-index: 100;
+}
+
+@media (max-width: 25rem) {
+
+    .Toolbar {
+        height: 3.5rem;
+        width: 120%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 0.3rem;
+        box-sizing: border-box;
+        z-index: 100;
+    }
+
+    .logo {
+        transform: scale(0.9);
+
+    }
 }

@@ -3,29 +3,59 @@ import React from "react";
 import "./RegionTable.css"
 import  imagePath from "../../data/imagePath.json"
 
+/**
+ * @alias RegionTable
+ * @memberOf Layout
+ * @param {Array<Object>} props.data the data object regarding the region selected by the user
+ * @param {string} props.option the selected option in Dropdown
+ * @param {string} props.regionName - the selected region in the SVGMap
+ * @param {boolean} props.darkTheme -To communicate the state of the theme (dark/light) to the component
+ * @return {JSX.Element}
+ * @description The class component RegionTable returns a div that contains two tables.
+ * The first one contains the name of the region and the flag,
+ * the second one contains the data for the selected region.
+ * The data changes dinamically depending on the user's choice in the Map component.
+ * An item of the second table is marked depending on the user's choice in the Dropdown component.
+ */
 const regionTable = (props) => {
 
     return (
 
-       <div className="Container" style={{display : 'flex', margin : '0 auto 12px'}}>
+       <div className="Container">
 
-           <div className = "RegionSubDiv">
-               <p className="RegionTitle">{props.regionName}</p>
-               <img className="RegionVapen" src={imagePath.[props.regionName]} title = {props.regionName} alt="Vapen" draggable={false}/>
-           </div>
+           <table className = "RegionSubDiv" style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)'}:{}}>
+               <tbody>
 
-           <table className = "RegionSubDiv">
+                   <tr key="r01">
+                       <td
+                           className="RegionTitle">
+                           {props.regionName}
+                       </td>
+                   </tr>
+                   <tr key="r02">
+                       <td style={{textAlign: 'center'}}>
+                       <img className="RegionVapen" src={imagePath.[props.regionName]}  title = {props.regionName} alt="Vapen" draggable={false}/>
+                       </td>
+                   </tr>
+
+               </tbody>
+           </table>
+
+
+
+           <table className = "RegionSubDiv"
+                  style = {props.darkTheme ? {borderColor : 'RGB(82,82,82)', margin : '1.06rem 0 0 0.5rem'}:{margin : '1.06rem 0 0 0.5rem'}}>
                <tbody>
 
                    <tr key="r1">
                        <td
                            title="Totalt antal infekterade"
-                           style={props.option === 'Infekterade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
+                           style={props.option === 'Smittade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
-                           Infekterade:
+                           Smittade:
                        </td>
                        <td
-                           style={props.option === 'Infekterade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
+                           style={props.option === 'Smittade' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.infectedCount}
                        </td>
@@ -34,12 +64,12 @@ const regionTable = (props) => {
                    <tr key="r2">
                        <td
                            title="Infekterade per 100000"
-                           style={props.option === 'Infekterade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
+                           style={props.option === 'Smittade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
                        </td>
                        <td
-                           style={props.option === 'Infekterade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
+                           style={props.option === 'Smittade per 100000' ? { fontWeight: 'bold' , textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.infectedPer100000}
                        </td>
@@ -49,7 +79,7 @@ const regionTable = (props) => {
                        <td
                            title="Daglig ökning av infektering"
                            className="Key">
-                           Daglig ökning:
+                           Ökning:
                        </td>
                        <td
                            className="Value">
@@ -89,7 +119,7 @@ const regionTable = (props) => {
                        <td
                            title="Daglig ökning av avlidna"
                            className="Key">
-                           Daglig ökning:
+                           Ökning:
                        </td>
                        <td
                            className="Value">
@@ -100,12 +130,12 @@ const regionTable = (props) => {
                    <tr key="r7">
                        <td
                            title="Totalt antal intensivvårds patienter"
-                           style={props.option === 'Intensivvård' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
+                           style={props.option === 'IVA' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key RegionPaddingTop">
                            Intensivvård:
                        </td>
                        <td
-                           style={props.option === 'Intensivvård' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
+                           style={props.option === 'IVA' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value RegionPaddingTop">
                            {props.data.intensiveCareCount}
                        </td>
@@ -114,12 +144,12 @@ const regionTable = (props) => {
                    <tr key="r8">
                        <td
                            title="Intensivvårds patienter per 100000"
-                           style={props.option === 'Intensivvård per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
+                           style={props.option === 'IVA per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Key">
                            Per 100000:
                        </td>
                        <td
-                           style={props.option === 'Intensivvård per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
+                           style={props.option === 'IVA per 100000' ? { fontWeight: 'bold', textDecoration: "underline"} : {}}
                            className="Value">
                            {props.data.intensiveCarePer100000}
                        </td>
@@ -129,7 +159,7 @@ const regionTable = (props) => {
                        <td
                            title="Daglig ökning av intensivvårds patienter"
                            className="Key">
-                           Daglig ökning:
+                           Ökning:
                        </td>
                        <td
                            className="Value">
