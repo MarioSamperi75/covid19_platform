@@ -83,7 +83,7 @@ class Layout extends Component {
             // creating strings with the date of the last two updating
             this.setState({lastUpdate: covidDataSweden.lastUpdatedAtApify.substring(0,10)})
             this.setState({previousUpdate: covidDataSwedenPrevious.lastUpdatedAtApify.substring(0,10)})
-                
+
             this.createRegionColorObject ()
 
             this.setState({loadingAxios:false})
@@ -173,11 +173,14 @@ class Layout extends Component {
                 const newDeaths = Math.round(e.deathCount - dataRegionPrevious[index].deathCount)/diffInDays;
                 const newInfected = Math.round(e.infectedCount - dataRegionPrevious[index].infectedCount)/diffInDays;
                 const newIntensiveCare = Math.round(e.intensiveCareCount - dataRegionPrevious[index].intensiveCareCount)/diffInDays;
+                const deathsPer100000 = Math.round(e.deathCount*100000/regionInhabitants.[e.region]);
+                const infectedPer100000 = Math.round(e.infectedCount*100000/regionInhabitants.[e.region])
+                const intensiveCarePer100000= Math.round(e.intensiveCareCount*100000/regionInhabitants.[e.region])
                 return {
                     ...e,
-                    deathsPer100000: Math.round(e.deathCount*100000/regionInhabitants.[e.region]),
-                    infectedPer100000: Math.round(e.infectedCount*100000/regionInhabitants.[e.region]),
-                    intensiveCarePer100000: Math.round(e.intensiveCareCount*100000/regionInhabitants.[e.region]),
+                    deathsPer100000: deathsPer100000,
+                    infectedPer100000: infectedPer100000,
+                    intensiveCarePer100000: intensiveCarePer100000 ,
                     population : regionInhabitants.[e.region],
                     newDeaths : newDeaths,
                     newInfected : newInfected,
