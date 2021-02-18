@@ -1,5 +1,6 @@
 .DrawerToggle {
     width: 2.5rem;
+    min-width: 2.5rem;
     height: 100%;
     display: flex;
     flex-flow: column;
