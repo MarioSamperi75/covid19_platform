@@ -1,3 +1,14 @@
+
+COVIDCARTA
+
+CovidKarta aims to keep people updated in a simple and effective way in the belief that statistics are often unattractive and difficult to read, no matter how relevant and current they are. 
+In order to achieve this goal, we use a map of Sweden whose regions change colour depending on the level of infection and respond interactively with details of the infection situation. 
+The result of the project is twofold. From a technical point of view, we have learned to show how it is possible to use SVG images in a React web application and also to take advantage of its specific characteristics and interaction possibilities. At the same time, we have created a working platform which can quickly reach a large number of people, due to its immediacy.
+This interesting exercise in data analysis gave us the opportunity to examine one of the most requested JavaScript libraries, Reactjs. The social significance of the project is quite evident: conscious and informed people can better adapt their social behaviour to a crisis situation and thus better contribute to reducing the infection of the virus in the country.
+
+----------------------------------------------------------
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
